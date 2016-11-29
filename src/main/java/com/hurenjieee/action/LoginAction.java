@@ -42,6 +42,7 @@ public class LoginAction extends ActionSupport{
     }  
     public String execute() throws Exception{  
         if(loginService.login(userName, passWord)){  
+        	System.out.println(1);
                return SUCCESS;  
           }else{  
                return ERROR;  
