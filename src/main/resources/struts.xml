@@ -1,17 +1,47 @@
 <?xml version="1.0" encoding="UTF-8" ?>  
   <!DOCTYPE struts PUBLIC  
       "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"  
-      "http://struts.apache.org/dtds/struts-2.0.dtd">  
-  <struts>  
-     <!-- struts的action配置文件 --> 
-     <!-- 将action托管给spring -->  
-    <!--  <constant name="struts.objectFactory" value="spring"></constant>     -->
-     <!-- 所有的action都应该放在对应的package下 -->  
-     <package name="hurenjie" extends="struts-default">  
-        <action name="login" class="com.hurenjieee.action.LoginAction">  
-            <!-- 定义逻辑视图和物理资源之间的映射 -->  
-            <result name="success">WEB-INF/jsp/success.jsp</result>  
-            <result name="error">WEB-INF/jsp/error.jsp</result>  
-        </action> 
-     </package>  
-  </struts>  
+      "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<!-- struts的action配置文件 -->
+	<!-- 将action托管给spring -->
+	<!-- <constant name="struts.objectFactory" value="spring"></constant> -->
+	<!-- 所有的action都应该放在对应的package下 -->
+	<!-- <package name="hurenjie" extends="struts-default"> <action name="login" 
+		class="com.hurenjieee.action.LoginAction"> 定义逻辑视图和物理资源之间的映射 <result name="success">WEB-INF/jsp/success.jsp</result> 
+		<result name="error">WEB-INF/jsp/error.jsp</result> </action> </package> -->
+
+	<!-- 请求参数的编码方式 -->
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+	<!-- 指定被struts2处理的请求后缀类型。多个用逗号隔开 -->
+	<constant name="struts.action.extension" value="action" />
+	<!-- 当struts.xml改动后，是否重新加载。默认值为false(生产环境下使用),开发阶段最好打开 -->
+	<constant name="struts.configuration.xml.reload" value="true" />
+	<!-- 是否使用struts的开发模式。开发模式会有更多的调试信息。默认值为false(生产环境下使用),开发阶段最好打开 -->
+	<constant name="struts.devMode" value="false" />
+	<!-- 设置浏览器是否缓存静态内容。默认值为true(生产环境下使用),开发阶段最好关闭 -->
+	<constant name="struts.serve.static.browserCache" value="false" />
+	<!-- 指定由spring负责action对象的创建 -->
+	<constant name="struts.objectFactory" value="spring" />
+	<!-- 是否开启动态方法调用 -->
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<!-- 拦截器配置 -->
+	<package name="all" extends="struts-default">
+		<interceptors>
+			<interceptor name="logInterceptor"
+				class="com.hurenjieee.interceptor.LogInterceptor"></interceptor>
+			<interceptor-stack name="allStack">
+				<!-- 按顺序拦截，先到先拦截 -->
+				<interceptor-ref name="logInterceptor"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="allStack" />
+		<global-results>
+			<!-- 逻辑名为login的结果，映射到/login.jsp页面 -->
+			<result name="login">/login.jsp</result>
+		</global-results>
+	</package>
+	
+    <constant name="struts.objectFactory.spring.autoWire.alwaysRespect" value="true"/>  
+</struts>  

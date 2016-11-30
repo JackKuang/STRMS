@@ -11,16 +11,25 @@
 		<!-- 如果有多个文件，在文件之间用英文逗号隔开 -->
 		<param-value>/WEB-INF/classes/applicationContext.xml</param-value>
 	</context-param>
-	
 	<!-- 配置Spring监听器 -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 	
+	<!-- Log4j 日志打印 -->	
+	<listener>       
+         <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>       
+    </listener> 	
+	<context-param>
+   	    <param-name>log4jConfigLocation</param-name>
+     	<param-value>WEB-INF/classes/log4j.properties</param-value>
+    </context-param>
+    
+	
 	<!-- 定义struts2的核心filter -->
 	<filter>
 		<filter-name>struts2</filter-name>
-		<filter-class>org.apache.struts2.dispatcher.FilterDispatcher</filter-class>
+		<filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>struts2</filter-name>
