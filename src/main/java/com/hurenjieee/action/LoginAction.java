@@ -1,14 +1,14 @@
 package com.hurenjieee.action;
 
 
-import org.apache.struts2.convention.annotation.Result;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Required;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.ParentPackage;
+import org.apache.struts2.convention.annotation.Result;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import com.hurenjieee.entity.User;
 import com.hurenjieee.service.LoginService;
-import com.opensymphony.xwork2.ActionSupport;
+import com.hurenjieee.util.CRUDActionSupport;
 
 @ParentPackage(value = "all")//应用全局包  
 @Action(
@@ -17,7 +17,7 @@ import com.opensymphony.xwork2.ActionSupport;
 		@Result(name = "error", location = "/WEB-INF/jsp/error.jsp")
 		}
 )
-public class LoginAction extends ActionSupport{  
+public class LoginAction extends CRUDActionSupport<User>{  
     
     private static final long serialVersionUID = 1L;       
           
@@ -40,9 +40,8 @@ public class LoginAction extends ActionSupport{
     public void setPassWord(String passWord) {  
         this.passWord = passWord;  
     }  
-    public String execute() throws Exception{  
-        if(loginService.login(userName, passWord)){  
-        	System.out.println(1);
+    public String execute() throws Exception{
+        if(loginService.login(userName, passWord)){
                return SUCCESS;  
           }else{  
                return ERROR;  
