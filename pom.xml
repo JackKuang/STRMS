@@ -11,6 +11,7 @@
 	<properties>
 		<struts2.version>2.3.20.1</struts2.version>
 		<spring.version>4.3.1.RELEASE</spring.version>
+		<hibernate.version>5.1.0.Final</hibernate.version>
 	</properties>
 	<dependencies>
 
@@ -60,9 +61,19 @@
 			<artifactId>log4j</artifactId>
 			<version>1.2.17</version>
 		</dependency>
+		<!-- Hibernate -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>${hibernate.version}</version>
+		</dependency>
 
-
-
+		<!-- MySQL connector -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.39</version>
+		</dependency>
 		<!-- Spring核心框架 -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -125,6 +136,7 @@
 			<version>${spring.version}</version>
 		</dependency>
 	</dependencies>
+
 	<build>
 		<finalName>SSHDemo</finalName>
 		<plugins>
