@@ -12,25 +12,36 @@
 	<property name="connection.username">root</property>
 	<property name="connection.password">123456</property>
 		
-	<!-- JDBC connection pool (use the built-in) -->
-	<!-- <property name="connection.pool_size">1</property> -->
-		
-	<!-- SQL dialect -->
-	<property name="dialect">org.hibernate.dialect.MySQLDialect</property>
-		
-	<!-- Echo all executed SQL to stdout -->
-	<property name="show_sql">true</property>
-		
-	<!-- Enable Hibernate's automatic session context management -->
-	<!--<property name="current_session_context_class">thread</property>-->
-		
-	<!-- Drop and re-create the database schema on startup -->
-	<!-- <property name="hbm2ddl.auto">create</property> -->
-		
-	<!-- Disable the second-level cache -->
-	<property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
-	
-	<mapping resource="Student.hbm.xml"/>
-		
+	 <!--采用c3p0数据库连接池 -->
+    <property name="hibernate.connection.provider_class">org.hibernate.connection.C3P0ConnectionProvider</property>
+    <!--最大连接数 -->
+    <property name="hibernate.c3p0.max_size">20</property>
+    <!--最小连接数  -->
+    <property name="hibernate.c3p0.min_size">5</property>
+    <!-- 获得连接的超时时间，如果超过这个时间会抛出异常，单位毫秒 -->
+    <property name="hibernate.c3p0.timeout">5000</property>
+    <!-- 最大的PreparedStatement的数量 -->
+    <property name="hibernate.c3p0.max_statements">100</property>
+    <!-- 当连接池里面的连接用完的时候，c3p0一下获得的连接数 -->
+    <property name="hibernate.c3p0.acquire_increment">5</property>
+    <!-- 每隔3000秒检查连接池里的空闲连接，单位是秒 -->    
+    <property name="hibernate.c3p0.idle_test_period">3000</property>
+    <!-- 连接池每隔60秒自动检测数据库连接情况，如果断开则自动重连 -->
+    <property name="idleConnectionTestPeriod">60</property>
+    <!-- 每次都验证连接是否可用 -->
+    <property name="hibernate.c3p0.validate">true</property>
+    <!-- 在控制台显示sql -->
+    <property name="hibernate.show_sql">true</property>
+    <!-- 我把它理解为好看的显示sql -->
+    <property name="hibernate.format_sql">true</property>
+    <!-- 取消hibernate查询缓存 -->
+    <property name="hibernate.cache.use_query_cache">false</property>
+    <!-- 批处理最大sql数量-->
+    <property name="hibernate.jdbc.batch_size">20</property>   
+    <!-- 取消hibernate二级缓存  -->
+    <property name="hibernate.cache.use_second_level_cache">false</property>
+    
+	<!-- <mapping resource="Student.hbm.xml"/> -->
+	<!-- <mapping class="com.hurenjieee.entity.Student"/> -->
 	</session-factory>
 </hibernate-configuration>

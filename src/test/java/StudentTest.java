@@ -2,17 +2,29 @@
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.hurenjieee.entity.Student;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration("/applicationContext.xml")
 public class StudentTest {
 
+	@Autowired
+	SessionFactory sessionFactory;
+	
 	public static void main(String[] args){
 		Student s = new Student();
-		s.setId(5);
+		s.setId(114131);
 		s.setName("s1");
 		s.setAge(1);
+		
 		
 		Configuration cfg = new Configuration();
 		SessionFactory sf = cfg.configure().buildSessionFactory();
@@ -23,5 +35,24 @@ public class StudentTest {
 		session.getTransaction().commit();
 		session.close();
 		sf.close();		
+	}
+	
+	@Test
+	public void test(){
+		Student s = new Student();
+		s.setId(1143131);
+		s.setName("s1");
+		s.setAge(1);
+		/*
+		Configuration cfg = new Configuration();
+		SessionFactory sf = cfg.configure().buildSessionFactory();
+*/	   	
+		Session session = sessionFactory.openSession();
+		Transaction t=session.beginTransaction();
+		session.save(s);
+		t.commit();
+		session.close();
+		sessionFactory.close();
+		
 	}
 }
