@@ -11,13 +11,14 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.hurenjieee.entity.Student;
+import com.hurenjieee.service.LoginService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/applicationContext.xml")
 public class StudentTest {
-
+	
 	@Autowired
-	SessionFactory sessionFactory;
+	LoginService loginService;
 	
 	public static void main(String[] args){
 		Student s = new Student();
@@ -47,12 +48,21 @@ public class StudentTest {
 		Configuration cfg = new Configuration();
 		SessionFactory sf = cfg.configure().buildSessionFactory();
 */	   	
-		Session session = sessionFactory.openSession();
+	/*	Session session = sessionFactory.openSession();
 		Transaction t=session.beginTransaction();
 		session.save(s);
 		t.commit();
 		session.close();
 		sessionFactory.close();
-		
+		*/
+	}
+	
+	@Test
+	public void test2(){
+		Student student = new Student();
+		student.setId(1);
+		student.setName("zhang");
+		student.setAge(12);
+		loginService.save(student);
 	}
 }
