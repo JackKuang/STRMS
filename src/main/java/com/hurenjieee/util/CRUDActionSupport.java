@@ -2,8 +2,10 @@ package com.hurenjieee.util;
 
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.interceptor.ApplicationAware;
 import org.apache.struts2.interceptor.CookiesAware;
@@ -34,27 +36,32 @@ public abstract class CRUDActionSupport<T> extends ActionSupport
 
 	@Override
 	public void setApplication(Map<String, Object> application) {
+		// TODO Auto-generated method stub
 		this.applicationMap = application;
 	}
 
 	@Override
 	public void setServletRequest(HttpServletRequest request) {
+		// TODO Auto-generated method stub
 		// request.setCharacterEncoding("");
 		this.request = request;
 	}
 
 	@Override
 	public void setServletResponse(HttpServletResponse response) {
+		// TODO Auto-generated method stub
 		this.response = response;
 	}
 
 	@Override
 	public void setCookiesMap(Map<String, String> cookies) {
+		// TODO Auto-generated method stub
 		this.cookieMap = cookies;
 	}
 
 	@Override
 	public void setSession(Map<String, Object> session) {
+		// TODO Auto-generated method stub
 		this.sessionMap = session;
 	}
 
@@ -69,6 +76,7 @@ public abstract class CRUDActionSupport<T> extends ActionSupport
 	public Map<String, Object> getApplicationMap() {
 		return applicationMap;
 	}
+
 	public Map<String, Object> getSessionMap() {
 		return sessionMap;
 	}
@@ -102,7 +110,7 @@ public abstract class CRUDActionSupport<T> extends ActionSupport
 		this.pageSize = pageSize;
 	}
 
-	// XXX  设置分页信息，调用这个方法，再在sql调用就可以执行分页操作
+	// 设置分页信息，调用这个方法，再在sql调用就可以执行分页操作
 	public void setPageInfo(Page<T> page) {
 		if (pageNo > 0) {
 			page.setPageNo(pageNo);
