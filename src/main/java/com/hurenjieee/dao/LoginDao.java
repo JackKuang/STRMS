@@ -1,22 +1,13 @@
 package com.hurenjieee.dao;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.hurenjieee.entity.Student;
+import com.hurenjieee.util.BaseDao;
 
 @Repository
-@Transactional
-public class LoginDao {
-	@Autowired
-	private SessionFactory sessionFactory;
-
-	private Session getSession() {
-		return sessionFactory.getCurrentSession();
-	}
+public class LoginDao extends BaseDao<Student,Integer>{
 	
 	@Transactional
 	public void save(Student student)

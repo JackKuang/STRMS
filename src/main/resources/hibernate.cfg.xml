@@ -33,7 +33,7 @@
     <!-- 在控制台显示sql -->
     <property name="hibernate.show_sql">true</property>
     <!-- 我把它理解为好看的显示sql -->
-    <property name="hibernate.format_sql">true</property>
+    <property name="hibernate.format_sql">false</property>
     <!-- 取消hibernate查询缓存 -->
     <property name="hibernate.cache.use_query_cache">false</property>
     <!-- 批处理最大sql数量-->

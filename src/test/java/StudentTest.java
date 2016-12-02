@@ -60,7 +60,7 @@ public class StudentTest {
 	@Test
 	public void test2(){
 		Student student = new Student();
-		student.setId(1);
+		student.setId(12345);
 		student.setName("zhang");
 		student.setAge(12);
 		loginService.save(student);

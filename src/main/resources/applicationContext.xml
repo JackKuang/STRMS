@@ -21,5 +21,6 @@
         <property name="sessionFactory" ref="sessionFactory"></property>
     </bean>
     <tx:annotation-driven transaction-manager="txManager"/>
-
+    <!-- 激活自动代理功能 -->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
 </beans>
