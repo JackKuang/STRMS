@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import com.hurenjieee.dao.LoginDao;
 import com.hurenjieee.entity.Student;
 
-@Service
+//@Service
 public class LoginService {
 	
 	@Autowired

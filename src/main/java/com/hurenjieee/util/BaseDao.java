@@ -30,7 +30,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class BaseDao<T, ID extends Serializable> implements IBaseDao<T, ID> {
 	
-	@Autowired
+	//@Autowired
 	private SessionFactory sessionFactory;
 	protected Class<T> entityClass;
 

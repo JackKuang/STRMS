@@ -12,7 +12,7 @@
 	<property name="connection.username">root</property>
 	<property name="connection.password">123456</property>
 		
-	 <!--采用c3p0数据库连接池 -->
+	<!--采用c3p0数据库连接池 -->
     <property name="hibernate.connection.provider_class">org.hibernate.connection.C3P0ConnectionProvider</property>
     <!--最大连接数 -->
     <property name="hibernate.c3p0.max_size">20</property>

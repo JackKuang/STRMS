@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.hurenjieee.entity.User;
 import com.hurenjieee.service.LoginService;
 import com.hurenjieee.util.CRUDActionSupport;
+import com.opensymphony.xwork2.ActionSupport;
 
 @ParentPackage(value = "all")//应用全局包  
 @Action(
@@ -17,7 +18,7 @@ import com.hurenjieee.util.CRUDActionSupport;
 		@Result(name = "error", location = "/WEB-INF/jsp/error.jsp")
 		}
 )
-public class LoginAction extends CRUDActionSupport<User>{  
+public class LoginAction extends ActionSupport{  
     
     private static final long serialVersionUID = 1L;       
           
@@ -25,7 +26,7 @@ public class LoginAction extends CRUDActionSupport<User>{
     private String passWord; 
     
     //@Autowired后不需要getter()和setter()方法
-    @Autowired
+    //@Autowired
     private LoginService loginService;
     
 	public String getUserName() {  
@@ -41,6 +42,7 @@ public class LoginAction extends CRUDActionSupport<User>{
         this.passWord = passWord;  
     }  
     public String execute() throws Exception{
+    	loginService = new LoginService();
         if(loginService.login(userName, passWord)){
                return SUCCESS;  
           }else{  

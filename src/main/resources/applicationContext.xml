@@ -7,8 +7,7 @@
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
 	<!-- 自动扫描这些路劲下得注入 -->
-	<context:component-scan base-package="com.hurenjieee.service,com.hurenjieee.action,com.hurenjieee.dao" />
-	
+	<context:component-scan base-package="com.hurenjieee.service,com.hurenjieee.action,com.hurenjieee.dao" /><!-- 
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<property name="configLocations"
@@ -21,6 +20,5 @@
         <property name="sessionFactory" ref="sessionFactory"></property>
     </bean>
     <tx:annotation-driven transaction-manager="txManager"/>
-    <!-- 激活自动代理功能 -->
-    <aop:aspectj-autoproxy proxy-target-class="true"/>
+    <aop:aspectj-autoproxy proxy-target-class="true"/> -->
 </beans>
