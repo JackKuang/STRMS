@@ -5,11 +5,13 @@ import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 
 import com.hurenjieee.service.LoginService;
 import com.opensymphony.xwork2.ActionSupport;
 
-@ParentPackage(value = "all")//应用全局包  
+@ParentPackage(value = "all")//应用全局包 
+@Scope("prototype")
 @Action(
 		results={
 		@Result(name = "success", location = "/WEB-INF/jsp/success.jsp"),
