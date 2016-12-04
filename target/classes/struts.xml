@@ -25,6 +25,9 @@
 	<constant name="struts.objectFactory" value="spring" />
 	<!-- 是否开启动态方法调用 -->
 	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<!-- 设置的自动装配策略 @AutoWire -->
+	<constant name="struts.objectFactory.spring.autoWire.alwaysRespect"
+		value="true" />
 	<!-- 拦截器配置 -->
 	<package name="all" extends="struts-default">
 		<interceptors>
@@ -37,11 +40,5 @@
 			</interceptor-stack>
 		</interceptors>
 		<default-interceptor-ref name="allStack" />
-		<global-results>
-			<!-- 逻辑名为login的结果，映射到/login.jsp页面 -->
-			<result name="login">/login.jsp</result>
-		</global-results>
 	</package>
-	
-    <constant name="struts.objectFactory.spring.autoWire.alwaysRespect" value="true"/>  
 </struts>  

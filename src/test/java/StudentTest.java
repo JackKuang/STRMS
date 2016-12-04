@@ -2,7 +2,6 @@
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,6 +10,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.hurenjieee.entity.Student;
+import com.hurenjieee.entity.Userr;
 import com.hurenjieee.service.LoginService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -21,18 +21,18 @@ public class StudentTest {
 	LoginService loginService;
 	
 	public static void main(String[] args){
-		Student s = new Student();
-		s.setId(114131);
-		s.setName("s1");
-		s.setAge(1);
 		
+		Userr user = new Userr();
+		user.setUserId(111);
+		user.setUserName("zhang");
+		user.setPassWord("123456");
 		
 		Configuration cfg = new Configuration();
 		SessionFactory sf = cfg.configure().buildSessionFactory();
 	   	
 		Session session = sf.openSession();
 		session.beginTransaction();
-		session.save(s);
+		session.save(user);
 		session.getTransaction().commit();
 		session.close();
 		sf.close();		
@@ -59,10 +59,8 @@ public class StudentTest {
 	
 	@Test
 	public void test2(){
-		Student student = new Student();
-		student.setId(12345);
-		student.setName("zhang");
-		student.setAge(12);
-		loginService.save(student);
+		Userr userr = new Userr();
+		userr=loginService.login("admin", "123");
+		System.out.println(userr.getUserId());
 	}
 }

@@ -43,5 +43,6 @@
     
 	<!-- <mapping resource="Student.hbm.xml"/> -->
 	<!-- <mapping class="com.hurenjieee.entity.Student"/> -->
+	<mapping class="com.hurenjieee.entity.Userr"/> 
 	</session-factory>
 </hibernate-configuration>

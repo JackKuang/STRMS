@@ -1,26 +1,33 @@
 package com.hurenjieee.dao;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
+
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
-import com.hurenjieee.entity.Student;
+import com.hurenjieee.entity.Userr;
 
-//@Repository
+@Repository
 public class LoginDao {
-//public class LoginDao extends BaseDao<Student,Integer>{
-	@Autowired
-	/*private SessionFactory sessionFactory;
-	
-	public Session getSession() {
-		// 需要开启事物，才能得到CurrentSession
-		return sessionFactory.getCurrentSession();
-	}*/
-	
-//	@Transactional
-	public void save(Student student)
-    {
-//        System.out.println(getSession().save(student));
-    }
 
+	public Userr login(String userName, String password) {
+		Configuration cfg = new Configuration();
+		SessionFactory sf = cfg.configure().buildSessionFactory();
+
+		Session session = sf.openSession();
+		Transaction transaction = session.beginTransaction();
+		String hql = "from Userr u where u.userName = '" + userName + "' and u.passWord = '" + password+"'";
+		Query query = session.createQuery(hql);
+		List<Userr> list = query.list();
+		transaction.commit();
+		session.close();
+		sf.close();
+		if (list.size() == 0)
+			return null;
+		return list.get(0);
+	}
 }
