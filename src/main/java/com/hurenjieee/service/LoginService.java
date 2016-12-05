@@ -13,6 +13,6 @@ public class LoginService {
 	LoginDao loginDao;
 	
 	public Userr login(String name,String password){
-		return loginDao.login(name,password);
+		return loginDao.selectByNameAndPassword(name,password);
 	}
 }

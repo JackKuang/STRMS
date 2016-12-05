@@ -18,7 +18,7 @@ public class LoginDao {
 		@Autowired
 		SessionFactory sessionFactory;
 
-	public Userr login(String userName, String password) {
+	public Userr selectByNameAndPassword(String userName, String password) {
 //		Configuration cfg = new Configuration();
 //		SessionFactory sessionFactory = cfg.configure().buildSessionFactory();
 
