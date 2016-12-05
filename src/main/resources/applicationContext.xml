@@ -7,29 +7,35 @@
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
 	<!-- 自动扫描这些路劲下得注入 -->
-	<context:component-scan base-package="com.hurenjieee.action,com.hurenjieee.service,com.hurenjieee.dao" />
-    
+	<context:component-scan
+		base-package="com.hurenjieee.action,com.hurenjieee.service,com.hurenjieee.dao" />
+
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
-		<property name="configLocations"
-			value="classpath:hibernate.cfg.xml" />
+		<property name="configLocations" value="classpath:hibernate.cfg.xml" />
 	</bean>
-    
-    <!-- 配置Spring声明式事务 -->
-    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
-        <property name="sessionFactory" ref="sessionFactory"></property>
-    </bean>
-    <!-- <tx:annotation-driven transaction-manager="txManager"/> -->
-    <!-- 配置事务事务属性 -->
-     <tx:advice id="txAdvice" transaction-manager="transactionManager">
-        <tx:attributes>
-            <tx:method name="login*" propagation="REQUIRED"/>
-            <tx:method name="*"/>
-        </tx:attributes>
-    </tx:advice>
-    <!-- 配置事务切点，并把切点和事务属性关联起来 -->
-    <aop:config>
-        <aop:pointcut expression="execution(* com.hurenjieee.dao.*.*(..))" id="txPointcut"/>
-        <aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut"/>
-    </aop:config>
+
+	<!-- 配置Spring声明式事务 -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<!-- <tx:annotation-driven transaction-manager="txManager"/> -->
+	<!-- 配置事务事务属性 -->
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="save*" propagation="REQUIRED" />
+			<tx:method name="add*" propagation="REQUIRED" />
+			<tx:method name="insert*" propagation="REQUIRED" />
+			<tx:method name="update*" propagation="REQUIRED" />
+			<tx:method name="delete*" propagation="REQUIRED" />
+			<tx:method name="find*" propagation="SUPPORTS" read-only="true" />
+		</tx:attributes>
+	</tx:advice>
+	<!-- 配置事务切点，并把切点和事务属性关联起来 -->
+	<aop:config>
+		<aop:pointcut expression="execution(* com.hurenjieee.dao.*.*(..))"
+			id="txPointcut" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut" />
+	</aop:config>
 </beans>
