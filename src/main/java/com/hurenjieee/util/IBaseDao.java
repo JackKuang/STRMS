@@ -151,7 +151,7 @@ public interface IBaseDao<T, ID extends Serializable> {
 	 * @param values
 	 * @return List
 	 */
-	public List findListBySql(final String sql, final RowMapper map, final Object... values);
+	public List<T> findListBySql(final String sql, final RowMapper map, final Object... values);
 
 	/**
 	 * <refresh>

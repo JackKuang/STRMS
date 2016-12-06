@@ -9,30 +9,27 @@ import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.Interceptor;
 import com.opensymphony.xwork2.interceptor.PreResultListener;
 
+@SuppressWarnings("serial")
 public class LogInterceptor implements Interceptor {
 	private static Logger log = Logger.getLogger(LogInterceptor.class);
 
 	@Override
 	public void destroy() {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void init() {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public String intercept(ActionInvocation invocation) throws Exception {
-		// TODO Auto-generated method stub
 		//增加返回结果前事件，实际开发过程中可以查看信息，
 		invocation.addPreResultListener(new PreResultListener() {
 
 			@Override
 			public void beforeResult(ActionInvocation invocation, String resultCode) {
-				// TODO Auto-generated method stub
 				StringBuffer sb = new StringBuffer();
 				Map<String, Object> sessionMap = invocation.getInvocationContext().getSession();
 				String name = (String) sessionMap.get("name");

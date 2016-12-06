@@ -20,14 +20,13 @@ import com.opensymphony.xwork2.ActionSupport;
 )
 public class LoginAction extends ActionSupport{  
     
-    private static final long serialVersionUID = 1L;       
+    private static final long serialVersionUID = 1L;
+
+    @Autowired
+    private LoginService loginService;
           
     private String userName;  
     private String passWord; 
-    
-    //@Autowired后不需要getter()和setter()方法
-    @Autowired
-    private LoginService loginService;
     
 	public String getUserName() {  
         return userName;  
