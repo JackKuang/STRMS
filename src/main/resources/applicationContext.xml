@@ -13,6 +13,8 @@
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<property name="configLocations" value="classpath:hibernate.cfg.xml" />
+		<!-- 自动扫描这个包下的entity -->
+		<property name="packagesToScan" value="com.hurenjieee.entity"/>
 	</bean>
 
 	<!-- 配置Spring声明式事务 -->
@@ -50,4 +52,7 @@
 			id="txPointcut" />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut" />
 	</aop:config>
+	<!-- 由于spring AOP动态代理默认是通过接口，所以注入事务层的地方都要通过接口进行注入，如果通过实现类进行注入就会报这个错
+有人说可以进行配置，然后也可以支持实体类的事务层注入  -->
+	<aop:aspectj-autoproxy proxy-target-class="true"/>
 </beans>
