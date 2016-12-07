@@ -42,6 +42,7 @@
 			<tx:method name="select*" propagation="REQUIRED" />
 			<tx:method name="get*" propagation="REQUIRED" />
 			<tx:method name="delete*" propagation="REQUIRED" />
+			<tx:method name="logi*" propagation="REQUIRED" />
 			
 			<tx:method name="find*" propagation="SUPPORTS" read-only="true" /> 
 		</tx:attributes>
