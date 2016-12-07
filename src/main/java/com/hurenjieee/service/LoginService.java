@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.hurenjieee.dao.LoginDao;
 import com.hurenjieee.entity.Userr;
-import com.hurenjieee.util.BaseDao;
 
 @Service
 public class LoginService {

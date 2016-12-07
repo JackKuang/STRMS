@@ -1,23 +1,31 @@
 package com.hurenjieee.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+
 @Entity
 @Table(name = "userr")
-public class Userr {
+public class Userr implements Serializable{
+//	多个主键下，实体类必须要序列化
+//	
+//	@Id
+//	@Column(name="userId")
+//	@GeneratedValue(strategy=GenerationType.IDENTITY)
+//	private Integer userId;
+//	综合考虑之下，选择是使用uuid作为主键
 	
-	@Id
-	@Column(name="userId")
-	private Integer userId;
-
-	@GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid.hex")
+	@Id	
+	@GenericGenerator(name="systemUUID",strategy="uuid")
+	@GeneratedValue(generator="systemUUID")
 	@Column(name="uuid")
 	private String uuid;
 	
@@ -26,14 +34,6 @@ public class Userr {
 	
 	@Column(name = "passWord")
 	private String passWord;
-
-	public Integer getUserId() {
-		return userId;
-	}
-
-	public void setUserId(Integer userId) {
-		this.userId = userId;
-	}
 
 	public String getUserName() {
 		return userName;

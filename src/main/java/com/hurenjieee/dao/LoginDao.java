@@ -10,9 +10,9 @@ import com.hurenjieee.entity.Userr;
 import com.hurenjieee.util.BaseDao;
 
 @Repository
+@Transactional
 public class LoginDao extends BaseDao<Userr, Integer>{
 	
-	@Transactional
 	public Userr selectByNameAndPassword(String userName, String password) {
 		String hql = "from Userr u where u.userName = '" + userName + "' and u.passWord = '" + password+"'";
 		List<Userr> list = getListByHQL(hql);
@@ -20,7 +20,7 @@ public class LoginDao extends BaseDao<Userr, Integer>{
 			return null;
 		return list.get(0);
 	}
-	@Transactional
+	
 	public void save(Userr userr){
 		super.save(userr);
 	}
