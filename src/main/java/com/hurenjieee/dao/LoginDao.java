@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import com.hurenjieee.entity.Userr;
+import com.hurenjieee.util.BaseDao;
 
 @Repository
 public class LoginDao extends BaseDao<Userr, Integer>{
