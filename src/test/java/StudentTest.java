@@ -60,7 +60,9 @@ public class StudentTest {
 	@Test
 	public void test2(){
 		Userr userr = new Userr();
-		userr=loginService.login("admin", "123");
-		System.out.println(userr.getUserId());
+		userr.setUserId(111);
+		userr.setUserName("aaa32123a");
+		userr.setPassWord("bb321b");
+		loginService.save(userr);
 	}
 }

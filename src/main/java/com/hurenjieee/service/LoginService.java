@@ -33,4 +33,8 @@ public class LoginService {
 	public Userr login(String name,String password){
 		return loginDao.selectByNameAndPassword(name, password);
 	}
+	
+	public void save(Userr userr){
+		loginDao.save(userr);
+	}
 }

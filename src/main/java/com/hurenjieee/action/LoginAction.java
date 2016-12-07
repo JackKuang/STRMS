@@ -7,6 +7,7 @@ import org.apache.struts2.convention.annotation.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 
+import com.hurenjieee.entity.Userr;
 import com.hurenjieee.service.LoginService;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -41,6 +42,7 @@ public class LoginAction extends ActionSupport{
         this.passWord = passWord;  
     }  
     public String execute() throws Exception{
+    	
         if(loginService.login(userName, passWord)!=null){
                return SUCCESS;
           }else{  

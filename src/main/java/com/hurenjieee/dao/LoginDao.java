@@ -20,4 +20,8 @@ public class LoginDao extends BaseDao<Userr, Integer>{
 			return null;
 		return list.get(0);
 	}
+	@Transactional
+	public void save(Userr userr){
+		super.save(userr);
+	}
 }
