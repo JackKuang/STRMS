@@ -2,19 +2,22 @@ package com.hurenjieee.util;
 
 import java.util.Map;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.apache.struts2.interceptor.ApplicationAware;
 import org.apache.struts2.interceptor.CookiesAware;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 import org.apache.struts2.interceptor.SessionAware;
+import org.springframework.web.context.ServletContextAware;
 
 import com.hurenjieee.entity.Page;
 import com.opensymphony.xwork2.ActionSupport;
 
 public abstract class CRUDActionSupport<T> extends ActionSupport
-		implements ServletRequestAware, ServletResponseAware, ApplicationAware, SessionAware, CookiesAware {
+		implements ServletContextAware, ServletRequestAware, ServletResponseAware, ApplicationAware, SessionAware, CookiesAware {
 
 	private static final long serialVersionUID = 1L;
 
@@ -30,6 +33,8 @@ public abstract class CRUDActionSupport<T> extends ActionSupport
 	private Map<String, Object> sessionMap;
 	// cookie存在客户端中，银盘持久化
 	private Map<String, String> cookieMap;
+	
+	private ServletContext servletContext;
 
 	@Override
 	public void setApplication(Map<String, Object> application) {
@@ -76,9 +81,17 @@ public abstract class CRUDActionSupport<T> extends ActionSupport
 	public Map<String, String> getCookieMap() {
 		return cookieMap;
 	}
-	
+
+	public ServletContext getServletContext() {
+		return servletContext;
+	}
+
+	public void setServletContext(ServletContext servletContext) {
+		this.servletContext = servletContext;
+	}
 
 	// -------------------------资源访问设置结束-------------------------------
+
 
 	// -------------------------页码信息设置----------------------------------
 	// 页码序号

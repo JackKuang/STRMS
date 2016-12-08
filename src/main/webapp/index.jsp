@@ -22,9 +22,10 @@
 </head>
 
 <body>
-	<s:form action="login">
+	<s:form action="login" enctype="multipart/form-data" method="post">
 		<s:textfield name="userName" label="用户名" key="user"></s:textfield>
 		<s:password name="passWord" label="密码" key="password"></s:password>
+		<s:file name="file" label="文件" key="file"></s:file>
 		<s:submit key="login" value="提交"></s:submit>
 	</s:form>
 </body>

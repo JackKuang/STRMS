@@ -20,7 +20,6 @@ public class LoginDao extends BaseDao<Userr, Integer>{
 			return null;
 		return list.get(0);
 	}
-	
 	public void save(Userr userr){
 		super.save(userr);
 	}
