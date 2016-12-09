@@ -6,6 +6,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.util.Map;
+
+import javax.servlet.ServletContext;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.struts2.convention.annotation.Action;
@@ -91,6 +94,11 @@ public class LoginAction extends CRUDActionSupport<Userr>{
     }
     
 	public String login() throws Exception{
+		
+		 ServletContext servletContext = getServletContext();
+		 Map<String,String> map=(Map<String, String>) servletContext.getAttribute("applicationMap");
+		 System.out.println(map.get("key1"));
+		 System.out.println(map.get("key2"));
     	 String realpath = getServletContext().getRealPath("/img");
     	 System.out.println("realpath: "+realpath);
     	 

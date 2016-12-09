@@ -38,6 +38,8 @@
 			<interceptor-stack name="allStack">
 				<!-- 按顺序拦截，先到先拦截 -->
 				<interceptor-ref name="logInterceptor"></interceptor-ref>
+				<!-- token,防止重复提交  -->
+				<!-- <interceptor-ref name="token"></interceptor-ref> -->
 				<interceptor-ref name="defaultStack"></interceptor-ref>
 			</interceptor-stack>
 		</interceptors>

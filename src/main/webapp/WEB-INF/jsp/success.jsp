@@ -8,5 +8,6 @@
 </head>
 <body>
 success
+<% out.print(getServletContext().getAttribute("applicationMap")); %>
 </body>
 </html>

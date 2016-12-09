@@ -40,11 +40,8 @@
 			<tx:method name="insert*" propagation="REQUIRED" />
 			<tx:method name="update*" propagation="REQUIRED" />
 			<tx:method name="select*" propagation="REQUIRED" />
-			<tx:method name="get*" propagation="REQUIRED" />
 			<tx:method name="delete*" propagation="REQUIRED" />
-			<tx:method name="logi*" propagation="REQUIRED" />
 			
-			<tx:method name="find*" propagation="SUPPORTS" read-only="true" /> 
 		</tx:attributes>
 	</tx:advice>
 	<!-- 配置事务切点，并把切点和事务属性关联起来 -->
