@@ -23,7 +23,6 @@ public class StudentTest {
 	public static void main(String[] args){
 		
 		Userr user = new Userr();
-		user.setUserId(111);
 		user.setUserName("zhang");
 		user.setPassWord("123456");
 		

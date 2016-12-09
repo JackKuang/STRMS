@@ -2,6 +2,10 @@ package com.hurenjieee.action;
 
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.struts2.convention.annotation.Action;
@@ -20,10 +24,15 @@ import com.opensymphony.xwork2.ActionContext;
 @Action(
 		results={
 		@Result(name = "success", location = "/WEB-INF/jsp/success.jsp"),
-		@Result(name = "error", location = "/WEB-INF/jsp/error.jsp")
+		@Result(name = "error", location = "/WEB-INF/jsp/error.jsp"),
+		@Result(name = "download", type = "stream", params = {  
+				"contentType", "application/octet-stream",  
+                "inputName", "inputStream",  
+                "contentDisposition", "attachment;filename=\"${fileName}\"",  
+                "bufferSize", "4096"})
 		}
 )
-public class LoginAction extends CRUDActionSupport<Userr>{  
+public class LoginAction extends CRUDActionSupport<Userr>{ 
     
     private static final long serialVersionUID = 1L;
 
@@ -35,6 +44,27 @@ public class LoginAction extends CRUDActionSupport<Userr>{
     private File file;
     private String fileFileName;
     
+    private String fileName;
+    private InputStream inputStream;
+    
+    
+    public String getFileName() {  
+        return fileName;  
+    }  
+  
+    public void setFileName(String fileName) {  
+        this.fileName = fileName;
+    }
+    
+    
+	public InputStream getInputStream() {
+		return inputStream;
+	}
+
+	public void setInputStream(InputStream inputStream) {
+		this.inputStream = inputStream;
+	}
+
 	public File getFile() {
 		return file;
 	}
@@ -58,8 +88,9 @@ public class LoginAction extends CRUDActionSupport<Userr>{
     }  
     public void setPassWord(String passWord) {  
         this.passWord = passWord;  
-    }  
-    public String execute() throws Exception{
+    }
+    
+	public String login() throws Exception{
     	 String realpath = getServletContext().getRealPath("/img");
     	 System.out.println("realpath: "+realpath);
     	 
@@ -76,5 +107,19 @@ public class LoginAction extends CRUDActionSupport<Userr>{
                return ERROR;  
             }  
     }
+	public String download(){
+		String filePath = getServletContext().getRealPath("/img")+"/text.txt";  
+        try {  
+            setFileName(new String("’≈π˙√˜≤‚ ‘Õº∆¨.txt".getBytes(), "iso8859-1"));  
+        } catch (UnsupportedEncodingException e) {  
+            e.printStackTrace();  
+        } 
+        try {  
+            inputStream= new FileInputStream(filePath);  
+        } catch (FileNotFoundException e) {  
+            e.printStackTrace();  
+        }  
+		return "download";
+	}
 
 }
