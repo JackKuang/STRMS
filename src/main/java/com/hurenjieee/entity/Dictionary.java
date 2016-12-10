@@ -1,5 +1,5 @@
 package com.hurenjieee.entity;
-// Generated 2016-12-9 23:09:58 by Hibernate Tools 4.3.1.Final
+// Generated 2016-12-10 22:48:20 by Hibernate Tools 4.3.1.Final
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,6 +16,7 @@ public class Dictionary implements java.io.Serializable {
 	private String uuidid;
 	private String key;
 	private String value;
+	private String description;
 
 	public Dictionary() {
 	}
@@ -24,10 +25,11 @@ public class Dictionary implements java.io.Serializable {
 		this.uuidid = uuidid;
 	}
 
-	public Dictionary(String uuidid, String key, String value) {
+	public Dictionary(String uuidid, String key, String value, String description) {
 		this.uuidid = uuidid;
 		this.key = key;
 		this.value = value;
+		this.description = description;
 	}
 
 	@Id
@@ -57,6 +59,15 @@ public class Dictionary implements java.io.Serializable {
 
 	public void setValue(String value) {
 		this.value = value;
+	}
+
+	@Column(name = "description")
+	public String getDescription() {
+		return this.description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 }
