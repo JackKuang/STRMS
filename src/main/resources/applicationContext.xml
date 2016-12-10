@@ -41,6 +41,7 @@
 			<tx:method name="update*" propagation="REQUIRED" />
 			<tx:method name="select*" propagation="REQUIRED" />
 			<tx:method name="delete*" propagation="REQUIRED" />
+			<tx:method name="get*" propagation="REQUIRED" />
 			
 		</tx:attributes>
 	</tx:advice>
@@ -53,4 +54,6 @@
 	<!-- 由于spring AOP动态代理默认是通过接口，所以注入事务层的地方都要通过接口进行注入，如果通过实现类进行注入就会报这个错
 有人说可以进行配置，然后也可以支持实体类的事务层注入  -->
 	<aop:aspectj-autoproxy proxy-target-class="true"/>
+	
+	<bean class = "com.hurenjieee.util.SpringContextUtil" id = "springContextUtil" />
 </beans>

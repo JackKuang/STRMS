@@ -10,6 +10,6 @@
 success
 <% out.print(getServletContext().getAttribute("applicationMap")); %>
 <!-- applicationMap获取到application里面的内容，同样的也有seesionScope和requestScope -->
-${applicationScope.applicationMap.key1 }
+${applicationScope.applicationMap.dictionary }
 </body>
 </html>

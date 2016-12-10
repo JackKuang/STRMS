@@ -7,7 +7,6 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import com.hurenjieee.entity.Userr;
-import com.hurenjieee.util.BaseDao;
 
 @Repository
 @Transactional

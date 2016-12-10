@@ -1,4 +1,4 @@
-package com.hurenjieee.util;
+package com.hurenjieee.dao;
 
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
@@ -13,12 +13,19 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+
+import javax.transaction.Transactional;
+
 import org.hibernate.Query;
 import org.hibernate.ScrollableResults;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.jdbc.Work;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import com.hurenjieee.util.IBaseDao;
+import com.hurenjieee.util.PageResults;
+import com.hurenjieee.util.RowMapper;
 
 /**
  * @ClassName: BaseDao
@@ -28,6 +35,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  *
  */
 @SuppressWarnings({ "rawtypes", "unchecked" })
+@Transactional
 public class BaseDao<T, ID extends Serializable> implements IBaseDao<T, ID> {
 	
 	@Autowired
