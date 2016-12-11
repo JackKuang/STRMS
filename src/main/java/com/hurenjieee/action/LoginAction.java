@@ -112,9 +112,11 @@ public class LoginAction extends CRUDActionSupport<Userr> {
 			ActionContext.getContext().put("message", "文件上传成功");
 		}
 		if (loginService.login(userName, passWord) != null) {
+			
+			
 			List<Dictionary> list= dictionaryService.getList();
-			System.out.println(getApplicationMap().get("key1"));
-			getApplicationMap().put("dictionary", list.get(0).getValue());
+			System.out.println(((Map<String,String>)servletContext.getAttribute("applicationMap")).get("key1"));
+			getSessionMap().put("ddd", "Sessioon");
 			return SUCCESS;
 		} else {
 			return ERROR;
