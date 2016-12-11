@@ -19,7 +19,7 @@ public class DictionaryService {
 	}
 	
 	public List<Dictionary> getList(){
-		return dictionaryDao.getListByHQL("FROM Dictionary");
+		return dictionaryDao.getListByHQL("FROM Dictionary WHERE status = true");
 	}
 	
 	public void update(Dictionary dictionary){

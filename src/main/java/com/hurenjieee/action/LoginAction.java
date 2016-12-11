@@ -22,6 +22,7 @@ import com.hurenjieee.entity.Userr;
 import com.hurenjieee.service.DictionaryService;
 import com.hurenjieee.service.LoginService;
 import com.hurenjieee.util.CRUDActionSupport;
+import com.hurenjieee.util.GlobalUtil;
 import com.opensymphony.xwork2.ActionContext;
 
 @ParentPackage(value = "all") // 应用全局包
@@ -98,9 +99,6 @@ public class LoginAction extends CRUDActionSupport<Userr> {
 	public String login() throws Exception {
 
 		ServletContext servletContext = getServletContext();
-		Map<String, String> map = (Map<String, String>) servletContext.getAttribute("applicationMap");
-		System.out.println(map.get("key1"));
-		System.out.println(map.get("key2"));
 		String realpath = getServletContext().getRealPath("/img");
 		System.out.println("realpath: " + realpath);
 
@@ -113,10 +111,7 @@ public class LoginAction extends CRUDActionSupport<Userr> {
 		}
 		if (loginService.login(userName, passWord) != null) {
 			
-			
-			List<Dictionary> list= dictionaryService.getList();
-			System.out.println(((Map<String,String>)servletContext.getAttribute("applicationMap")).get("key1"));
-			getSessionMap().put("ddd", "Sessioon");
+			System.out.println(GlobalUtil.getStringValue("systemName"));
 			return SUCCESS;
 		} else {
 			return ERROR;

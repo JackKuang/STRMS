@@ -16,9 +16,7 @@ import javax.servlet.annotation.WebFilter;
 
 import org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter;
 
-import com.hurenjieee.entity.Dictionary;
-import com.hurenjieee.service.DictionaryService;
-import com.hurenjieee.util.SpringContextUtil;
+import com.hurenjieee.util.GlobalUtil;
 
 /**
  * Servlet Filter implementation class InitStrutsPrepareAndExecuteFilter
@@ -58,16 +56,21 @@ public class InitStrutsPrepareAndExecuteFilter extends StrutsPrepareAndExecuteFi
 	public void init(FilterConfig fConfig) throws ServletException {
 		// TODO Auto-generated method stub
 		ServletContext servletContext =  fConfig.getServletContext();
+		
+		GlobalUtil.initGlobalToServlet(servletContext);
+		/*
 		Map<String,String> map=new TreeMap<String,String>();
-		map.put("key1", "value1");
-		map.put("key2", "value2");
 		// FIXME 对数据库数据字典的访问，写到ServletContext中
 		DictionaryService dictionaryService = (DictionaryService) SpringContextUtil.getBean("dictionaryService");
 		List<Dictionary> list=dictionaryService.getList();
+		new Global;
 		for(Dictionary dictionary:list){
-			map.put(dictionary.getKey(),dictionary.getValue());
+			switch(dictionary.getValueType()){
+			case "string":
+				Global
+			}
 		}
-		servletContext.setAttribute("applicationMap", map);
+		servletContext.setAttribute("systemMap", map);*/
 	}
 
 }

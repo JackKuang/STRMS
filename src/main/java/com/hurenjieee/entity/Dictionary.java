@@ -1,5 +1,5 @@
 package com.hurenjieee.entity;
-// Generated 2016-12-10 22:48:20 by Hibernate Tools 4.3.1.Final
+// Generated 2016-12-11 16:59:51 by Hibernate Tools 4.3.1.Final
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,34 +13,38 @@ import javax.persistence.Table;
 @Table(name = "dictionary", catalog = "strms")
 public class Dictionary implements java.io.Serializable {
 
-	private String uuidid;
+	private String uuid;
 	private String key;
+	private String valueType;
 	private String value;
 	private String description;
+	private Boolean status;
 
 	public Dictionary() {
 	}
 
-	public Dictionary(String uuidid) {
-		this.uuidid = uuidid;
+	public Dictionary(String uuid) {
+		this.uuid = uuid;
 	}
 
-	public Dictionary(String uuidid, String key, String value, String description) {
-		this.uuidid = uuidid;
+	public Dictionary(String uuid, String key, String valueType, String value, String description, Boolean status) {
+		this.uuid = uuid;
 		this.key = key;
+		this.valueType = valueType;
 		this.value = value;
 		this.description = description;
+		this.status = status;
 	}
 
 	@Id
 
-	@Column(name = "uuidid", unique = true, nullable = false, length = 32)
-	public String getUuidid() {
-		return this.uuidid;
+	@Column(name = "uuid", unique = true, nullable = false, length = 32)
+	public String getUuid() {
+		return this.uuid;
 	}
 
-	public void setUuidid(String uuidid) {
-		this.uuidid = uuidid;
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
 	}
 
 	@Column(name = "key")
@@ -50,6 +54,15 @@ public class Dictionary implements java.io.Serializable {
 
 	public void setKey(String key) {
 		this.key = key;
+	}
+
+	@Column(name = "value_type")
+	public String getValueType() {
+		return this.valueType;
+	}
+
+	public void setValueType(String valueType) {
+		this.valueType = valueType;
 	}
 
 	@Column(name = "value")
@@ -68,6 +81,15 @@ public class Dictionary implements java.io.Serializable {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	@Column(name = "status")
+	public Boolean getStatus() {
+		return this.status;
+	}
+
+	public void setStatus(Boolean status) {
+		this.status = status;
 	}
 
 }
