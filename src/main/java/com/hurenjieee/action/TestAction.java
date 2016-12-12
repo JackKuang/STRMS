@@ -31,7 +31,7 @@ import com.opensymphony.xwork2.ActionContext;
 		@Result(name = "error", location = "/WEB-INF/jsp/error.jsp"),
 		@Result(name = "download", type = "stream", params = { "contentType", "application/octet-stream", "inputName",
 				"inputStream", "contentDisposition", "attachment;filename=\"${fileName}\"", "bufferSize", "4096" }) })
-public class LoginAction extends CRUDActionSupport<Userr> {
+public class TestAction extends CRUDActionSupport<Userr> {
 
 	private static final long serialVersionUID = 1L;
 
