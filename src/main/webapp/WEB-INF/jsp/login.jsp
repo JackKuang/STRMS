@@ -37,12 +37,12 @@
 			<b>${Global.stringMap.systemName }</b>
 		</div>
 		<!-- /.login-logo -->
-		<c:if test="wrong != null && wrong==1">
-		<div class="callout callout-danger">
-			<p>错误的用户名或者密码！</p>
-		</div>
+		<c:if test="${wrong==1 }">
+			<div class="callout callout-danger">
+				<p>错误的用户名或者密码！</p>
+			</div>
 		</c:if>
-		
+
 		<div class="login-box-body">
 			<form action="login!login.action" method="post">
 				<div class="form-group has-feedback">
@@ -56,13 +56,9 @@
 						class="glyphicon glyphicon-lock form-control-feedback"></span>
 				</div>
 				<div class="form-group has-feedback">
-					<label> <input type="radio" name="type" value="student" class="minimal"
-						checked> 学生
-					</label> <label> <input type="radio" name="type" value="teacher" class="minimal">
-						教师
-					</label> <label> <input type="radio" name="type" value="admin" class="minimal">
-						管理员
-					</label>
+					<label><input type="radio" name="type" value="student" class="minimal">学生</label>
+					<label><input type="radio" name="type" value="teacher" class="minimal">教师</label>
+					<label><input type="radio" name="type" value="admin" class="minimal">管理员</label>
 				</div>
 				<div class="row">
 					<div class="col-xs-8"></div>
@@ -92,6 +88,7 @@
 				radioClass : 'iradio_square-blue',
 				increaseArea : '20%' // optional
 			});
+			//$("input[name='type'][value='teacher']").attr("checked", true); 
 		});
 	</script>
 </body>

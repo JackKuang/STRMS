@@ -52,14 +52,19 @@ public class LoginAction extends CRUDActionSupport<Object> {
 	public String login() {
 		String result= "toLogin";
 		if("student".equals(type)){//学生登录
-			
+			getRequest().setAttribute("wrong", "1");
+			getRequest().setAttribute("type", type);
+			result = "toLogin";
 		}else if("teacher".equals(type)){//教师登录
-			
+			getRequest().setAttribute("wrong", "1");
+			getRequest().setAttribute("type", type);
+			result = "toLogin";
 		}else if("admin".equals(type)){//管理员登录
 			if (loginService.login(userName, password) != null) {
 				result = "success-admin";
 			} else {
-				getRequest().setAttribute("wrong", "1");
+				getRequest().setAttribute("wrong", 1);
+				getRequest().setAttribute("type", type);
 				result = "toLogin";
 			}
 		}
