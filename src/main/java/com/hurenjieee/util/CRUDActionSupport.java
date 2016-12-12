@@ -17,7 +17,7 @@ import com.hurenjieee.entity.Page;
 import com.opensymphony.xwork2.ActionSupport;
 
 public abstract class CRUDActionSupport<T> extends ActionSupport
-		implements ServletContextAware, ServletRequestAware, ServletResponseAware, ApplicationAware, SessionAware, CookiesAware {
+		implements  ServletContextAware,ServletRequestAware, ServletResponseAware, ApplicationAware, SessionAware, CookiesAware {
 
 	private static final long serialVersionUID = 1L;
 
