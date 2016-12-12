@@ -17,6 +17,6 @@
     <url-pattern>/*</url-pattern>
   </filter-mapping>
   <welcome-file-list>
-    <welcome-file>login!toLogin.action</welcome-file>
+    <welcome-file>toLogin.jsp</welcome-file>
   </welcome-file-list>
 </web-app>
