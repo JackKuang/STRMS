@@ -7,7 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.w3c.dom.css.ElementCSSInlineStyle;
 
+import com.hurenjieee.entity.Admin;
+import com.hurenjieee.entity.Student;
+import com.hurenjieee.service.AdminService;
 import com.hurenjieee.service.LoginService;
+import com.hurenjieee.service.StudentService;
+import com.hurenjieee.service.TeacherService;
 import com.hurenjieee.util.CRUDActionSupport;
 import com.hurenjieee.util.GlobalUtil;
 
@@ -19,8 +24,15 @@ import com.hurenjieee.util.GlobalUtil;
 		@Result(name = "toLogin", location = "/WEB-INF/jsp/login.jsp") })
 public class LoginAction extends CRUDActionSupport<Object> {
 
+	
 	@Autowired
-	LoginService loginService;
+	AdminService adminService;
+
+	@Autowired
+	TeacherService teacherService;
+
+	@Autowired
+	StudentService studentService;
 	private String userName;
 	private String password;
 	private String type;
@@ -52,16 +64,23 @@ public class LoginAction extends CRUDActionSupport<Object> {
 	public String login() {
 		String result= "toLogin";
 		if("student".equals(type)){//学生登录
-			getRequest().setAttribute("wrong", "1");
-			getRequest().setAttribute("type", type);
-			result = "toLogin";
+			if (studentService.login(userName, password)) {
+				result = "success-admin";
+			} else {
+				getRequest().setAttribute("wrong", 1);
+				getRequest().setAttribute("type", type);
+				result = "toLogin";
+			}
 		}else if("teacher".equals(type)){//教师登录
-			getRequest().setAttribute("wrong", "1");
-			getRequest().setAttribute("type", type);
-			result = "toLogin";
+			if (teacherService.login(userName, password)) {
+				result = "success-admin";
+			} else {
+				getRequest().setAttribute("wrong", 1);
+				getRequest().setAttribute("type", type);
+				result = "toLogin";
+			}
 		}else if("admin".equals(type)){//管理员登录
-			loginService.login("admin", "111");
-			if (loginService.login(userName, password)) {
+			if (adminService.login(userName, password)) {
 				result = "success-admin";
 			} else {
 				getRequest().setAttribute("wrong", 1);

@@ -11,6 +11,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.hurenjieee.entity.Student;
 import com.hurenjieee.entity.Userr;
+import com.hurenjieee.service.AdminService;
 import com.hurenjieee.service.LoginService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -19,6 +20,8 @@ public class StudentTest {
 	
 	@Autowired
 	LoginService loginService;
+	@Autowired
+	AdminService adminService;
 	
 	public static void main(String[] args){
 		
@@ -40,7 +43,7 @@ public class StudentTest {
 	
 	@Test
 	public void test2(){
-		loginService.login("admin", "111");
+		adminService.login("admin", "111");
 //		loginService.save(userr);
 	}
 }

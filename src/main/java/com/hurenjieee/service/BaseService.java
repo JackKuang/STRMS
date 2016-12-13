@@ -6,13 +6,17 @@ import java.lang.reflect.Type;
 import java.util.Collection;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.stereotype.Service;
 
 import com.hurenjieee.entity.Dictionary;
 import com.hurenjieee.util.BaseDao;
 
 @Service
-public class BaseService<T, ID extends Serializable>{
+@Transactional
+public abstract class BaseService<T, ID extends Serializable>{
+	
 	private BaseDao<T, ID> dao;
 
 	public BaseDao<T, ID> getDao() {

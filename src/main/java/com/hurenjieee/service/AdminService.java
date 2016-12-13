@@ -1,23 +1,28 @@
 package com.hurenjieee.service;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
-import org.hibernate.SessionFactory;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.hurenjieee.entity.Dictionary;
-import com.hurenjieee.entity.Userr;
+import com.hurenjieee.entity.Admin;
 import com.hurenjieee.util.BaseDao;
 
 @Service
 @Transactional
-public class DictionaryService extends BaseService<Dictionary, String>{
+public class AdminService extends BaseService<Admin, String> {
+	
 	@Autowired
 	public void setSessionFactory(SessionFactory sessionFactory) {
-		BaseDao<Dictionary,String> dao = new BaseDao<Dictionary,String>();
+		BaseDao<Admin,String> dao = new BaseDao<Admin,String>();
 		dao.setSessionFactory(sessionFactory);
 		setDao(dao);
+	}
+	
+	public boolean login(String userName,String password){
+		return getDao().getListByHQL("from Admin a where a.admName = '" + userName + "' and a.admPassword = '" + password+"'")!=null;
 	}
 }
