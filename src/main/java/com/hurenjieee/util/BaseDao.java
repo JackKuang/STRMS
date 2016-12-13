@@ -1,4 +1,4 @@
-package com.hurenjieee.dao;
+package com.hurenjieee.util;
 
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
@@ -22,10 +22,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.jdbc.Work;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import com.hurenjieee.util.IBaseDao;
-import com.hurenjieee.util.PageResults;
-import com.hurenjieee.util.RowMapper;
 
 /**
  * @ClassName: BaseDao

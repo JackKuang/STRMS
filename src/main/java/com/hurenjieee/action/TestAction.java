@@ -109,7 +109,7 @@ public class TestAction extends CRUDActionSupport<Userr> {
 			FileUtils.copyFile(file, savefile);
 			ActionContext.getContext().put("message", "文件上传成功");
 		}
-		if (loginService.login(userName, passWord) != null) {
+		if (true) {
 			
 			System.out.println(GlobalUtil.getStringValue("systemName"));
 			return SUCCESS;

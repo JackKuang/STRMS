@@ -60,7 +60,8 @@ public class LoginAction extends CRUDActionSupport<Object> {
 			getRequest().setAttribute("type", type);
 			result = "toLogin";
 		}else if("admin".equals(type)){//π‹¿Ì‘±µ«¬º
-			if (loginService.login(userName, password) != null) {
+			loginService.login("admin", "111");
+			if (loginService.login(userName, password)) {
 				result = "success-admin";
 			} else {
 				getRequest().setAttribute("wrong", 1);

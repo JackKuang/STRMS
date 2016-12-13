@@ -37,30 +37,10 @@ public class StudentTest {
 		sf.close();		
 	}
 	
-	@Test
-	public void test(){
-		Student s = new Student();
-		s.setId(1143131);
-		s.setName("s1");
-		s.setAge(1);
-		/*
-		Configuration cfg = new Configuration();
-		SessionFactory sf = cfg.configure().buildSessionFactory();
-*/	   	
-	/*	Session session = sessionFactory.openSession();
-		Transaction t=session.beginTransaction();
-		session.save(s);
-		t.commit();
-		session.close();
-		sessionFactory.close();
-		*/
-	}
 	
 	@Test
 	public void test2(){
-		Userr userr = new Userr();
-		userr.setUserName("aaa32123a");
-		userr.setPassWord("bb321b");
-		loginService.save(userr);
+		loginService.login("admin", "111");
+//		loginService.save(userr);
 	}
 }
