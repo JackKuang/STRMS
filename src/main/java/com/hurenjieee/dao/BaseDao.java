@@ -61,8 +61,8 @@ public class BaseDao<T, ID extends Serializable> implements IBaseDao<T, ID> {
 	 * @see com.hurenjieee.util.IBaseDao#save(java.lang.Object)
 	 */
 	@Override
-	public ID save(T t) {
-		return (ID)this.getSession().save(t);
+	public Serializable save(T t) {
+		return this.getSession().save(t);
 	}
 
 	/**

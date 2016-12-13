@@ -1,15 +1,13 @@
 package com.hurenjieee.dao;
 
-import java.util.List;
-
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
-import com.hurenjieee.entity.Dictionary;
+import com.hurenjieee.entity.Student;
 
 @Repository
 @Transactional
-public class DictionaryDao extends BaseDao<Dictionary, String> {
-	
+public class StudentDao extends BaseDao<Student, String> {
+
 }

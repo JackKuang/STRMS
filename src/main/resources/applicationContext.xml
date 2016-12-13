@@ -42,12 +42,14 @@
 			<tx:method name="select*" propagation="REQUIRED" />
 			<tx:method name="delete*" propagation="REQUIRED" />
 			<tx:method name="get*" propagation="REQUIRED" />
+			<tx:method name="contain*" propagation="REQUIRED" />
+			<tx:method name="load*" propagation="REQUIRED" />
 			
 		</tx:attributes>
 	</tx:advice>
 	<!-- 配置事务切点，并把切点和事务属性关联起来 -->
 	<aop:config>
-		<aop:pointcut expression="execution(* com.hurenjieee.dao.*.*(..))"
+		<aop:pointcut expression="execution(* com.hurenjieee.*.*.*(..))"
 			id="txPointcut" />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut" />
 	</aop:config>
