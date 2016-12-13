@@ -26,28 +26,30 @@
 	<!-- 配置事务事务属性 -->
 	<tx:advice id="txAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
-			<!-- 
+			<!--
 			REQUIRED（默认值）：在有transaction状态下执行；如当前没有transaction，则创建新的transaction；
 			SUPPORTS：如当前有transaction，则在transaction状态下执行；如果当前没有transaction，在无transaction状态下执行；
 			MANDATORY：必须在有transaction状态下执行，如果当前没有transaction，则抛出异常IllegalTransactionStateException；
 			REQUIRES_NEW：创建新的transaction并执行；如果当前已有transaction，则将当前transaction挂起；
 			NOT_SUPPORTED：在无transaction状态下执行；如果当前已有transaction，则将当前transaction挂起；
 			NEVER：在无transaction状态下执行；如果当前已有transaction，则抛出异常IllegalTransactionStateException。
-			-->		
+			-->
 			<tx:method name="save*" propagation="REQUIRED" />
 			<tx:method name="add*" propagation="REQUIRED" />
-			
+
 			<tx:method name="insert*" propagation="REQUIRED" />
 			<tx:method name="update*" propagation="REQUIRED" />
 			<tx:method name="select*" propagation="REQUIRED" />
 			<tx:method name="delete*" propagation="REQUIRED" />
 			<tx:method name="get*" propagation="REQUIRED" />
 			<tx:method name="login*" propagation="REQUIRED" />
-			
+			<tx:method name="load*" propagation="REQUIRED" />
+
 		</tx:attributes>
 	</tx:advice>
 	<!-- 配置事务切点，并把切点和事务属性关联起来 -->
 	<aop:config>
+
 		<aop:pointcut expression="execution(* com.hurenjieee.service.*.*(..))"
 			id="txPointcut" />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut" />
@@ -55,6 +57,6 @@
 	<!-- 由于spring AOP动态代理默认是通过接口，所以注入事务层的地方都要通过接口进行注入，如果通过实现类进行注入就会报这个错
 有人说可以进行配置，然后也可以支持实体类的事务层注入  -->
 	<aop:aspectj-autoproxy proxy-target-class="true"/>
-	
+
 	<bean class = "com.hurenjieee.util.SpringContextUtil" id = "springContextUtil" />
 </beans>

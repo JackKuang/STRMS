@@ -1,3 +1,4 @@
+
 package com.hurenjieee.util;
 
 import java.io.Serializable;
