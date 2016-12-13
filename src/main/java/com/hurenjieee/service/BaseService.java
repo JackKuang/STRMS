@@ -6,11 +6,10 @@ import java.lang.reflect.Type;
 import java.util.Collection;
 import java.util.List;
 
-import org.aspectj.weaver.VersionedDataInputStream;
 import org.springframework.stereotype.Service;
 
-import com.hurenjieee.dao.BaseDao;
 import com.hurenjieee.entity.Dictionary;
+import com.hurenjieee.util.BaseDao;
 
 @Service
 public class BaseService<T, ID extends Serializable>{
