@@ -1,6 +1,6 @@
 package com.hurenjieee.service;
 
-import java.util.List;
+	import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hurenjieee.entity.Admin;
-import com.hurenjieee.util.BaseDao;
 
 @Service
 @Transactional
@@ -23,6 +22,8 @@ public class AdminService extends BaseService<Admin, String> {
 	}
 	
 	public boolean login(String userName,String password){
-		return getDao().getListByHQL("from Admin a where a.admName = '" + userName + "' and a.admPassword = '" + password+"'")!=null;
+		Admin admin= getDao().getByHQL("from Admin a where a.admName = '" + userName + "' and a.admPassword = '" + password+"'");
+		System.out.println(admin.getAdmName());
+		return admin!=null;
 	}
 }
