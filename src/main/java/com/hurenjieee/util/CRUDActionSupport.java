@@ -13,7 +13,6 @@ import org.apache.struts2.interceptor.ServletResponseAware;
 import org.apache.struts2.interceptor.SessionAware;
 import org.springframework.web.context.ServletContextAware;
 
-import com.hurenjieee.entity.Page;
 import com.opensymphony.xwork2.ActionSupport;
 
 public abstract class CRUDActionSupport<T> extends ActionSupport
@@ -94,36 +93,7 @@ public abstract class CRUDActionSupport<T> extends ActionSupport
 
 
 	// -------------------------页码信息设置----------------------------------
-	// 页码序号
-	private int pageNo;
-	// 页码大小
-	private int pageSize;
-
-	public int getPageNo() {
-		return pageNo;
-	}
-
-	public void setPageNo(int pageNo) {
-		this.pageNo = pageNo;
-	}
-
-	public int getPageSize() {
-		return pageSize;
-	}
-
-	public void setPageSize(int pageSize) {
-		this.pageSize = pageSize;
-	}
-
-	// 设置分页信息，调用这个方法，再在sql调用就可以执行分页操作
-	public void setPageInfo(Page<T> page) {
-		if (pageNo > 0) {
-			page.setPageNo(pageNo);
-		}
-		if (pageSize > 0) {
-			page.setDataSize(pageSize);
-		}
-	}
+	
 	// -------------------------页码信息设置结束-------------------------------
 
 }

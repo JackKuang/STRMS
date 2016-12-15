@@ -73,14 +73,14 @@ public abstract class BaseService<T, ID extends Serializable>{
 	
 	//-----------自定义方法         开始-------------------
 	@SuppressWarnings("unchecked")
-	public List<Dictionary> getList(){
+	public List<T> getList(){
 		
 		Type type = getClass().getGenericSuperclass();  
         Type trueType = ((ParameterizedType) type).getActualTypeArguments()[0];  
         Class<T> entityClass=(Class<T>) trueType;
         String tName = entityClass.getSimpleName();
         
-		return (List<Dictionary>) dao.getListByHQL("FROM "+tName+" WHERE 1=1");
+		return (List<T>) dao.getListByHQL("FROM "+tName+" WHERE 1=1");
 	}
 
 	//-----------自定义方法         结束-------------------

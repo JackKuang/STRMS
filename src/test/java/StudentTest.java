@@ -43,7 +43,7 @@ public class StudentTest {
 	
 	@Test
 	public void test2(){
-		adminService.login("admin", "111");
+		System.out.println(adminService.login("admin", "111"));
 //		loginService.save(userr);
 	}
 }
