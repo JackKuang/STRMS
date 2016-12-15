@@ -9,10 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.hurenjieee.entity.Student;
 import com.hurenjieee.entity.Userr;
 import com.hurenjieee.service.AdminService;
 import com.hurenjieee.service.LoginService;
+import com.hurenjieee.service.TeacherService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/applicationContext.xml")
@@ -22,6 +22,9 @@ public class StudentTest {
 	LoginService loginService;
 	@Autowired
 	AdminService adminService;
+
+	@Autowired
+	TeacherService teacherService;
 	
 	public static void main(String[] args){
 		
@@ -43,7 +46,8 @@ public class StudentTest {
 	
 	@Test
 	public void test2(){
-		adminService.login("admin", "111");
+		adminService.login("admin", "123");
+		teacherService.login("tea", "tea");
 //		loginService.save(userr);
 	}
 }
