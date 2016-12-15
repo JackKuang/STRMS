@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hurenjieee.entity.Student;
+import com.hurenjieee.util.BaseDao;
 
 @Service
 @Transactional
