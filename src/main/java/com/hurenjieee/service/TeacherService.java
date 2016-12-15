@@ -22,7 +22,6 @@ public class TeacherService extends BaseService<Teacher, String> {
 	
 	public boolean login(String userName,String password){
 		Teacher teacher=getDao().getByHQL("from Teacher t where t.teaName = '" + userName + "' and t.teaPassword = '" + password+"'");
-		System.out.println(teacher.getTeaName());
 		return teacher!=null;
 	}
 }

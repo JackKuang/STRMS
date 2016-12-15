@@ -22,7 +22,6 @@ public class StudentService extends BaseService<Student, String> {
 
 	public boolean login(String userName,String password){
 		Student student = getDao().getByHQL("from Student s where s.stuName = '" + userName + "' and s.stuPassword = '" + password+"'");
-		System.out.println(student.getStuName());
 		return student!=null;
 	}
 }
