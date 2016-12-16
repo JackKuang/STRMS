@@ -20,8 +20,7 @@ public class TeacherService extends BaseService<Teacher, String> {
 		setDao(dao);
 	}
 	
-	public boolean login(String userName,String password){
-		Teacher teacher=getDao().getByHQL("from Teacher t where t.teaName = '" + userName + "' and t.teaPassword = '" + password+"'");
-		return teacher!=null;
+	public Teacher getTeacherByUsernameAndPassword(String userName,String password){
+		return getDao().getByHQL("from Teacher t where t.teaName = '" + userName + "' and t.teaPassword = '" + password+"'");
 	}
 }

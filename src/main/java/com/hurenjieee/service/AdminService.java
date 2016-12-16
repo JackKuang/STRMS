@@ -20,8 +20,7 @@ public class AdminService extends BaseService<Admin, String> {
 		setDao(dao);
 	}
 	
-	public boolean login(String userName,String password){
-		Admin admin= getDao().getByHQL("from Admin a where a.admName = '" + userName + "' and a.admPassword = '" + password+"'");
-		return admin!=null;
+	public Admin getAdminByUserNameAndPassword(String userName,String password){
+		return getDao().getByHQL("from Admin a where a.admName = '" + userName + "' and a.admPassword = '" + password+"'");
 	}
 }

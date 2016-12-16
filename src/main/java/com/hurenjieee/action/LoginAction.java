@@ -9,6 +9,7 @@ import org.w3c.dom.css.ElementCSSInlineStyle;
 
 import com.hurenjieee.entity.Admin;
 import com.hurenjieee.entity.Student;
+import com.hurenjieee.entity.Teacher;
 import com.hurenjieee.service.AdminService;
 import com.hurenjieee.service.LoginService;
 import com.hurenjieee.service.StudentService;
@@ -24,7 +25,6 @@ import com.hurenjieee.util.GlobalUtil;
 		@Result(name = "toLogin", location = "/WEB-INF/jsp/login.jsp") })
 public class LoginAction extends CRUDActionSupport<Object> {
 
-	
 	@Autowired
 	AdminService adminService;
 
@@ -62,25 +62,41 @@ public class LoginAction extends CRUDActionSupport<Object> {
 	}
 
 	public String login() {
-		String result= "toLogin";
-		if("student".equals(type)){//学生登录
-			if (studentService.login(userName, password)) {
+		String result = "toLogin";
+		// 清理Session
+		getSessionMap().clear();
+		// 学生登录
+		if ("student".equals(type)) {
+			Student student = studentService.getStudentByUsernameAndPassword(userName, password);
+			if (student != null) {
+				getSessionMap().put("type", "student");
+				getSessionMap().put("student", student);
 				result = "success-admin";
 			} else {
 				getRequest().setAttribute("wrong", 1);
 				getRequest().setAttribute("type", type);
 				result = "toLogin";
 			}
-		}else if("teacher".equals(type)){//教师登录
-			if (teacherService.login(userName, password)) {
+		}
+		// 教师登录
+		else if ("teacher".equals(type)) {
+			Teacher teacher = teacherService.getTeacherByUsernameAndPassword(userName, password);
+			if (teacher != null) {
+				getSessionMap().put("type", "teacher");
+				getSessionMap().put("student", teacher);
 				result = "success-admin";
 			} else {
 				getRequest().setAttribute("wrong", 1);
 				getRequest().setAttribute("type", type);
 				result = "toLogin";
 			}
-		}else if("admin".equals(type)){//管理员登录
-			if (adminService.login(userName, password)) {
+		}
+		// 管理员登录
+		else if ("admin".equals(type)) {
+			Admin admin = adminService.getAdminByUserNameAndPassword(userName, password);
+			if (admin != null) {
+				getSessionMap().put("type", "admin");
+				getSessionMap().put("admin", admin);
 				result = "success-admin";
 			} else {
 				getRequest().setAttribute("wrong", 1);

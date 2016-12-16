@@ -20,8 +20,7 @@ public class StudentService extends BaseService<Student, String> {
 		setDao(dao);
 	}
 
-	public boolean login(String userName,String password){
-		Student student = getDao().getByHQL("from Student s where s.stuName = '" + userName + "' and s.stuPassword = '" + password+"'");
-		return student!=null;
+	public Student getStudentByUsernameAndPassword(String userName,String password){
+		return getDao().getByHQL("from Student s where s.stuName = '" + userName + "' and s.stuPassword = '" + password+"'");
 	}
 }
