@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hurenjieee.entity.Student;
+import com.hurenjieee.util.BaseDao;
 
 @Service
 @Transactional
@@ -21,7 +22,6 @@ public class StudentService extends BaseService<Student, String> {
 
 	public boolean login(String userName,String password){
 		Student student = getDao().getByHQL("from Student s where s.stuName = '" + userName + "' and s.stuPassword = '" + password+"'");
-		System.out.println(student.getStuName());
 		return student!=null;
 	}
 }
