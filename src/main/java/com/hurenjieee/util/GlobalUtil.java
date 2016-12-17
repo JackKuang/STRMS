@@ -20,7 +20,7 @@ public class GlobalUtil {
 	 * @param servletContext
 	 */
 	public static void initGlobalToServlet(ServletContext servletContext){
-		Map<String,String> map=new TreeMap<String,String>();
+		new TreeMap<String,String>();
 		// FIXME 对数据库数据字典的访问，写到ServletContext中
 		DictionaryService dictionaryService = (DictionaryService) SpringContextUtil.getBean("dictionaryService");
 		List<Dictionary> list=dictionaryService.getList();

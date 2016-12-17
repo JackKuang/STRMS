@@ -5,9 +5,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
-import java.util.List;
-import java.util.Map;
-
 import javax.servlet.ServletContext;
 
 import org.apache.commons.io.FileUtils;
@@ -17,7 +14,6 @@ import org.apache.struts2.convention.annotation.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 
-import com.hurenjieee.entity.Dictionary;
 import com.hurenjieee.entity.Userr;
 import com.hurenjieee.service.DictionaryService;
 import com.hurenjieee.service.LoginService;
@@ -34,11 +30,6 @@ import com.opensymphony.xwork2.ActionContext;
 public class TestAction extends CRUDActionSupport<Userr> {
 
 	private static final long serialVersionUID = 1L;
-
-	@Autowired
-	private LoginService loginService;
-	@Autowired
-	private DictionaryService dictionaryService;
 
 	private String userName;
 	private String passWord;
@@ -98,7 +89,7 @@ public class TestAction extends CRUDActionSupport<Userr> {
 
 	public String login() throws Exception {
 
-		ServletContext servletContext = getServletContext();
+		getServletContext();
 		String realpath = getServletContext().getRealPath("/img");
 		System.out.println("realpath: " + realpath);
 

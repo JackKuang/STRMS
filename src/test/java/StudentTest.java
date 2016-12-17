@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.hurenjieee.entity.Student;
 import com.hurenjieee.entity.Userr;
 import com.hurenjieee.service.AdminService;
 import com.hurenjieee.service.LoginService;

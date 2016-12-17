@@ -3,12 +3,10 @@ package com.hurenjieee.service;
 import javax.transaction.Transactional;
 
 import org.hibernate.SessionFactory;
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hurenjieee.entity.Dictionary;
-import com.hurenjieee.entity.Userr;
 import com.hurenjieee.util.BaseDao;
 
 @Service

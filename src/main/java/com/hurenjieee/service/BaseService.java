@@ -10,7 +10,6 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
-import com.hurenjieee.entity.Dictionary;
 import com.hurenjieee.util.BaseDao;
 
 @Service

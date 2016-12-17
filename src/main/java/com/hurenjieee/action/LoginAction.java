@@ -5,17 +5,13 @@ import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-import org.w3c.dom.css.ElementCSSInlineStyle;
-
 import com.hurenjieee.entity.Admin;
 import com.hurenjieee.entity.Student;
 import com.hurenjieee.entity.Teacher;
 import com.hurenjieee.service.AdminService;
-import com.hurenjieee.service.LoginService;
 import com.hurenjieee.service.StudentService;
 import com.hurenjieee.service.TeacherService;
 import com.hurenjieee.util.CRUDActionSupport;
-import com.hurenjieee.util.GlobalUtil;
 
 @ParentPackage(value = "all") // 应用全局包
 @Scope("prototype")
