@@ -42,7 +42,7 @@
     <property name="hibernate.cache.use_second_level_cache">false</property>
     
     <!-- 自动创建实体类   -->
-    <property name="hibernate.hbm2ddl.auto">update</property>
+    <!-- <property name="hibernate.hbm2ddl.auto">update</property> -->
     
 	<!-- <mapping resource="Student.hbm.xml"/> -->
 	<!-- <mapping class="com.hurenjieee.entity.Student"/> -->
