@@ -15,9 +15,9 @@ import com.hurenjieee.util.CRUDActionSupport;
 
 @ParentPackage(value = "all") // 应用全局包
 @Scope("prototype")
-@Action(results = { @Result(name = "success-admin", location = "/WEB-INF/jsp/admin/index.jsp"),
-		@Result(name = "success-teacher", location = "/WEB-INF/jsp/teacher/index.jsp"),
-		@Result(name = "success-student", location = "/WEB-INF/jsp/student/index.jsp"),
+@Action(results = { @Result(name = "success-admin", type = "redirectAction", location = "admin!index.action"),
+		@Result(name = "success-teacher", type = "redirectAction", location = "teacher!index.action"),
+		@Result(name = "success-student", type = "redirectAction", location = "student!index.action"),
 		@Result(name = "toLogin", location = "/WEB-INF/jsp/login.jsp") })
 public class LoginAction extends CRUDActionSupport<Object> {
 
