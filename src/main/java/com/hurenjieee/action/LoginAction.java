@@ -15,9 +15,9 @@ import com.hurenjieee.util.CRUDActionSupport;
 
 @ParentPackage(value = "all") // 应用全局包
 @Scope("prototype")
-@Action(results = { @Result(name = "success-admin", type = "redirectAction", location = "admin!index.action"),
-		@Result(name = "success-teacher", type = "redirectAction", location = "teacher!index.action"),
-		@Result(name = "success-student", type = "redirectAction", location = "student!index.action"),
+@Action(results = { @Result(name = "success-admin", type = "redirectAction", location = "admin/admin!index.action"),
+		@Result(name = "success-teacher", type = "redirectAction", location = "teacher/teacher!index.action"),
+		@Result(name = "success-student", type = "redirectAction", location = "student/student!index.action"),
 		@Result(name = "toLogin", location = "/WEB-INF/jsp/login.jsp") })
 public class LoginAction extends CRUDActionSupport<Object> {
 
@@ -31,7 +31,7 @@ public class LoginAction extends CRUDActionSupport<Object> {
 	StudentService studentService;
 	private String userName;
 	private String password;
-	private String type;
+	private String userType;
 
 	public String getUserName() {
 		return userName;
@@ -49,12 +49,12 @@ public class LoginAction extends CRUDActionSupport<Object> {
 		this.password = password;
 	}
 
-	public String getType() {
-		return type;
+	public String getUserType() {
+		return userType;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	public void setUserType(String userType) {
+		this.userType = userType;
 	}
 
 	public String login() {
@@ -62,41 +62,41 @@ public class LoginAction extends CRUDActionSupport<Object> {
 		// 清理Session
 		getSessionMap().clear();
 		// 学生登录
-		if ("student".equals(type)) {
+		if ("student".equals(userType)) {
 			Student student = studentService.getStudentByUsernameAndPassword(userName, password);
 			if (student != null) {
-				getSessionMap().put("type", "student");
+				getSessionMap().put("userType", "student");
 				getSessionMap().put("student", student);
 				result = "success-admin";
 			} else {
 				getRequest().setAttribute("wrong", 1);
-				getRequest().setAttribute("type", type);
+				getRequest().setAttribute("userType", userType);
 				result = "toLogin";
 			}
 		}
 		// 教师登录
-		else if ("teacher".equals(type)) {
+		else if ("teacher".equals(userType)) {
 			Teacher teacher = teacherService.getTeacherByUsernameAndPassword(userName, password);
 			if (teacher != null) {
-				getSessionMap().put("type", "teacher");
+				getSessionMap().put("userType", "teacher");
 				getSessionMap().put("student", teacher);
 				result = "success-admin";
 			} else {
 				getRequest().setAttribute("wrong", 1);
-				getRequest().setAttribute("type", type);
+				getRequest().setAttribute("type", userType);
 				result = "toLogin";
 			}
 		}
 		// 管理员登录
-		else if ("admin".equals(type)) {
+		else if ("admin".equals(userType)) {
 			Admin admin = adminService.getAdminByUserNameAndPassword(userName, password);
 			if (admin != null) {
-				getSessionMap().put("type", "admin");
+				getSessionMap().put("userType", "admin");
 				getSessionMap().put("admin", admin);
 				result = "success-admin";
 			} else {
 				getRequest().setAttribute("wrong", 1);
-				getRequest().setAttribute("type", type);
+				getRequest().setAttribute("type", userType);
 				result = "toLogin";
 			}
 		}

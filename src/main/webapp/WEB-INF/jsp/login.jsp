@@ -54,9 +54,9 @@
 						class="glyphicon glyphicon-lock form-control-feedback"></span>
 				</div>
 				<div class="form-group has-feedback">
-					<label><input type="radio" name="type" value="student" class="minimal">学生</label>
-					<label><input type="radio" name="type" value="teacher" class="minimal">教师</label>
-					<label><input type="radio" name="type" value="admin" class="minimal">管理员</label>
+					<label><input type="radio" name="userType" value="student" class="minimal">学生</label>
+					<label><input type="radio" name="userType" value="teacher" class="minimal">教师</label>
+					<label><input type="radio" name="userType" value="admin" class="minimal">管理员</label>
 				</div>
 				<div class="row">
 					<div class="col-xs-8"></div>
@@ -81,7 +81,7 @@
 	<script src="plugins/iCheck/icheck.min.js"></script>
 	<script>	
 		$(function() {
-			$("input[name='type'][value='${type }']").attr("checked", true);
+			$("input[name='userType'][value='${userType }']").attr("checked", true);
 			$('input').iCheck({
 				checkboxClass : 'icheckbox_square-blue',
 				radioClass : 'iradio_square-blue',

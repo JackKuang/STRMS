@@ -11,18 +11,18 @@
 	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
 	name="viewport">
 <!-- Bootstrap 3.3.6 -->
-<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
 <!-- Font Awesome -->
 <link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+	href="../ajax/css/font-awesome.min.css">
 <!-- Ionicons -->
 <link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+	href="../ajax/css/ionicons.min.css">
 <!-- Theme style -->
-<link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+<link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
 <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
-<link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+<link rel="stylesheet" href="../dist/css/skins/_all-skins.min.css">
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -67,7 +67,7 @@
 										<li>
 											<!-- start message --> <a href="#">
 												<div class="pull-left">
-													<img src="dist/img/user2-160x160.jpg" class="img-circle"
+													<img src="../dist/img/user2-160x160.jpg" class="img-circle"
 														alt="User Image">
 												</div>
 												<h4>
@@ -80,7 +80,7 @@
 										<li>
 											<!-- start message --> <a href="#">
 												<div class="pull-left">
-													<img src="dist/img/user2-160x160.jpg" class="img-circle"
+													<img src="../dist/img/user2-160x160.jpg" class="img-circle"
 														alt="User Image">
 												</div>
 												<h4>
@@ -99,12 +99,12 @@
 						<!-- User Account: style can be found in dropdown.less -->
 						<li class="dropdown user user-menu"><a href="#"
 							class="dropdown-toggle" data-toggle="dropdown"> <img
-								src="dist/img/user2-160x160.jpg" class="user-image"
+								src="../dist/img/user2-160x160.jpg" class="user-image"
 								alt="User Image"> <span class="hidden-xs">管理员<span></a>
 							<ul class="dropdown-menu">
 								<!-- User image -->
 								<li class="user-header"><img
-									src="dist/img/user2-160x160.jpg" class="img-circle"
+									src="../dist/img/user2-160x160.jpg" class="img-circle"
 									alt="User Image">
 
 									<p>
@@ -134,7 +134,7 @@
 				<!-- Sidebar user panel -->
 				<div class="user-panel">
 					<div class="pull-left image">
-						<img src="dist/img/user2-160x160.jpg" class="img-circle"
+						<img src="../dist/img/user2-160x160.jpg" class="img-circle"
 							alt="User Image">
 					</div>
 					<div class="pull-left info">
@@ -146,7 +146,7 @@
 				<!-- sidebar menu: : style can be found in sidebar.less -->
 				<ul class="sidebar-menu">
 					<li class="header">主导航</li>
-					<li><a href="#" onclick="javascript:load('login!toLogin.action')"> <i class="fa fa-th"></i>
+					<li><a href="#" onclick="javascript:load('../login!toLogin.action')"> <i class="fa fa-th"></i>
 							<span>系统信息查看</span> <span class="pull-right-container"> <small
 								class="label pull-right bg-green">3</small>
 						</span>
@@ -198,15 +198,15 @@
 	<!-- ./wrapper -->
 
 	<!-- jQuery 2.2.3 -->
-	<script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
+	<script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
 	<!-- Bootstrap 3.3.6 -->
-	<script src="bootstrap/js/bootstrap.min.js"></script>
+	<script src="../bootstrap/js/bootstrap.min.js"></script>
 	<!-- FastClick -->
-	<script src="plugins/fastclick/fastclick.js"></script>
+	<script src="../plugins/fastclick/fastclick.js"></script>
 	<!-- AdminLTE App -->
-	<script src="dist/js/app.min.js"></script>
+	<script src="../dist/js/app.min.js"></script>
 	<!-- AdminLTE for demo purposes -->
-	<script src="dist/js/demo.js"></script>
+	<script src="../dist/js/demo.js"></script>
 	<script type="text/javascript">
 		function load(url) {
 			alert(1)
