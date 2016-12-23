@@ -1,9 +1,8 @@
 package com.hurenjieee.entity;
-// Generated 2016-12-12 22:04:30 by Hibernate Tools 4.3.1.Final
+// Generated 2016-12-23 16:13:13 by Hibernate Tools 4.3.1.Final
 
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -21,7 +20,7 @@ import javax.persistence.Table;
 public class Collective implements java.io.Serializable {
 
 	private String colUuid;
-	private Branch branch;
+	private Major major;
 	private String colName;
 	private Integer colYear;
 	private Set<Student> students = new HashSet<Student>(0);
@@ -33,9 +32,9 @@ public class Collective implements java.io.Serializable {
 		this.colUuid = colUuid;
 	}
 
-	public Collective(String colUuid, Branch branch, String colName, Integer colYear, Set<Student> students) {
+	public Collective(String colUuid, Major major, String colName, Integer colYear, Set<Student> students) {
 		this.colUuid = colUuid;
-		this.branch = branch;
+		this.major = major;
 		this.colName = colName;
 		this.colYear = colYear;
 		this.students = students;
@@ -54,12 +53,12 @@ public class Collective implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "col_major_uuid")
-	public Branch getBranch() {
-		return this.branch;
+	public Major getMajor() {
+		return this.major;
 	}
 
-	public void setBranch(Branch branch) {
-		this.branch = branch;
+	public void setMajor(Major major) {
+		this.major = major;
 	}
 
 	@Column(name = "col_name")

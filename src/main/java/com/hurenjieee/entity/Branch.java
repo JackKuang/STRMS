@@ -1,5 +1,5 @@
 package com.hurenjieee.entity;
-// Generated 2016-12-12 22:04:30 by Hibernate Tools 4.3.1.Final
+// Generated 2016-12-23 16:13:13 by Hibernate Tools 4.3.1.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -19,7 +19,6 @@ public class Branch implements java.io.Serializable {
 
 	private String braUuid;
 	private String braName;
-	private Set<Collective> collectives = new HashSet<Collective>(0);
 	private Set<Major> majors = new HashSet<Major>(0);
 
 	public Branch() {
@@ -29,10 +28,9 @@ public class Branch implements java.io.Serializable {
 		this.braUuid = braUuid;
 	}
 
-	public Branch(String braUuid, String braName, Set<Collective> collectives, Set<Major> majors) {
+	public Branch(String braUuid, String braName, Set<Major> majors) {
 		this.braUuid = braUuid;
 		this.braName = braName;
-		this.collectives = collectives;
 		this.majors = majors;
 	}
 
@@ -54,15 +52,6 @@ public class Branch implements java.io.Serializable {
 
 	public void setBraName(String braName) {
 		this.braName = braName;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "branch")
-	public Set<Collective> getCollectives() {
-		return this.collectives;
-	}
-
-	public void setCollectives(Set<Collective> collectives) {
-		this.collectives = collectives;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "branch")

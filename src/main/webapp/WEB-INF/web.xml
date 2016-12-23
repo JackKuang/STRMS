@@ -8,6 +8,7 @@
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
+  
   <filter>
     <filter-name>struts2</filter-name>
     <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
@@ -19,7 +20,8 @@
   <welcome-file-list>
     <welcome-file>toLogin.jsp</welcome-file>
   </welcome-file-list>
-  <!-- <filter> 
+  
+  <filter> 
     <filter-name>openSessionInViewFilter</filter-name> 
     <filter-class> 
      org.springframework.orm.hibernate4.support.OpenSessionInViewFilter 
@@ -28,7 +30,7 @@
 <filter-mapping> 
     <filter-name>openSessionInViewFilter</filter-name> 
     <url-pattern>*.action</url-pattern> 
-</filter-mapping> -->
-
+</filter-mapping> 
+	
 
 </web-app>
