@@ -2,8 +2,11 @@ package com.hurenjieee.action;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 
 import org.apache.struts2.convention.annotation.Action;
@@ -14,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 
 import com.hurenjieee.entity.Branch;
+import com.hurenjieee.entity.Major;
 import com.hurenjieee.service.BranchService;
 import com.hurenjieee.util.CRUDActionSupport;
 
@@ -21,7 +25,7 @@ import com.hurenjieee.util.CRUDActionSupport;
 @Scope("prototype")
 @Namespace(value = "/admin")
 @Action(results = { @Result(name = "index", location = "/WEB-INF/jsp/admin/index.jsp"),
-		@Result(name = "branchList", type = "json", params = { "root", "resultMap" }) })
+		@Result(name = "branchList", type = "json", params = {"root", "resultMap","excludeProperties","^.*majors$"}) })
 public class SchoolAction extends CRUDActionSupport<Object> {
 
 	@Autowired
@@ -41,12 +45,7 @@ public class SchoolAction extends CRUDActionSupport<Object> {
 	public String branchList() throws IOException {
 		resultMap = new TreeMap<String, Object>();
 		List<Branch> list =  branchService.getList();
-		List<Branch> list2 =new ArrayList<Branch>();
-		for(Branch b:list){
-			Branch b2 = new Branch();
-			b2.setBraName(b.getBraName());
-		}
-		resultMap.put("key",list2);
+		resultMap.put("key",list);
 		return "branchList";
 	}
 
