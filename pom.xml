@@ -2,10 +2,10 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>hurenjie.com</groupId>
-	<artifactId>SSHDemo</artifactId>
+	<artifactId>STRMS</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>SSHDemo Maven Webapp</name>
+	<name>STRMS Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 	<!-- 这个地方统一设置了版本，减少了版本的选择以及避免了冲突 -->
 	<properties>
@@ -155,7 +155,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>SSHDemo</finalName>
+		<finalName>STRMS</finalName>
 		<plugins>
 			<!-- maven开发配置 -->
 			<plugin>
