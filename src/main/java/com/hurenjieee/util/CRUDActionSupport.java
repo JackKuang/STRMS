@@ -15,8 +15,8 @@ import org.springframework.web.context.ServletContextAware;
 
 import com.opensymphony.xwork2.ActionSupport;
 
-public abstract class CRUDActionSupport<T> extends ActionSupport
-		implements  ServletContextAware,ServletRequestAware, ServletResponseAware, ApplicationAware, SessionAware, CookiesAware {
+public abstract class CRUDActionSupport<T> extends ActionSupport implements ServletContextAware, ServletRequestAware,
+		ServletResponseAware, ApplicationAware, SessionAware, CookiesAware {
 
 	private static final long serialVersionUID = 1L;
 
@@ -32,7 +32,7 @@ public abstract class CRUDActionSupport<T> extends ActionSupport
 	private Map<String, Object> sessionMap;
 	// cookie存在客户端中，银盘持久化
 	private Map<String, String> cookieMap;
-	
+
 	private ServletContext servletContext;
 
 	@Override
@@ -91,9 +91,40 @@ public abstract class CRUDActionSupport<T> extends ActionSupport
 
 	// -------------------------资源访问设置结束-------------------------------
 
-
 	// -------------------------页码信息设置----------------------------------
-	
+
 	// -------------------------页码信息设置结束-------------------------------
+
+	// -----------------------通用访问参数---------------------------
+	private Map<String, Integer> intMap;
+
+	private Map<String, String> strMap;
+
+	private Map<String, Double> douMap;
+
+	public Map<String, Integer> getIntMap() {
+		return intMap;
+	}
+
+	public void setIntMap(Map<String, Integer> intMap) {
+		this.intMap = intMap;
+	}
+
+	public Map<String, String> getStrMap() {
+		return strMap;
+	}
+
+	public void setStrMap(Map<String, String> strMap) {
+		this.strMap = strMap;
+	}
+
+	public Map<String, Double> getDouMap() {
+		return douMap;
+	}
+
+	public void setDouMap(Map<String, Double> douMap) {
+		this.douMap = douMap;
+	}
+	// -----------------------通用访问参数结束---------------------------
 
 }
