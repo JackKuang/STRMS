@@ -35,8 +35,11 @@
 		<interceptors>
 			<interceptor name="logInterceptor"
 				class="com.hurenjieee.interceptor.LogInterceptor"></interceptor>
+			<interceptor name="roleInterceptor"
+				class="com.hurenjieee.interceptor.RoleInterceptor"></interceptor>
 			<interceptor-stack name="allStack">
 				<!-- 按顺序拦截，先到先拦截 -->
+				<interceptor-ref name="roleInterceptor"></interceptor-ref>
 				<interceptor-ref name="logInterceptor"></interceptor-ref>
 				<!-- token,防止重复提交 -->
 				<!-- <interceptor-ref name="token"></interceptor-ref> -->
@@ -44,5 +47,9 @@
 			</interceptor-stack>
 		</interceptors>
 		<default-interceptor-ref name="allStack" />
+		<global-results>
+			<result name="login" type="redirect">/login!toLogin.action</result>
+		</global-results>
 	</package>
+
 </struts>  
