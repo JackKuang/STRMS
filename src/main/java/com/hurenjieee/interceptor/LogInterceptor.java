@@ -25,7 +25,7 @@ public class LogInterceptor implements Interceptor {
 
 	@Override
 	public String intercept(ActionInvocation invocation) throws Exception {
-		//Ôö¼Ó·µ»Ø½á¹ûÇ°ÊÂ¼þ£¬Êµ¼Ê¿ª·¢¹ý³ÌÖÐ¿ÉÒÔ²é¿´ÐÅÏ¢£¬
+		//å¢žåŠ è¿”å›žç»“æžœå‰äº‹ä»¶ï¼Œå®žé™…å¼€å‘è¿‡ç¨‹ä¸­å¯ä»¥æŸ¥çœ‹ä¿¡æ¯ï¼Œ
 		invocation.addPreResultListener(new PreResultListener() {
 
 			@Override
@@ -46,8 +46,8 @@ public class LogInterceptor implements Interceptor {
 					sb.append(key + "==>[" + ((Object[]) map.get(key))[0] + "]");
 				}
 				sb.append("}result==>[" + invocation.getResultCode() + "]");
-				//¿É¿ØÖÆÌ¨´òÓ¡ÒÔ¼°ÎÄ¼þ´òÓ¡£¬¾ßÌåÅäÖÃ¿´log4j.properties
-				//2016-11-30 10:34:16 [INFO] -[anonymous]visited[LoginAction.login]with{login==>[Ìá½»]passWord==>[123]userName==>[admin]}result==>[success]
+				//å¯æŽ§åˆ¶å°æ‰“å°ä»¥åŠæ–‡ä»¶æ‰“å°ï¼Œå…·ä½“é…ç½®çœ‹log4j.properties
+				//2016-11-30 10:34:16 [INFO] -[anonymous]visited[LoginAction.login]with{login==>[æäº¤]passWord==>[123]userName==>[admin]}result==>[success]
 				log.info(sb);
 			}
 		});
