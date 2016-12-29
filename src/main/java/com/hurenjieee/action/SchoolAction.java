@@ -26,7 +26,6 @@ import com.hurenjieee.service.MajorService;
 import com.hurenjieee.service.StudentService;
 import com.hurenjieee.service.TeacherService;
 import com.hurenjieee.util.CRUDActionSupport;
-import com.sun.org.apache.xml.internal.resolver.helpers.PublicId;
 
 @ParentPackage(value = "json-default") // 应用全局包
 @Scope("prototype")
