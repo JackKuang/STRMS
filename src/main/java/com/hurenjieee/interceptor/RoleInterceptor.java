@@ -27,8 +27,8 @@ public class RoleInterceptor implements Interceptor {
 
 	@Override
 	public String intercept(ActionInvocation invocation) throws Exception {
-		//Ôö¼Ó·µ»Ø½á¹ûÇ°ÊÂ¼ş£¬Êµ¼Ê¿ª·¢¹ı³ÌÖĞ¿ÉÒÔ²é¿´ĞÅÏ¢£¬
-		// È¡µÃÇëÇóÏà¹ØµÄActionContextÊµÀı  
+		//å¢åŠ è¿”å›ç»“æœå‰äº‹ä»¶ï¼Œå®é™…å¼€å‘è¿‡ç¨‹ä¸­å¯ä»¥æŸ¥çœ‹ä¿¡æ¯ï¼Œ
+		// å–å¾—è¯·æ±‚ç›¸å…³çš„ActionContextå®ä¾‹  
 		ActionContext actionContext = invocation.getInvocationContext();  
         Map<String,Object> session = actionContext.getSession();
         String userType = (String) session.get("userType");
@@ -36,7 +36,7 @@ public class RoleInterceptor implements Interceptor {
         String path = httpServletRequest.getContextPath();
         System.out.println("11111111111111"+path);
         String servletPath = httpServletRequest.getServletPath();
-        //È¥³ı²»ĞèÒª¹ıÂËµÄÍøÖ·
+        //å»é™¤ä¸éœ€è¦è¿‡æ»¤çš„ç½‘å€
         if("/login!login.action".equals(servletPath)
         		|| "login!toLogin.action".equals(servletPath)){
     		return invocation.invoke();        	
