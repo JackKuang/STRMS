@@ -1,5 +1,7 @@
 package com.hurenjieee.util;
 
+import java.io.Serializable;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
@@ -13,10 +15,15 @@ import org.apache.struts2.interceptor.ServletResponseAware;
 import org.apache.struts2.interceptor.SessionAware;
 import org.springframework.web.context.ServletContextAware;
 
+import com.hurenjieee.service.BaseService;
 import com.opensymphony.xwork2.ActionSupport;
 
 public abstract class CRUDActionSupport<T> extends ActionSupport implements ServletContextAware, ServletRequestAware,
 		ServletResponseAware, ApplicationAware, SessionAware, CookiesAware {
+	
+	private BaseService<T, Serializable> service;
+	
+	private T object;
 
 	private static final long serialVersionUID = 1L;
 
@@ -126,5 +133,9 @@ public abstract class CRUDActionSupport<T> extends ActionSupport implements Serv
 		this.douMap = douMap;
 	}
 	// -----------------------通用访问参数结束---------------------------
-
+	//---------------调用Service方法------------
+	public void getAllList(){
+		List<T> list = service.getList();
+	}
+	//---------------调用Service方法结束------------
 }
