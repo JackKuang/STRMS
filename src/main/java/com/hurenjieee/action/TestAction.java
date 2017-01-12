@@ -15,9 +15,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 
 import com.hurenjieee.entity.Userr;
+import com.hurenjieee.service.BaseService;
 import com.hurenjieee.service.DictionaryService;
 import com.hurenjieee.service.LoginService;
-import com.hurenjieee.util.CRUDActionSupport;
+import com.hurenjieee.util.BaseAction;
 import com.hurenjieee.util.GlobalUtil;
 import com.opensymphony.xwork2.ActionContext;
 
@@ -27,9 +28,21 @@ import com.opensymphony.xwork2.ActionContext;
 		@Result(name = "error", location = "/WEB-INF/jsp/error.jsp"),
 		@Result(name = "download", type = "stream", params = { "contentType", "application/octet-stream", "inputName",
 				"inputStream", "contentDisposition", "attachment;filename=\"${fileName}\"", "bufferSize", "4096" }) })
-public class TestAction extends CRUDActionSupport<Userr> {
+public class TestAction extends BaseAction<Userr,Integer> {
 
-	private static final long serialVersionUID = 1L;
+	@Override
+    public BaseService<Userr, Integer> getService(){
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Userr getObject(){
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    private static final long serialVersionUID = 1L;
 
 	private String userName;
 	private String passWord;
@@ -100,13 +113,8 @@ public class TestAction extends CRUDActionSupport<Userr> {
 			FileUtils.copyFile(file, savefile);
 			ActionContext.getContext().put("message", "文件上传成功");
 		}
-		if (true) {
-			
-			System.out.println(GlobalUtil.getStringValue("systemName"));
-			return SUCCESS;
-		} else {
-			return ERROR;
-		}
+		System.out.println(GlobalUtil.getStringValue("systemName"));
+		return SUCCESS;
 	}
 
 	public String download() {
