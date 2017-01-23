@@ -35,18 +35,29 @@
 		<interceptors>
 			<interceptor name="logInterceptor"
 				class="com.hurenjieee.interceptor.LogInterceptor"></interceptor>
-			<interceptor name="roleInterceptor"
-				class="com.hurenjieee.interceptor.RoleInterceptor"></interceptor>
+			<interceptor name="adminInterceptor"
+				class="com.hurenjieee.interceptor.AdminInterceptor"></interceptor>
+			<interceptor name="teacherInterceptor"
+				class="com.hurenjieee.interceptor.TeacherInterceptor"></interceptor>
+			<interceptor name="studentInterceptor"
+				class="com.hurenjieee.interceptor.StudentInterceptor"></interceptor>
 			<interceptor-stack name="allStack">
-				<!-- 按顺序拦截，先到先拦截 -->
-				<interceptor-ref name="roleInterceptor"></interceptor-ref>
 				<interceptor-ref name="logInterceptor"></interceptor-ref>
-				<!-- token,防止重复提交 -->
-				<!-- <interceptor-ref name="token"></interceptor-ref> -->
 				<interceptor-ref name="defaultStack"></interceptor-ref>
 			</interceptor-stack>
+			<interceptor-stack name="admin-interceptor">
+				<interceptor-ref name="logInterceptor"></interceptor-ref>
+				<interceptor-ref name="adminInterceptor"></interceptor-ref>
+			</interceptor-stack>
+			<interceptor-stack name="teacher-interceptor">
+				<interceptor-ref name="logInterceptor"></interceptor-ref>
+				<interceptor-ref name="teacherInterceptor"></interceptor-ref>
+			</interceptor-stack>
+			<interceptor-stack name="student-interceptor">
+				<interceptor-ref name="logInterceptor"></interceptor-ref>
+				<interceptor-ref name="studentInterceptor"></interceptor-ref>
+			</interceptor-stack>
 		</interceptors>
-		<default-interceptor-ref name="allStack" />
 		<global-results>
 			<result name="login" type="redirect">/login!toLogin.action</result>
 		</global-results>
