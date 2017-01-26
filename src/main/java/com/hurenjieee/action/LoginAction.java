@@ -1,5 +1,7 @@
 package com.hurenjieee.action;
 
+import java.io.Serializable;
+
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
@@ -9,9 +11,10 @@ import com.hurenjieee.entity.Admin;
 import com.hurenjieee.entity.Student;
 import com.hurenjieee.entity.Teacher;
 import com.hurenjieee.service.AdminService;
+import com.hurenjieee.service.BaseService;
 import com.hurenjieee.service.StudentService;
 import com.hurenjieee.service.TeacherService;
-import com.hurenjieee.util.CRUDActionSupport;
+import com.hurenjieee.util.BaseAction;
 
 @ParentPackage(value = "all") // 应用全局包
 @Scope("prototype")
@@ -19,7 +22,19 @@ import com.hurenjieee.util.CRUDActionSupport;
         @Result(name = "success-teacher",type = "redirectAction",location = "teacher/teacher!index.action"),
         @Result(name = "success-student",type = "redirectAction",location = "student/student!index.action"),
         @Result(name = "toLogin",location = "/WEB-INF/jsp/login.jsp") })
-public class LoginAction extends CRUDActionSupport<Object> {
+public class LoginAction extends BaseAction<Object,Serializable> {
+
+    @Override
+    public BaseService<Object, Serializable> getService(){
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Object getObject(){
+        // TODO Auto-generated method stub
+        return null;
+    }
 
     @Autowired
     AdminService   adminService;
