@@ -58,4 +58,5 @@
 	<aop:aspectj-autoproxy proxy-target-class="true"/>
 
 	<bean class = "com.hurenjieee.util.SpringContextUtil" id = "springContextUtil" />
+	
 </beans>

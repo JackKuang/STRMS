@@ -53,7 +53,7 @@ public class InitStrutsPrepareAndExecuteFilter extends StrutsPrepareAndExecuteFi
 		// TODO Auto-generated method stub
 		ServletContext servletContext =  fConfig.getServletContext();
 		
-		GlobalUtil.initGlobalToServlet(servletContext);
+		//GlobalUtil.initGlobalToServlet(servletContext);
 		/*
 		Map<String,String> map=new TreeMap<String,String>();
 		// FIXME 对数据库数据字典的访问，写到ServletContext中

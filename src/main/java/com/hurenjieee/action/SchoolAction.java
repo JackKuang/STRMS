@@ -29,11 +29,11 @@ import com.hurenjieee.service.StudentService;
 import com.hurenjieee.service.TeacherService;
 import com.hurenjieee.util.BaseAction;
 
-@ParentPackage(value = "json-default") // 应用全局包
+@ParentPackage(value = "all") // 应用全局包
 @Scope("prototype")
 @Namespace(value = "/admin")
-@Action(results = { @Result(name = "index",location = "/WEB-INF/jsp/admin/index.jsp"),
-        @Result(name = "json",type = "json",params = { "root", "resultMap"/* ,"excludeProperties","^.*majors$" */ }) })
+@Action(results = { @Result(name = "index",location = "/WEB-INF/jsp/admin/index.jsp")/*,
+        @Result(name = "json",type = "json",params = { "root", "resultMap" ,"excludeProperties","^.*majors$"  })*/ })
 public class SchoolAction extends BaseAction<Object, Serializable> {
 
     @Override
