@@ -22,7 +22,7 @@ import com.hurenjieee.util.BaseAction;
 import com.hurenjieee.util.GlobalUtil;
 import com.opensymphony.xwork2.ActionContext;
 
-@ParentPackage(value = "all") // 应用全局包
+`@ParentPackage(value = "all") // 应用全局包
 @Scope("prototype")
 @Action(results = { @Result(name = "success", location = "/WEB-INF/jsp/success.jsp"),
 		@Result(name = "error", location = "/WEB-INF/jsp/error.jsp"),
