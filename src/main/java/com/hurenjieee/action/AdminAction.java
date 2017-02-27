@@ -18,7 +18,7 @@ import com.hurenjieee.util.BaseAction;
 @ParentPackage(value = "all") // 应用全局包
 @Scope("prototype")
 @Namespace(value = "/admin")
-@Action(results = { @Result(name = "index",location = "/WEB-INF/jsp/admin/index.jsp") },interceptorRefs = { @InterceptorRef("interceptorStack1") })
+@Action(results = { @Result(name = "index",location = "/WEB-INF/jsp/admin/index.jsp") })
 public class AdminAction extends BaseAction<Admin, String> {
 
     public String index(){
