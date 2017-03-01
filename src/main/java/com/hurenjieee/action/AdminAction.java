@@ -14,31 +14,24 @@ import com.hurenjieee.entity.Admin;
 import com.hurenjieee.service.AdminService;
 import com.hurenjieee.service.BaseService;
 import com.hurenjieee.util.BaseAction;
+import com.opensymphony.xwork2.ActionSupport;
 
+//这里的类都做action跳转
 @ParentPackage(value = "all") // 应用全局包
 @Scope("prototype")
 @Namespace(value = "/admin")
 @Action(results = { @Result(name = "index",location = "/WEB-INF/jsp/admin/index.jsp") })
-public class AdminAction extends BaseAction<Admin, String> {
-
+public class AdminAction extends ActionSupport {
+    String flag;
     public String index(){
-        return "index";
+        return flag;        
     }
-
-    @Override
-    public BaseService<Admin, String> getService(){
-        // TODO Auto-generated method stub
-        return adminService;
+    
+    public String getFlag(){
+        return flag;
     }
-
-    @Override
-    public Admin getObject(){
-        // TODO Auto-generated method stub
-        return admin == null ? new Admin() : admin;
+    
+    public void setFlag(String flag){
+        this.flag = flag;
     }
-
-    @Autowired
-    AdminService adminService;
-
-    Admin admin;
 }

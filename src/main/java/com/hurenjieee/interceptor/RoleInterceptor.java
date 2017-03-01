@@ -37,11 +37,12 @@ public class RoleInterceptor implements Interceptor {
         System.out.println("11111111111111" + path);
         String servletPath = httpServletRequest.getServletPath();
         // 去除不需要过滤的网址
-        if ("/login!login.action".equals(servletPath) || "login!toLogin.action".equals(servletPath)) {
+        if ("/login!login.action".equals(servletPath) || "/login!toLogin.action".equals(servletPath)) {
             // 经过Servlet方法
             return invocation.invoke();
         }
-        return Action.LOGIN;
+        return invocation.invoke();
+        //return Action.LOGIN;
     }
 
 }

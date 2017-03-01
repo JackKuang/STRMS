@@ -28,121 +28,26 @@ import com.hurenjieee.service.MajorService;
 import com.hurenjieee.service.StudentService;
 import com.hurenjieee.service.TeacherService;
 import com.hurenjieee.util.BaseAction;
+import com.opensymphony.xwork2.ActionSupport;
 
 @ParentPackage(value = "all") // 应用全局包
 @Scope("prototype")
 @Namespace(value = "/admin")
 @Action(results = { @Result(name = "index",location = "/WEB-INF/jsp/admin/index.jsp")/*,
         @Result(name = "json",type = "json",params = { "root", "resultMap" ,"excludeProperties","^.*majors$"  })*/ })
-public class SchoolAction extends BaseAction<Object, Serializable> {
-
-    @Override
-    public BaseService<Object, Serializable> getService(){
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public Object getObject(){
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Autowired
-    BranchService branchService;
-
-    @Autowired
-    MajorService majorService;
-
-    @Autowired
-    CollectiveService collectiveService;
-
-    @Autowired
-    TeacherService teacherService;
-
-    @Autowired
-    StudentService studentService;
-
-    Branch branch;
-    Major  major;
-
-    Map<String, Object> resultMap;
-
-    public Map<String, Object> getResultMap(){
-        return resultMap;
-    }
-
-    public void setResultMap(Map<String, Object> resultMap){
-        this.resultMap = resultMap;
-    }
-
-    public Branch getBranch(){
-        return branch;
-    }
-
-    public void setBranch(Branch branch){
-        this.branch = branch;
-    }
-
-    public Major getMajor(){
-        return major;
-    }
-
-    public void setMajor(Major major){
-        this.major = major;
-    }
-
-    public String branchList() throws IOException{
-        resultMap = new TreeMap<String, Object>();
-        List<Branch> list = branchService.getList();
-        resultMap.put("data",list);
-        return "json";
-    }
-
-    public String saveBranch(){
-        resultMap = new TreeMap<String, Object>();
-        String result = (String) branchService.save(branch);
-        if ("".equals(result)) {
-            resultMap.put("result","defailed");
-        } else {
-            resultMap.put("result","success");
-        }
-        return "json";
-    }
-
-    public String updateBranch(){
-        resultMap = new TreeMap<String, Object>();
-        branchService.update(branch);
-        resultMap.put("result","success");
-        return "json";
-    }
-
-    public String MajorList(){
-        resultMap = new TreeMap<String, Object>();
-        List<Major> list = majorService.getList();
-        resultMap.put("data",list);
-        return "json";
-    }
-
+public class SchoolAction extends ActionSupport {
+    String flag;
     public String index(){
-        return "index";
+        return flag;        
     }
-
-    public String saveMajor(){
-        resultMap = new TreeMap<String, Object>();
-        String result = (String) majorService.save(major);
-        if ("".equals(result)) {
-            resultMap.put("result","defailed");
-        } else {
-            resultMap.put("result","success");
-        }
-        return "json";
+    
+    public String getFlag(){
+        return flag;
     }
-
-    public String updateMajor(){
-        resultMap = new TreeMap<String, Object>();
-        majorService.update(major);
-        resultMap.put("result","success");
-        return "json";
+    
+    public void setFlag(String flag){
+        this.flag = flag;
     }
 }
+
+
