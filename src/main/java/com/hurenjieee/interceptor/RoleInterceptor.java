@@ -33,16 +33,18 @@ public class RoleInterceptor implements Interceptor {
         Map<String, Object> session = actionContext.getSession();
         String userType = (String) session.get("userType");
         HttpServletRequest httpServletRequest = (HttpServletRequest) actionContext.get(ServletActionContext.HTTP_REQUEST);
-        String path = httpServletRequest.getContextPath();
-        System.out.println("11111111111111" + path);
+        String path = httpServletRequest.getServletPath();
+        //"/admin/admin!index.action"
+        System.out.println(path);
         String servletPath = httpServletRequest.getServletPath();
+        String loginUserType = servletPath.split("/")[1];
         // 去除不需要过滤的网址
-        if ("/login!login.action".equals(servletPath) || "/login!toLogin.action".equals(servletPath)) {
+        if (loginUserType.equals(userType) || "/login!login.action".equals(servletPath) || "/login!toLogin.action".equals(servletPath)) {
             // 经过Servlet方法
             return invocation.invoke();
         }
-        return invocation.invoke();
-        //return Action.LOGIN;
+        session.clear();
+        return Action.LOGIN;
     }
 
 }

@@ -24,7 +24,7 @@ import com.opensymphony.xwork2.ActionSupport;
 public class AdminAction extends ActionSupport {
     String flag;
     public String index(){
-        return flag;        
+        return "index";        
     }
     
     public String getFlag(){
