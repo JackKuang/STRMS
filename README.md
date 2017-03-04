@@ -3,7 +3,7 @@
 1.使用该框架之前需要查看好简单的框架结构：使用的maven+Struts2+Spring+HIbernate整合完成，版本请自行查看看pom.xml 		
 2.strust2上使用了InitStrutsPrepareAndExecuteFilter，第一次初始化读取配置文件下的systemConfig.properties，读取后存入到session中。		
 3.拦截器，没有使用shiro拦截器，就写了一个根据路劲来拦截用户，防止越权操作。其中，LogInterceptor只是在用户访问action时在控制台打印相关信息，RoleInterceptor拦截用户的页面请求，RoleForJsonInterceptor拦截用户的json请求。		
-4.spring只是大部分的AOP切面编程，不需要大部分的配置，在自动扫描的等功能下，根据实际开发更改。
+4.spring只是大部分的AOP切面编程，不需要大部分的配置，在自动扫描的等功能下，根据实际开发更改。		
 5.在hibernate下，大部分的dao写在了BaseDao里了，所以就不使用了dao层。所以一个Service上关联一个实体类。相关注意增加注解。		
 6.log4j功能简单配置了一下，具体实际开发需求更改。		
 7.页面请求这里不做解释了，json请求时，查看SchoolAction这个action，直接页面上访问相对的页面，直接吧信息put在resultMap里面就好了，但是在返回一个对象时，会返回对象的全部信息，所以这个东西会不安全，建议不放对象。		
