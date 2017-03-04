@@ -14,7 +14,7 @@ import org.hibernate.annotations.GenericGenerator;
  */
 @Entity
 @Table(name = "teacher", catalog = "strms")
-public class Teacher  implements java.io.Serializable{
+public class Teacher implements java.io.Serializable {
 
 	private int teaUuid;
 	private String teaName;
@@ -47,7 +47,7 @@ public class Teacher  implements java.io.Serializable{
 	@Id
 
 	@GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid.hex")
+	@GenericGenerator(name = "uuid", strategy = "uuid.hex")
 	@Column(name = "tea_uuid", unique = true, nullable = false)
 	public int getTeaUuid() {
 		return this.teaUuid;

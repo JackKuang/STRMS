@@ -3,41 +3,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>学校教学资源管理系统</title>
-<!-- Tell the browser to be responsive to screen width -->
-<meta
-	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
-	name="viewport">
-<!-- Bootstrap 3.3.6 -->
-<link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
-<!-- Font Awesome -->
-<link rel="stylesheet"
-	href="../ajax/css/font-awesome.min.css">
-<!-- Ionicons -->
-<link rel="stylesheet"
-	href="../ajax/css/ionicons.min.css">
-<!-- Theme style -->
-<link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
-<!-- AdminLTE Skins. Choose a skin from the css/skins
-       folder instead of downloading all of them to reduce the load. -->
-<link rel="stylesheet" href="../dist/css/skins/_all-skins.min.css">
-
-<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
+<jsp:include page="/WEB-INF/include/meta.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/include/css.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/include/adaptor.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/include/jquery.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/include/redirectPage.jsp"></jsp:include>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 	<div class="wrapper">
 
 		<header class="main-header">
 			<!-- Logo -->
-			<!-- FIXME 主页链接  -->
-			<a href="index2.html" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
+			<!-- 主页链接  -->
+			<a href="admin!index.action" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
 				<span class="logo-mini">★</span> <!-- logo for regular state and mobile devices -->
 				<span class="logo-lg">学校教学资源管理系统</span>
 			</a>
@@ -146,9 +125,8 @@
 				<!-- sidebar menu: : style can be found in sidebar.less -->
 				<ul class="sidebar-menu">
 					<li class="header">主导航</li>
-					<li><a href="#" onclick="javascript:load('../login!toLogin.action')"> <i class="fa fa-th"></i>
-							<span>系统信息查看</span> <span class="pull-right-container"> <small
-								class="label pull-right bg-green">3</small>
+					<li><a href="#" onclick="redirectPage('admin!redirectPage.action?flag=detail')"> <i class="fa fa-th"></i>
+							<span>系统信息查看</span> <span class="pull-right-container">
 						</span>
 					</a></li>
 					<li><a href="#"> <i class="fa fa-th"></i> <span>教师管理</span>
@@ -167,17 +145,10 @@
 
 		<!-- Content Wrapper. Contains page content -->
 		<div class="content-wrapper">
-			<!-- Content Header (Page header) -->
-			<section class="content-header">
-				<h1>标题</h1>
-			</section>
-
 			<!-- Main content -->
 			<section>
-
 				<div id="main"></div>
 				<!-- /.error-page -->
-
 			</section>
 			<!-- /.content -->
 		</div>
@@ -196,22 +167,5 @@
 
 	</div>
 	<!-- ./wrapper -->
-
-	<!-- jQuery 2.2.3 -->
-	<script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
-	<!-- Bootstrap 3.3.6 -->
-	<script src="../bootstrap/js/bootstrap.min.js"></script>
-	<!-- FastClick -->
-	<script src="../plugins/fastclick/fastclick.js"></script>
-	<!-- AdminLTE App -->
-	<script src="../dist/js/app.min.js"></script>
-	<!-- AdminLTE for demo purposes -->
-	<script src="../dist/js/demo.js"></script>
-	<script type="text/javascript">
-		function load(url) {
-			alert(1)
-			$("#main").load(url);
-		}
-	</script>
 </body>
 </html>

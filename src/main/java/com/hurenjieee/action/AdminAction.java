@@ -20,18 +20,25 @@ import com.opensymphony.xwork2.ActionSupport;
 @ParentPackage(value = "all") // 应用全局包
 @Scope("prototype")
 @Namespace(value = "/admin")
-@Action(results = { @Result(name = "index",location = "/WEB-INF/jsp/admin/index.jsp") })
+@Action(results = { @Result(name = "index", location = "/WEB-INF/jsp/admin/index.jsp"),
+		@Result(name = "detail", location = "/WEB-INF/jsp/admin/detail.jsp")})
 public class AdminAction extends ActionSupport {
-    String flag;
-    public String index(){
-        return "index";        
-    }
-    
-    public String getFlag(){
-        return flag;
-    }
-    
-    public void setFlag(String flag){
-        this.flag = flag;
-    }
+	String flag;
+
+	public String index() {
+		return "index";
+	}
+
+	public String getFlag() {
+		return flag;
+	}
+
+	public void setFlag(String flag) {
+		this.flag = flag;
+	}
+
+	public String redirectPage() {
+		//detail:系统信息查看
+		return flag;
+	}
 }

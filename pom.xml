@@ -12,7 +12,7 @@
 		<struts2.version>2.3.20.1</struts2.version>
 		<spring.version>4.3.1.RELEASE</spring.version>
 		<hibernate.version>4.3.8.Final</hibernate.version>
-		<project.build.sourceEncoding>GBK</project.build.sourceEncoding>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<dependencies>
 

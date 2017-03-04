@@ -45,7 +45,7 @@ public class Student implements java.io.Serializable {
 	@Id
 
 	@GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid.hex")
+	@GenericGenerator(name = "uuid", strategy = "uuid.hex")
 	@Column(name = "stu_uuid", unique = true, nullable = false)
 	public int getStuUuid() {
 		return this.stuUuid;

@@ -2,12 +2,12 @@ package com.hurenjieee.entity;
 
 import java.util.Map;
 
-public class BaseObject implements java.io.Serializable{
-	
+public class BaseObject implements java.io.Serializable {
+
 	private Map<String, Integer> intMap;
-	
+
 	private Map<String, String> strMap;
-	
+
 	private Map<String, Double> douMap;
 
 	public Map<String, Integer> getIntMap() {
@@ -33,7 +33,5 @@ public class BaseObject implements java.io.Serializable{
 	public void setDouMap(Map<String, Double> douMap) {
 		this.douMap = douMap;
 	}
-	
-	
 
 }

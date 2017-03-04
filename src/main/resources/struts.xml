@@ -51,5 +51,25 @@
 			<result name="login" type="redirect">/login!toLogin.action</result>
 		</global-results>
 	</package>
+	<package name="json" extends="json-default">
+		<interceptors>
+			<interceptor name="logInterceptor"
+				class="com.hurenjieee.interceptor.LogInterceptor"></interceptor>
+			<interceptor name="roleForJsonInterceptor"
+				class="com.hurenjieee.interceptor.RoleForJsonInterceptor"></interceptor>
+			<interceptor-stack name="allStack">
+				<!-- 按顺序拦截，先到先拦截 -->
+				<interceptor-ref name="roleForJsonInterceptor"></interceptor-ref>
+				<interceptor-ref name="logInterceptor"></interceptor-ref>
+				<!-- token,防止重复提交 -->
+				<!-- <interceptor-ref name="token"></interceptor-ref> -->
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="allStack" />
+		<global-results>
+			<result name="login" type="redirect">/login!toLogin.action</result>
+		</global-results>
+	</package>
 
 </struts>  

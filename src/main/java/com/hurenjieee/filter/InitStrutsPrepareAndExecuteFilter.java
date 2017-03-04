@@ -19,14 +19,14 @@ import com.hurenjieee.util.GlobalUtil;
  */
 @WebFilter("/InitStrutsPrepareAndExecuteFilter")
 public class InitStrutsPrepareAndExecuteFilter extends StrutsPrepareAndExecuteFilter implements Filter {
-       
-    /**
-     * @see StrutsPrepareAndExecuteFilter#StrutsPrepareAndExecuteFilter()
-     */
-    public InitStrutsPrepareAndExecuteFilter() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	/**
+	 * @see StrutsPrepareAndExecuteFilter#StrutsPrepareAndExecuteFilter()
+	 */
+	public InitStrutsPrepareAndExecuteFilter() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see Filter#destroy()
@@ -38,7 +38,8 @@ public class InitStrutsPrepareAndExecuteFilter extends StrutsPrepareAndExecuteFi
 	/**
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+			throws IOException, ServletException {
 		// TODO Auto-generated method stub
 		// place your code here
 
@@ -51,22 +52,11 @@ public class InitStrutsPrepareAndExecuteFilter extends StrutsPrepareAndExecuteFi
 	 */
 	public void init(FilterConfig fConfig) throws ServletException {
 		// TODO Auto-generated method stub
-		ServletContext servletContext =  fConfig.getServletContext();
+		ServletContext servletContext = fConfig.getServletContext();
+		GlobalUtil.loadSystemProperties(servletContext);
 		
-		//GlobalUtil.initGlobalToServlet(servletContext);
-		/*
-		Map<String,String> map=new TreeMap<String,String>();
-		// FIXME 对数据库数据字典的访问，写到ServletContext中
-		DictionaryService dictionaryService = (DictionaryService) SpringContextUtil.getBean("dictionaryService");
-		List<Dictionary> list=dictionaryService.getList();
-		new Global;
-		for(Dictionary dictionary:list){
-			switch(dictionary.getValueType()){
-			case "string":
-				Global
-			}
-		}
-		servletContext.setAttribute("systemMap", map);*/
+		// GlobalUtil.initGlobalToServlet(servletContext);
+		
 	}
 
 }
