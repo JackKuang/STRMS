@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>学校教学资源管理系统</title>
+<title>${admin.admName }</title>
 <jsp:include page="/WEB-INF/include/meta.jsp"></jsp:include>
 <jsp:include page="/WEB-INF/include/css.jsp"></jsp:include>
 <jsp:include page="/WEB-INF/include/adaptor.jsp"></jsp:include>
@@ -18,7 +18,7 @@
 			<!-- 主页链接  -->
 			<a href="admin!index.action" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
 				<span class="logo-mini">★</span> <!-- logo for regular state and mobile devices -->
-				<span class="logo-lg">学校教学资源管理系统</span>
+				<span class="logo-lg">${prop.systemName }</span>
 			</a>
 			<!-- Header Navbar: style can be found in header.less -->
 			<nav class="navbar navbar-static-top">

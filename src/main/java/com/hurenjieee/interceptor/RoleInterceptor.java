@@ -36,7 +36,7 @@ public class RoleInterceptor implements Interceptor {
 				.get(ServletActionContext.HTTP_REQUEST);
 		String path = httpServletRequest.getServletPath();
 		// "/admin/admin!index.action"
-		System.out.println(path);
+		//System.out.println(path);
 		String servletPath = httpServletRequest.getServletPath();
 		String loginUserType = servletPath.split("/")[1];
 		// 去除不需要过滤的网址

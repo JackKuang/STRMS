@@ -169,34 +169,5 @@ public abstract class BaseAction<T,ID extends Serializable> extends ActionSuppor
 			e.printStackTrace();
 		}
 	}
-	//--------------通用方法----------------
-	
-
-	
-	//---------------调用Service方法，避免了多次使用------------
-	/**
-	 * 获取到全部的实体
-	 * @throws IOException
-	 */
-	public void getAllList() throws IOException{
-		Map<String,Object> resultMap = new TreeMap<String,Object>();
-		List<T> list = service.getList();
-		resultMap.put("list", list);
-		ResponseJson(resultMap);
-	}
-	
-	/**
-	 * 根据ID获取到实体
-	 * @param id
-	 * @throws IOException
-	 */
-	public void getById(ID id) throws IOException{
-		Map<String,Object> resultMap = new TreeMap<String,Object>();
-		T result = getService().getById(id);
-		resultMap.put("result", result);
-		ResponseJson(resultMap);
-		
-	}
-	
-	//---------------调用Service方法结束------------
+	//--------------通用方法----------------	
 }
