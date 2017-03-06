@@ -15,9 +15,7 @@ import java.io.OutputStream;
  * @Since: 2017年1月23日下午10:50:12  
  */
 public class CopyFileUtil {
-	private static String MESSAGE = "";
-
-    /**
+	/**
      * 复制单个文件
      *
      * @param srcFileName
@@ -34,12 +32,10 @@ public class CopyFileUtil {
 
         // 判断源文件是否存在
         if (!srcFile.exists()) {
-            MESSAGE = "源文件：" + srcFileName + "不存在！";
-           // JOptionPane.showMessageDialog(null, MESSAGE);
+            // JOptionPane.showMessageDialog(null, MESSAGE);
             return false;
         } else if (!srcFile.isFile()) {
-            MESSAGE = "复制文件失败，源文件：" + srcFileName + "不是一个文件！";
-           // JOptionPane.showMessageDialog(null, MESSAGE);
+            // JOptionPane.showMessageDialog(null, MESSAGE);
             return false;
         }
 
@@ -107,12 +103,10 @@ public class CopyFileUtil {
         // 判断源目录是否存在
         File srcDir = new File(srcDirName);
         if (!srcDir.exists()) {
-            MESSAGE = "复制目录失败：源目录" + srcDirName + "不存在！";
-           // JOptionPane.showMessageDialog(null, MESSAGE);
+            // JOptionPane.showMessageDialog(null, MESSAGE);
             return false;
         } else if (!srcDir.isDirectory()) {
-            MESSAGE = "复制目录失败：" + srcDirName + "不是目录！";
-          //  JOptionPane.showMessageDialog(null, MESSAGE);
+            //  JOptionPane.showMessageDialog(null, MESSAGE);
             return false;
         }
 
@@ -127,8 +121,7 @@ public class CopyFileUtil {
             if (overlay) {
                 new File(destDirName).delete();
             } else {
-                MESSAGE = "复制目录失败：目的目录" + destDirName + "已存在！";
-              //  JOptionPane.showMessageDialog(null, MESSAGE);
+                //  JOptionPane.showMessageDialog(null, MESSAGE);
                 return false;
             }
         } else {
@@ -157,8 +150,7 @@ public class CopyFileUtil {
             }
         }
         if (!flag) {
-            MESSAGE = "复制目录" + srcDirName + "至" + destDirName + "失败！";
-           // JOptionPane.showMessageDialog(null, MESSAGE);
+            // JOptionPane.showMessageDialog(null, MESSAGE);
             return false;
         } else {
             return true;

@@ -5,8 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import org.springframework.util.StringUtils;
-
 public class DateUtil {
 	/**
 	 * 本日日期 YYYY-MM-DD
@@ -77,7 +75,7 @@ public class DateUtil {
 	public static String getToday4LocaleTime() {
 		java.util.Date date = new java.util.Date();
 		String dd = date.toLocaleString();
-		String[] dat = dd.split(":");
+		dd.split(":");
 		return null;
 	}
 

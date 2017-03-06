@@ -1,7 +1,6 @@
 package com.hurenjieee.util;
 
 import java.io.BufferedInputStream;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.HashMap;
@@ -11,12 +10,7 @@ import java.util.Properties;
 
 import javax.servlet.ServletContext;
 
-import org.apache.commons.io.IOUtils;
-import org.springframework.core.io.ResourceLoader;
-
 public class GlobalUtil {
-
-    private static Global global;
 
     /**
      * 初始化去全局参数
@@ -60,7 +54,7 @@ public class GlobalUtil {
     	Properties properties = new Properties();
     	Map<String, String> stringMap = new HashMap<String, String>();
     	try {
-    		String filePath= servletContext.getRealPath("\\")+"WEB-INF\\classes\\systemConfig.properties";
+    		String filePath= servletContext.getRealPath("\\")+"\\WEB-INF\\classes\\systemConfig.properties";
     		InputStream inputStream = new BufferedInputStream(new FileInputStream(filePath));
 			properties.load(inputStream);
 			Iterator<String> iterator = properties.stringPropertyNames().iterator();

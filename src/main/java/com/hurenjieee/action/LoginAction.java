@@ -1,6 +1,5 @@
 package com.hurenjieee.action;
 
-import java.io.Serializable;
 import java.util.Map;
 
 import org.apache.struts2.convention.annotation.Action;

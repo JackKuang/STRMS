@@ -6,7 +6,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.ServletActionContext;
 
-import com.hurenjieee.entity.Admin;
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionInvocation;
@@ -34,7 +33,7 @@ public class RoleInterceptor implements Interceptor {
 		String userType = (String) session.get("userType");
 		HttpServletRequest httpServletRequest = (HttpServletRequest) actionContext
 				.get(ServletActionContext.HTTP_REQUEST);
-		String path = httpServletRequest.getServletPath();
+		httpServletRequest.getServletPath();
 		// "/admin/admin!index.action"
 		//System.out.println(path);
 		String servletPath = httpServletRequest.getServletPath();

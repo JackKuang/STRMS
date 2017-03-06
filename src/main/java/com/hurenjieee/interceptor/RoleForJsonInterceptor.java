@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts2.ServletActionContext;
 
-import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.Interceptor;
@@ -39,7 +38,7 @@ public class RoleForJsonInterceptor implements Interceptor {
 				.get(ServletActionContext.HTTP_REQUEST);
 		HttpServletResponse httpServletResponse = (HttpServletResponse) actionContext
 				.get(ServletActionContext.HTTP_RESPONSE);
-		String path = httpServletRequest.getServletPath();
+		httpServletRequest.getServletPath();
 		// "/admin/admin!index.action"
 		//System.out.println(path);
 		String servletPath = httpServletRequest.getServletPath();
