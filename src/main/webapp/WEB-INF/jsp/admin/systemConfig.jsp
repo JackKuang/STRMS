@@ -102,7 +102,17 @@
 					<h4 class="modal-title">新增分院</h4>
 				</div>
 				<div class="modal-body">
-					<p>One fine body…</p>
+					<form class="form-horizontal">
+						<div class="box-body">
+							<div class="form-group">
+								<label class="col-sm-2">分院名称</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" placeholder="分院名称">
+								</div>
+							</div>
+							<!-- /.box-body -->
+						</div>
+					</form>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default pull-left"
@@ -125,11 +135,10 @@
 					<h4 class="modal-title">新增专业</h4>
 				</div>
 				<div class="modal-body">
-
 					<form class="form-horizontal">
 						<div class="box-body">
 							<div class="form-group">
-								<label class="col-sm-2">分院：</label>
+								<label class="col-sm-2">所属分院</label>
 								<div class="col-sm-10">
 									<select class="form-control">
 										<option>option 1</option>
@@ -141,14 +150,14 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-2">专业名称：</label>
+								<label class="col-sm-2">专业名称</label>
 								<div class="col-sm-10">
-								<input type="text" placeholder="Enter ..."></div>
+									<input type="text" class="form-control" placeholder="专业名称">
+								</div>
 							</div>
+							<!-- /.box-body -->
 						</div>
-						<!-- /.box-body -->
 					</form>
-
 
 				</div>
 				<div class="modal-footer">
