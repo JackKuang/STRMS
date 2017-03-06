@@ -123,24 +123,25 @@
 				<!-- search form -->
 				<!-- /.search form -->
 				<!-- sidebar menu: : style can be found in sidebar.less -->
-				<ul class="navbar sidebar-menu">
+				<ul class="nav sidebar-menu">
 					<li class="header">主导航</li>
 					<li><a href="#" onclick="redirectPage('systemDetail')"> <i
-							class="fa fa-th"></i> <span>系统信息查看</span>
+							class="fa fa-navicon"></i> <span>系统信息查看</span>
 					</a></li>
 					<li><a href="#" onclick="redirectPage('systemConfig')"> <i
-							class="fa fa-th"></i> <span>属性配置</span>
+							class="fa fa-wrench"></i> <span>属性配置</span>
 					</a></li>
-					<li><a href="#" onclick="redirectPage('teacherManager')"> <i
-							class="fa fa-th"></i> <span>教师管理</span>
+					<li><a href="#" onclick="redirectPage('teacherManager')">
+							<i class="fa fa-users"></i> <span>教师管理</span>
 					</a></li>
-					<li><a href="#" onclick="redirectPage('studentManager')"> <i
-							class="fa fa-th"></i> <span>学生管理</span>
+					<li><a href="#" onclick="redirectPage('studentManager')">
+							<i class="fa fa-users"></i> <span>学生管理</span>
 					</a></li>
 				</ul>
 			</section>
 			<!-- /.sidebar -->
 		</aside>
+
 
 		<!-- Content Wrapper. Contains page content -->
 		<div class="content-wrapper">
@@ -156,4 +157,13 @@
 	</div>
 	<!-- ./wrapper -->
 </body>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('ul.nav > li').click(function(e) {
+			e.preventDefault();
+			$('ul.nav > li').removeClass('active');
+			$(this).addClass('active');
+		});
+	});
+</script>
 </html>

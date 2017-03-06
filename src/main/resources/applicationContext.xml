@@ -57,6 +57,6 @@
 有人说可以进行配置，然后也可以支持实体类的事务层注入  -->
 	<aop:aspectj-autoproxy proxy-target-class="true"/>
 
-	<bean class = "com.hurenjieee.util.SpringContextUtil" id = "springContextUtil" />
+	<!-- <bean class = "com.hurenjieee.util.SpringContextUtil" id = "springContextUtil" /> -->
 	
 </beans>
