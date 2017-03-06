@@ -31,7 +31,7 @@ public class SchoolAction extends ActionSupport {
         resultMap = new HashMap<String, Object>();
         Admin admin = new Admin();
         admin.setAdmName("admin");
-        admin.setAdmPic("12333");
+        admin.setAdmPicture("12333");
         resultMap.put("admin",admin);
         return "json";
     }

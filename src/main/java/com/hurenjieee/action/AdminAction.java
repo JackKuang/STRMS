@@ -13,6 +13,10 @@ import com.opensymphony.xwork2.ActionSupport;
 @Scope("prototype")
 @Namespace(value = "/admin")
 @Action(results = { @Result(name = "index", location = "/WEB-INF/jsp/admin/index.jsp"),
+		@Result(name = "systemDetail", location = "/WEB-INF/jsp/admin/systemDetail.jsp"),
+		@Result(name = "systemConfig", location = "/WEB-INF/jsp/admin/systemConfig.jsp"),
+		@Result(name = "teacherManager", location = "/WEB-INF/jsp/admin/teacherManager.jsp"),
+		@Result(name = "studentManager", location = "/WEB-INF/jsp/admin/studentManager.jsp"),
 		@Result(name = "detail", location = "/WEB-INF/jsp/admin/detail.jsp")})
 public class AdminAction extends ActionSupport {
 	String flag;
@@ -30,7 +34,16 @@ public class AdminAction extends ActionSupport {
 	}
 
 	public String redirectPage() {
-		//detail:系统信息查看
-		return flag;
-	}
+		if ("systemDetail".equals(flag)) {
+			return "systemDetail";//		
+		}else if ("systemConfig".equals(flag)) {
+			return "systemConfig";			
+		}else if ("teacherManager".equals(flag)) {
+			return "teacherManager";			
+		}else if ("studentManager".equals(flag)) {
+			return "studentManager";			
+		}else{
+			return "detail";
+		}
+	}	
 }

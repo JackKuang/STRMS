@@ -5,9 +5,11 @@
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 %>
-<script type="text/javascript">
-	function redirectPage(flag) {
-		var url = "${sessionScope.userType }!redirectPage.action?flag="+flag;
-		$("#main").load(url);
-	}
-</script>
+<footer class="main-footer">
+	<div class="pull-right hidden-xs">
+		<b>Version</b> 0.1
+	</div>
+	<strong>Copyright &copy; 2014-2016 <a
+		href="http://hurenjieee.com">Jack</a>.
+	</strong> All rights reserved.
+</footer>

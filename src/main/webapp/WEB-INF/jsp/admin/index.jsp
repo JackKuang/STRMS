@@ -79,7 +79,7 @@
 						<li class="dropdown user user-menu"><a href="#"
 							class="dropdown-toggle" data-toggle="dropdown"> <img
 								src="../dist/img/user2-160x160.jpg" class="user-image"
-								alt="User Image"> <span class="hidden-xs">管理员<span></a>
+								alt="User Image"> <span class="hidden-xs">管理员</span></a>
 							<ul class="dropdown-menu">
 								<!-- User image -->
 								<li class="user-header"><img
@@ -123,21 +123,20 @@
 				<!-- search form -->
 				<!-- /.search form -->
 				<!-- sidebar menu: : style can be found in sidebar.less -->
-				<ul class="sidebar-menu">
+				<ul class="navbar sidebar-menu">
 					<li class="header">主导航</li>
-					<li><a href="#" onclick="redirectPage('admin!redirectPage.action?flag=detail')"> <i class="fa fa-th"></i>
-							<span>系统信息查看</span> <span class="pull-right-container">
-						</span>
+					<li><a href="#" onclick="redirectPage('systemDetail')"> <i
+							class="fa fa-th"></i> <span>系统信息查看</span>
 					</a></li>
-					<li><a href="#"> <i class="fa fa-th"></i> <span>教师管理</span>
+					<li><a href="#" onclick="redirectPage('systemConfig')"> <i
+							class="fa fa-th"></i> <span>属性配置</span>
 					</a></li>
-					<li><a href="#"> <i class="fa fa-th"></i> <span>学生管理</span>
+					<li><a href="#" onclick="redirectPage('teacherManager')"> <i
+							class="fa fa-th"></i> <span>教师管理</span>
 					</a></li>
-					<li class="header">LABELS</li>
-					<li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
-					<li><a href="#"><i class="fa fa-circle-o text-yellow"></i>
-							<span>Warning</span></a></li>
-					<li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
+					<li><a href="#" onclick="redirectPage('studentManager')"> <i
+							class="fa fa-th"></i> <span>学生管理</span>
+					</a></li>
 				</ul>
 			</section>
 			<!-- /.sidebar -->
@@ -153,18 +152,7 @@
 			<!-- /.content -->
 		</div>
 		<!-- /.content-wrapper -->
-		<footer class="main-footer">
-			<div class="pull-right hidden-xs">
-				<b>Version</b> 2.3.8
-			</div>
-			<strong>Copyright &copy; 2014-2016 <a
-				href="http://almsaeedstudio.com">Almsaeed Studio</a>.
-			</strong> All rights reserved.
-		</footer>
-
-		<!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
-
+		<jsp:include page="/WEB-INF/include/footer.jsp"></jsp:include>
 	</div>
 	<!-- ./wrapper -->
 </body>
