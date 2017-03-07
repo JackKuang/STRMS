@@ -10,4 +10,5 @@
 		var url = "${sessionScope.userType }!redirectPage.action?flag="+flag;
 		$("#main").load(url);
 	}
+	
 </script>

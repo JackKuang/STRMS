@@ -11,11 +11,11 @@ import com.hurenjieee.util.BaseDao;
 
 @Service
 @Transactional
-public class AdminService extends BaseService<Admin, String> {
+public class AdminService extends BaseService<Admin, Long> {
 	
 	@Autowired
 	public void setSessionFactory(SessionFactory sessionFactory) {
-		BaseDao<Admin,String> dao = new BaseDao<Admin,String>();
+		BaseDao<Admin,Long> dao = new BaseDao<Admin,Long>();
 		dao.setSessionFactory(sessionFactory);
 		setDao(dao);
 	}

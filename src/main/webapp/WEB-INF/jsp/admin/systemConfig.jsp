@@ -107,7 +107,7 @@
 							<div class="form-group">
 								<label class="col-sm-2">分院名称</label>
 								<div class="col-sm-10">
-									<input type="text" class="form-control" placeholder="分院名称">
+									<input type="text" class="form-control" id="braName" placeholder="分院名称">
 								</div>
 							</div>
 							<!-- /.box-body -->
@@ -115,9 +115,8 @@
 					</form>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default pull-left"
-						data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary">Save changes</button>
+					<button type="button" id="modalBranchSave" class="btn btn-primary">保存</button>
+					<button type="button" id="modalBranchCancel" class="btn btn-default" data-dismiss="modal">取消</button>
 				</div>
 			</div>
 			<!-- /.modal-content -->
@@ -161,29 +160,38 @@
 
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default pull-left"
-						data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary">Save changes</button>
+					<button type="button" id="modalMajorCancel" class="btn btn-default" data-dismiss="modal">取消</button>
 				</div>
 			</div>
+					<button type="button" id="modalMajorSave" class="btn btn-primary">保存</button>
 			<!-- /.modal-content -->
 		</div>
 		<!-- /.modal-dialog -->
 	</div>
 </body>
 <script type="text/javascript">
-	function getTree() {
-		// Some logic to retrieve, or generate tree structure
-		return tree;
-	}
+	$("#modalBranchSave").click(function() {
+		$.ajax({
+			type: 'POST',
+			url: 'school!saveBranch.action',
+			data: {
+				braName:$("#braName").val()
+			},
+			dataType:'json',
+		    success:function(data,textStatus,jqXHR){
+		        console.log(data)
+		    }
+		})	
+		$('#modalBranch').modal('hide');
+	});
+	$("#modalMajorSave").click(function() {
+		$('#modalMajor').modal('hide');
+	});
 	$("#addBranch").click(function() {
 		$('#modalBranch').modal('show');
 	});
 	$("#addMajor").click(function() {
 		$('#modalMajor').modal('show');
-	});
-	$('#tree').treeview({
-		data : getTree()
 	});
 </script>
 </html>
