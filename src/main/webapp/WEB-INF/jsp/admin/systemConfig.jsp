@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,7 +14,7 @@
 <body>
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
-		<h1>系统信息查看</h1>
+		<h1>属性配置</h1>
 	</section>
 
 	<!-- Main content -->
@@ -39,56 +40,66 @@
 			</div>
 			<!-- /.col -->
 			<div class="col-md-3">
-				<!-- <table class="table table-bordered text-center">
-					<tr>
-						<td>
-							<div class="box box-success box-solid">
-								<div class="box-header with-border">
-									<h3 class="box-title">计算机与计算科学学院</h3>
-									<div class="box-tools pull-right">
-										<button type="button" class="btn btn-box-tool"
-											data-widget="collapse">
-											<i class="fa fa-minus"></i>
-										</button>
-									</div>
-									/.box-tools
-								</div>
-								/.box-header
-								<div class="box-body">计算机科学与技术</div>
-								<div class="box-body">计算机科学与技术</div>
-								<div class="box-body">计算机科学与技术</div>
-								<div class="box-body">计算机科学与技术</div>
-								/.box-body
+				<s:iterator var="branch" value="branchList">
+					<div class="box box-success box-solid">
+						<div class="box-header with-border">
+							<h3 class="box-title">
+								<s:property value="#branch.braName" />
+							</h3>
+							<div class="box-tools pull-right">
+								<button type="button" class="btn btn-box-tool"
+									data-widget="collapse">
+									<i class="fa fa-minus"></i>
+								</button>
+								<button type="button" class="btn btn-box-tool">
+									<i class="fa fa-close"></i>
+								</button>
 							</div>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<div class="box box-success box-solid">
-								<div class="box-header with-border">
-									<h3 class="box-title"></h3>
-									<div class="box-tools pull-right">
-										<button type="button" class="btn btn-box-tool"
-											data-widget="collapse">
-											<i class="fa fa-minus"></i>
-										</button>
-									</div>
-									/.box-tools
-								</div>
-								/.box-header
-								<div class="box-body">计算机科学与技术</div>
-								/.box-body
-							</div>
-						</td>
-					</tr>
-				</table> -->
+						</div>
+					</div>
+				</s:iterator>
+				<div class="box box-success box-solid">
+					<div class="box-header with-border">
+						<h3 class="box-title">计算机与计算科学学院</h3>
+						<div class="box-tools pull-right">
+							<button type="button" class="btn btn-box-tool"
+								data-widget="collapse">
+								<i class="fa fa-minus"></i>
+							</button>
+							<button type="button" class="btn btn-box-tool">
+								<i class="fa fa-close"></i>
+							</button>
+						</div>
+					</div>
+					<div class="box-body">
+						计算机科学与技术&nbsp;&nbsp;&nbsp;
+						<button type="button" class="btn btn-default btn-sm">修改</button>
+						&nbsp;&nbsp;&nbsp;
+						<button type="button" class="btn btn-default btn-sm">删除</button>
+					</div>
+					<div class="box-body">
+						计算机科学与技术&nbsp;&nbsp;&nbsp;
+						<button type="button" class="btn btn-default btn-sm">修改</button>
+						&nbsp;&nbsp;&nbsp;
+						<button type="button" class="btn btn-default btn-sm">删除</button>
+					</div>
+					<div class="box-body">
+						计算机科学与技术&nbsp;&nbsp;&nbsp;
+						<button type="button" class="btn btn-default btn-sm">修改</button>
+						&nbsp;&nbsp;&nbsp;
+						<button type="button" class="btn btn-default btn-sm">删除</button>
+					</div>
+					<div class="box-body">
+						计算机科学与技术&nbsp;&nbsp;&nbsp;
+						<button type="button" class="btn btn-default btn-sm">修改</button>
+						&nbsp;&nbsp;&nbsp;
+						<button type="button" class="btn btn-default btn-sm">删除</button>
+					</div>
+				</div>
 
-				<div id="tree"></div>
+				<!-- /.col -->
 			</div>
-			<!-- /.col -->
-		</div>
-		<!-- /.row -->
-
+			<!-- /.row -->
 	</section>
 	<!-- /.content -->
 	<div class="modal" id="modalBranch">
@@ -107,7 +118,8 @@
 							<div class="form-group">
 								<label class="col-sm-2">分院名称</label>
 								<div class="col-sm-10">
-									<input type="text" class="form-control" id="braName" placeholder="分院名称">
+									<input type="text" class="form-control" id="braName"
+										placeholder="分院名称">
 								</div>
 							</div>
 							<!-- /.box-body -->
@@ -116,7 +128,8 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" id="modalBranchSave" class="btn btn-primary">保存</button>
-					<button type="button" id="modalBranchCancel" class="btn btn-default" data-dismiss="modal">取消</button>
+					<button type="button" id="modalBranchCancel"
+						class="btn btn-default" data-dismiss="modal">取消</button>
 				</div>
 			</div>
 			<!-- /.modal-content -->
@@ -160,10 +173,11 @@
 
 				</div>
 				<div class="modal-footer">
-					<button type="button" id="modalMajorCancel" class="btn btn-default" data-dismiss="modal">取消</button>
+					<button type="button" id="modalMajorSave" class="btn btn-primary">保存</button>
+					<button type="button" id="modalMajorCancel" class="btn btn-default"
+						data-dismiss="modal">取消</button>
 				</div>
 			</div>
-					<button type="button" id="modalMajorSave" class="btn btn-primary">保存</button>
 			<!-- /.modal-content -->
 		</div>
 		<!-- /.modal-dialog -->
@@ -172,16 +186,16 @@
 <script type="text/javascript">
 	$("#modalBranchSave").click(function() {
 		$.ajax({
-			type: 'POST',
-			url: 'school!saveBranch.action',
-			data: {
-				braName:$("#braName").val()
+			type : 'POST',
+			url : 'school!saveBranch.action',
+			data : {
+				braName : $("#braName").val()
 			},
-			dataType:'json',
-		    success:function(data,textStatus,jqXHR){
-		        console.log(data)
-		    }
-		})	
+			dataType : 'json',
+			success : function(data, textStatus, jqXHR) {
+				console.log(data)
+			}
+		})
 		$('#modalBranch').modal('hide');
 	});
 	$("#modalMajorSave").click(function() {
