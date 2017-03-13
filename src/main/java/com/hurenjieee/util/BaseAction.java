@@ -181,7 +181,8 @@ public abstract class BaseAction<T, ID extends Serializable> extends ActionSuppo
     
     public String save(){
         try {
-            getService().save(getObject());
+            resultMap = new HashMap<String,Object>();
+            getService().saveOrUpdate(getObject());
             resultMap.put("result","success");
         } catch (Exception e) {
             e.printStackTrace();
@@ -193,6 +194,7 @@ public abstract class BaseAction<T, ID extends Serializable> extends ActionSuppo
 
     public String update(){
         try {
+            resultMap = new HashMap<String,Object>();
             getService().update(getObject());
             resultMap.put("result","success");
         } catch (Exception e) {
@@ -205,6 +207,7 @@ public abstract class BaseAction<T, ID extends Serializable> extends ActionSuppo
     
     public String delete(){
         try {
+            resultMap = new HashMap<String,Object>();
             getService().delete(getObject());
             resultMap.put("result","success");
         } catch (Exception e) {

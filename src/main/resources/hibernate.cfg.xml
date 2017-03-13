@@ -41,7 +41,7 @@
     <!-- 取消hibernate二级缓存  -->
     <property name="hibernate.cache.use_second_level_cache">false</property>
     <!-- 懒加载的no session 修复   -->
-    <!-- <property name="hibernate.enable_lazy_load_no_trans">true</property> -->
+    <property name="hibernate.enable_lazy_load_no_trans">true</property>
     
     <!-- 自动创建实体类   -->
     <!-- <property name="hibernate.hbm2ddl.auto">update</property> -->

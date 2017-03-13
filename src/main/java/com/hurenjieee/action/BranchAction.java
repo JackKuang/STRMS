@@ -39,4 +39,14 @@ public class BranchAction extends BaseAction<Branch, Long> {
         return branch == null ? new Branch() : branch;
     }
 
+    
+    public Branch getBranch(){
+        return branch;
+    }
+
+    
+    public void setBranch(Branch branch){
+        this.branch = branch;
+    }
+    
 }

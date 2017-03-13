@@ -56,6 +56,7 @@ public class AdminAction extends ActionSupport {
     
     public void systemConfig(){
         branchList = branchService.getList();
+        System.out.println(111);
     }
     
     public String getFlag(){

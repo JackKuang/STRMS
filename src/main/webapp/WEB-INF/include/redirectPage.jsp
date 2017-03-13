@@ -11,4 +11,10 @@
 		$("#main").load(url);
 	}
 	
+	function testData(data){
+		if(data.result=="01"){
+			
+		}
+	}
+	
 </script>

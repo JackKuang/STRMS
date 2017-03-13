@@ -23,13 +23,13 @@
 				<table class="table table-bordered text-center">
 					<tr>
 						<td>
-							<button type="button" id="addBranch"
+							<button type="button" onclick="showBranch();"
 								class="btn btn-block btn-primary btn-lg">增加分院</button>
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<button type="button" id="addMajor"
+							<button type="button" onclick="showMajor();"
 								class="btn btn-block btn-primary btn-lg">增加专业</button>
 						</td>
 					</tr>
@@ -47,22 +47,26 @@
 								<button type="button" class="btn btn-box-tool"
 									data-widget="collapse">
 									<i class="fa fa-minus"></i>
-								</button><button type="button" class="btn btn-box-tool"
-									data-widget="collapse"  onclick="modifyBranch(<s:property value="branch.braId" />)">
-									<i class="fa fa-minus"></i>
 								</button>
-								<button type="button" class="btn btn-box-tool"  onclick="deleteBranch(<s:property value="branch.braId" />)">
+								<button type="button" class="btn btn-box-tool"
+									onclick="showBranch(<s:property value="#branch.braId" />)">
+									<i class="fa fa-edit"></i>
+								</button>
+								<button type="button" class="btn btn-box-tool"
+									onclick="deleteBranch(<s:property value="#branch.braId" />)">
 									<i class="fa fa-close"></i>
 								</button>
 							</div>
 						</div>
-						<s:iterator var="major" value="majors">
+						<s:iterator var="major" value="#branch.majors">
 							<div class="box-body">
-								<s:property value="#majors.majName" />
+								<s:property value="#major.majName" />
 								&nbsp;&nbsp;&nbsp;
-								<button type="button" class="btn btn-default btn-sm" onclick="modifyMajor(<s:property value="#major.majId" />)">修改</button>
+								<button type="button" class="btn btn-default btn-sm"
+									onclick="showMajor(<s:property value="#major.majId" />)">修改</button>
 								&nbsp;&nbsp;&nbsp;
-								<button type="button" class="btn btn-default btn-sm" onclick="deleteMajor(<s:property value="#major.majId" />)">删除</button>
+								<button type="button" class="btn btn-default btn-sm"
+									onclick="deleteMajor(<s:property value="#major.majId" />)">删除</button>
 							</div>
 						</s:iterator>
 					</div>
@@ -80,11 +84,11 @@
 						aria-label="Close">
 						<span aria-hidden="true">×</span>
 					</button>
-					<h4 class="modal-title">新增分院</h4>
+					<h4 class="modal-title" id="branchTitle">新增分院</h4>
 				</div>
 				<div class="modal-body">
 					<form class="form-horizontal">
-						<input type="hidden" id="braName"/>
+						<input type="hidden" id="braId"/>
 						<div class="box-body">
 							<div class="form-group">
 								<label class="col-sm-2">分院名称</label>
@@ -115,28 +119,26 @@
 						aria-label="Close">
 						<span aria-hidden="true">×</span>
 					</button>
-					<h4 class="modal-title">新增专业</h4>
+					<h4 class="modal-title" id="majorTitle">新增专业</h4>
 				</div>
 				<div class="modal-body">
 					<form class="form-horizontal">
-						<input type="hidden" id="braName"/>
+						<input type="hidden" id="braName" />
 						<div class="box-body">
 							<div class="form-group">
 								<label class="col-sm-2">所属分院</label>
 								<div class="col-sm-10">
-									<select class="form-control">
-										<option>option 1</option>
-										<option>option 2</option>
-										<option>option 3</option>
-										<option>option 4</option>
-										<option>option 5</option>
+									<select class="form-control" id="braSelect">
+										<s:iterator var="branch" value="branchList">
+											<option value="<s:property value="#branch.braId" />"><s:property value="#branch.braName" /></option>
+										</s:iterator>
 									</select>
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-2">专业名称</label>
 								<div class="col-sm-10">
-									<input type="text" class="form-control" placeholder="专业名称">
+									<input type="text" class="form-control" placeholder="专业名称" id="majName">
 								</div>
 							</div>
 							<!-- /.box-body -->
@@ -161,8 +163,8 @@
 			type : 'POST',
 			url : 'branch!save.action',
 			data : {
-				braId:$("#braId").val(),
-				braName : $("#braName").val()
+				'branch.braId' : $("#braId").val(),
+				'branch.braName' : $("#braName").val()
 			},
 			dataType : 'json',
 			success : function(data, textStatus, jqXHR) {
@@ -171,13 +173,15 @@
 		})
 		$('#modalBranch').modal('hide');
 	});
+	
 	$("#modalMajorSave").click(function() {
 		$.ajax({
 			type : 'POST',
 			url : 'major!save.action',
 			data : {
-				majId:$("#majId").val(),
-				majName : $("#majName").val()
+				'major.majBraId' : $("#braSelect").val(),
+				'major.majId' : $("#majId").val(),
+				'major.majName' : $("#majName").val()
 			},
 			dataType : 'json',
 			success : function(data, textStatus, jqXHR) {
@@ -186,19 +190,35 @@
 		})
 		$('#modalBranch').modal('hide');
 	});
-	$("#addBranch").click(function() {
+	
+	
+	function showBranch(braId){
+		if(braId!=null){
+			$("#braId").val(braId);
+			$("#branchTitle").html("修改分院");
+		}else{
+			$("#branchTitle").html("新增分院");
+		}
 		$('#modalBranch').modal('show');
-	});
-	$("#addMajor").click(function() {
+	}
+	
+	function showMajor(majId){
+		if(majId!=null){
+			$("#majId").val(majId);
+			$("#majTitle").html("修改分院");
+		}else{
+			$("#majTitle").html("新增分院");
+		}
 		$('#modalMajor').modal('show');
-	});
+	}
+	
 	function deleteBranch(braId){
 		$.ajax({
 		    url:'branch!delete.action',
 		    type:'POST', //GET
 		    async:true,    //或false,是否异步
 		    data:{
-		    	braId:braId
+		    	'branch.braId':braId
 		    },
 		    dataType:'json',
 		    success:function(data,textStatus,jqXHR){
@@ -216,7 +236,7 @@
 		    type:'POST', //GET
 		    async:true,    //或false,是否异步
 		    data:{
-		    	majId:majId
+		    	'major.majId':majId
 		    },
 		    dataType:'json',
 		    success:function(data,textStatus,jqXHR){
