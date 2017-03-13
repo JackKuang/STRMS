@@ -53,6 +53,7 @@ public class AdminAction extends ActionSupport {
             return "detail";
         }
     }
+    
     public void systemConfig(){
         branchList = branchService.getList();
     }

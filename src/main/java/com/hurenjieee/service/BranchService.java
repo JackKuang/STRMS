@@ -19,4 +19,8 @@ public class BranchService extends BaseService<Branch, Long> {
         dao.setSessionFactory(sessionFactory);
         setDao(dao);
     }
+    
+    public Branch selectByBraName(String braName){
+        return getDao().getByHQL("from Branch b where b.braName = ?",braName);
+    }
 }

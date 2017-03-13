@@ -54,6 +54,8 @@ public class SchoolAction extends ActionSupport {
         return "json";
     }
     public String saveBranch(){
+        Branch branch = branchService.selectByBraName(braName);
+        if()
         Branch branch = new Branch();
         branch.setBraName(braName);
         branchService.save(branch);

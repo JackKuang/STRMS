@@ -53,7 +53,7 @@ public class Branch implements java.io.Serializable {
         this.braName = braName;
     }
 
-    @OneToMany(cascade=CascadeType.ALL,mappedBy="majId")   
+    @OneToMany(cascade=CascadeType.ALL,mappedBy="majBraId")   
     //@OneToMany(cascade=CascadeType.ALL,mappedBy="clazz",fetch=FetchType.EAGER) πÿ±’—”≥Ÿº”‘ÿ°£ 
     public Set<Major> getMajors(){
         return majors;
