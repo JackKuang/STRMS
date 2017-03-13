@@ -1,5 +1,6 @@
 package com.hurenjieee.action;
 
+import java.security.KeyStore.PrivateKeyEntry;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,6 +13,7 @@ import org.springframework.context.annotation.Scope;
 
 import com.hurenjieee.entity.Admin;
 import com.hurenjieee.entity.Branch;
+import com.hurenjieee.entity.Major;
 import com.hurenjieee.service.BranchService;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -22,28 +24,13 @@ import com.opensymphony.xwork2.ActionSupport;
 public class SchoolAction extends ActionSupport {
 
     Map<String, Object> resultMap;
+
+    private Branch branch;
     
-    private String braName;
-    
+    private Major major;
+
     @Autowired
     private BranchService branchService;
-
-    public Map<String, Object> getResultMap(){
-        return resultMap;
-    }
-
-    public void setResultMap(Map<String, Object> resultMap){
-        this.resultMap = resultMap;
-    }
-    
-    public String getBraName(){
-        return braName;
-    }
-
-    
-    public void setBraName(String braName){
-        this.braName = braName;
-    }
 
     public String testJson(){
         resultMap = new HashMap<String, Object>();
@@ -53,14 +40,29 @@ public class SchoolAction extends ActionSupport {
         resultMap.put("admin",admin);
         return "json";
     }
-    public String saveBranch(){
-        Branch branch = branchService.selectByBraName(braName);
-        if()
-        Branch branch = new Branch();
-        branch.setBraName(braName);
-        branchService.save(branch);
-        resultMap = new HashMap<String, Object>();
-        resultMap.put("result","success");
-        return "json";
+
+    public Map<String, Object> getResultMap(){
+        return resultMap;
     }
+
+    public void setResultMap(Map<String, Object> resultMap){
+        this.resultMap = resultMap;
+    }
+
+    public Branch getBranch(){
+        return branch;
+    }
+
+    public void setBranch(Branch branch){
+        this.branch = branch;
+    }
+    
+    public Major getMajor(){
+        return major;
+    }
+
+    public void setMajor(Major major){
+        this.major = major;
+    }
+    
 }

@@ -16,10 +16,8 @@
 	<section class="content-header">
 		<h1>属性配置</h1>
 	</section>
-
 	<!-- Main content -->
 	<section class="content">
-
 		<div class="row">
 			<div class="col-md-3">
 				<table class="table table-bordered text-center">
@@ -36,7 +34,6 @@
 						</td>
 					</tr>
 				</table>
-
 			</div>
 			<!-- /.col -->
 			<div class="col-md-3">
@@ -50,53 +47,26 @@
 								<button type="button" class="btn btn-box-tool"
 									data-widget="collapse">
 									<i class="fa fa-minus"></i>
+								</button><button type="button" class="btn btn-box-tool"
+									data-widget="collapse"  onclick="modifyBranch(<s:property value="branch.braId" />)">
+									<i class="fa fa-minus"></i>
 								</button>
-								<button type="button" class="btn btn-box-tool">
+								<button type="button" class="btn btn-box-tool"  onclick="deleteBranch(<s:property value="branch.braId" />)">
 									<i class="fa fa-close"></i>
 								</button>
 							</div>
 						</div>
+						<s:iterator var="major" value="majors">
+							<div class="box-body">
+								<s:property value="#majors.majName" />
+								&nbsp;&nbsp;&nbsp;
+								<button type="button" class="btn btn-default btn-sm" onclick="modifyMajor(<s:property value="#major.majId" />)">修改</button>
+								&nbsp;&nbsp;&nbsp;
+								<button type="button" class="btn btn-default btn-sm" onclick="deleteMajor(<s:property value="#major.majId" />)">删除</button>
+							</div>
+						</s:iterator>
 					</div>
 				</s:iterator>
-				<div class="box box-success box-solid">
-					<div class="box-header with-border">
-						<h3 class="box-title">计算机与计算科学学院</h3>
-						<div class="box-tools pull-right">
-							<button type="button" class="btn btn-box-tool"
-								data-widget="collapse">
-								<i class="fa fa-minus"></i>
-							</button>
-							<button type="button" class="btn btn-box-tool">
-								<i class="fa fa-close"></i>
-							</button>
-						</div>
-					</div>
-					<div class="box-body">
-						计算机科学与技术&nbsp;&nbsp;&nbsp;
-						<button type="button" class="btn btn-default btn-sm">修改</button>
-						&nbsp;&nbsp;&nbsp;
-						<button type="button" class="btn btn-default btn-sm">删除</button>
-					</div>
-					<div class="box-body">
-						计算机科学与技术&nbsp;&nbsp;&nbsp;
-						<button type="button" class="btn btn-default btn-sm">修改</button>
-						&nbsp;&nbsp;&nbsp;
-						<button type="button" class="btn btn-default btn-sm">删除</button>
-					</div>
-					<div class="box-body">
-						计算机科学与技术&nbsp;&nbsp;&nbsp;
-						<button type="button" class="btn btn-default btn-sm">修改</button>
-						&nbsp;&nbsp;&nbsp;
-						<button type="button" class="btn btn-default btn-sm">删除</button>
-					</div>
-					<div class="box-body">
-						计算机科学与技术&nbsp;&nbsp;&nbsp;
-						<button type="button" class="btn btn-default btn-sm">修改</button>
-						&nbsp;&nbsp;&nbsp;
-						<button type="button" class="btn btn-default btn-sm">删除</button>
-					</div>
-				</div>
-
 				<!-- /.col -->
 			</div>
 			<!-- /.row -->
@@ -114,6 +84,7 @@
 				</div>
 				<div class="modal-body">
 					<form class="form-horizontal">
+						<input type="hidden" id>
 						<div class="box-body">
 							<div class="form-group">
 								<label class="col-sm-2">分院名称</label>

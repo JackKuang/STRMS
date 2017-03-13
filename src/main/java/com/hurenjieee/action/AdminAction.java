@@ -58,8 +58,6 @@ public class AdminAction extends ActionSupport {
         branchList = branchService.getList();
     }
     
-    
-
     public String getFlag(){
         return flag;
     }

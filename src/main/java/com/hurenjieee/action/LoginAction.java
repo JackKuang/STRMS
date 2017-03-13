@@ -69,7 +69,6 @@ public class LoginAction extends ActionSupport {
         Map<String, Object> sessionMap = actionContext.getSession();
         sessionMap.clear();
         Map<String, Object> request = (Map<String, Object>) actionContext.get("request");
-
         // MD5º”√‹
         // password = Md5AndSha.convertMD5(password);
 
