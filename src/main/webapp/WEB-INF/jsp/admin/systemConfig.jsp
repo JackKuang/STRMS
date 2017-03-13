@@ -84,7 +84,7 @@
 				</div>
 				<div class="modal-body">
 					<form class="form-horizontal">
-						<input type="hidden" id>
+						<input type="hidden" id="braName"/>
 						<div class="box-body">
 							<div class="form-group">
 								<label class="col-sm-2">分院名称</label>
@@ -119,6 +119,7 @@
 				</div>
 				<div class="modal-body">
 					<form class="form-horizontal">
+						<input type="hidden" id="braName"/>
 						<div class="box-body">
 							<div class="form-group">
 								<label class="col-sm-2">所属分院</label>
@@ -158,8 +159,9 @@
 	$("#modalBranchSave").click(function() {
 		$.ajax({
 			type : 'POST',
-			url : 'school!saveBranch.action',
+			url : 'branch!save.action',
 			data : {
+				braId:$("#braId").val(),
 				braName : $("#braName").val()
 			},
 			dataType : 'json',
@@ -170,7 +172,19 @@
 		$('#modalBranch').modal('hide');
 	});
 	$("#modalMajorSave").click(function() {
-		$('#modalMajor').modal('hide');
+		$.ajax({
+			type : 'POST',
+			url : 'major!save.action',
+			data : {
+				majId:$("#majId").val(),
+				majName : $("#majName").val()
+			},
+			dataType : 'json',
+			success : function(data, textStatus, jqXHR) {
+				console.log(data)
+			}
+		})
+		$('#modalBranch').modal('hide');
 	});
 	$("#addBranch").click(function() {
 		$('#modalBranch').modal('show');
@@ -178,5 +192,44 @@
 	$("#addMajor").click(function() {
 		$('#modalMajor').modal('show');
 	});
+	function deleteBranch(braId){
+		$.ajax({
+		    url:'branch!delete.action',
+		    type:'POST', //GET
+		    async:true,    //或false,是否异步
+		    data:{
+		    	braId:braId
+		    },
+		    dataType:'json',
+		    success:function(data,textStatus,jqXHR){
+		    	if(data.result=="success"){
+		    		//删除成功
+		    	}else{
+		    		//删除失败
+		    	}
+		    }
+		})
+	}
+	function deleteMajor(majId){
+		$.ajax({
+		    url:'major!delete.action',
+		    type:'POST', //GET
+		    async:true,    //或false,是否异步
+		    data:{
+		    	majId:majId
+		    },
+		    dataType:'json',
+		    success:function(data,textStatus,jqXHR){
+		    	if(data.result=="success"){
+		    		//删除成功
+		    	}else{
+		    		//删除失败
+		    	}
+		    }
+		})
+	}
+	$(function(){
+		
+	})
 </script>
 </html>
