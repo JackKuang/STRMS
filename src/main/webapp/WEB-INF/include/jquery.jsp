@@ -8,6 +8,7 @@
 
 <!-- jQuery 2.2.3 -->
 <script src="<%=basePath%>plugins/jQuery/jquery-2.2.3.min.js"></script>
+<script src="<%=basePath%>plugins/jQueryForm/jquery.form.js"></script>
 <!-- Bootstrap 3.3.6 -->
 <script src="<%=basePath%>bootstrap/js/bootstrap.min.js"></script>
 <!-- FastClick -->

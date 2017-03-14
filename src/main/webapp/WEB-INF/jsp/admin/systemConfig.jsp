@@ -18,26 +18,39 @@
 	</section>
 	<!-- Main content -->
 	<section class="content">
-		<div class="row">
-			<div class="col-md-3">
-				<table class="table table-bordered text-center">
-					<tr>
-						<td>
-							<button type="button" onclick="showBranch();"
-								class="btn btn-block btn-primary btn-lg">增加分院</button>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<button type="button" onclick="showMajor();"
-								class="btn btn-block btn-primary btn-lg">增加专业</button>
-						</td>
-					</tr>
-				</table>
-			</div>
-			<!-- /.col -->
-			<div class="col-md-3">
-				<s:iterator var="branch" value="branchList">
+		<div class="alert alert-danger alert-dismissible" hidden="true">
+			<button type="button" class="close" data-dismiss="alert"
+				aria-hidden="true">×</button>
+			<h4>
+				<i class="icon fa fa-ban"></i><span id="alertTitle"></span>
+			</h4>
+			<span id="alertContent"></span>
+		</div>
+		<div class="col-md-3">
+			<table class="table table-bordered text-center">
+				<tr>
+					<td>
+						<button type="button" onclick="showBranch();"
+							class="btn btn-block btn-primary btn-lg">增加分院</button>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<button type="button" onclick="showMajor();"
+							class="btn btn-block btn-primary btn-lg">增加专业</button>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<button type="button" onclick="showCollective();"
+							class="btn btn-block btn-primary btn-lg">增加班级</button>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<!-- /.col -->
+		<div class="col-md-3">
+			<%-- <s:iterator var="branch" value="branchList">
 					<div class="box box-success box-solid">
 						<div class="box-header with-border">
 							<h3 class="box-title">
@@ -70,13 +83,14 @@
 							</div>
 						</s:iterator>
 					</div>
-				</s:iterator>
-				<!-- /.col -->
-			</div>
-			<!-- /.row -->
+				</s:iterator> --%>
+			<div id="treeviewBranch"></div>
+			<!-- /.col -->
+		</div>
+		<!-- /.row -->
 	</section>
 	<!-- /.content -->
-	<div class="modal" id="modalBranch">
+	<div class="modal" id="branchModal">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -87,14 +101,15 @@
 					<h4 class="modal-title" id="branchTitle">新增分院</h4>
 				</div>
 				<div class="modal-body">
-					<form class="form-horizontal">
-						<input type="hidden" id="braId"/>
+					<form class="form-horizontal" id="branchForm"
+						action="branch!save.action">
+						<input type="hidden" id="branchId" name="branch.braId" />
 						<div class="box-body">
 							<div class="form-group">
 								<label class="col-sm-2">分院名称</label>
 								<div class="col-sm-10">
 									<input type="text" class="form-control" id="braName"
-										placeholder="分院名称">
+										name="branch.braName" placeholder="分院名称">
 								</div>
 							</div>
 							<!-- /.box-body -->
@@ -102,16 +117,16 @@
 					</form>
 				</div>
 				<div class="modal-footer">
-					<button type="button" id="modalBranchSave" class="btn btn-primary">保存</button>
-					<button type="button" id="modalBranchCancel"
-						class="btn btn-default" data-dismiss="modal">取消</button>
+					<button type="button" id="branchSave" class="btn btn-primary">保存</button>
+					<button type="button" id="branchCancel" class="btn btn-default"
+						data-dismiss="modal">取消</button>
 				</div>
 			</div>
 			<!-- /.modal-content -->
 		</div>
 		<!-- /.modal-dialog -->
 	</div>
-	<div class="modal" id="modalMajor">
+	<div class="modal" id="majorModal">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -122,23 +137,28 @@
 					<h4 class="modal-title" id="majorTitle">新增专业</h4>
 				</div>
 				<div class="modal-body">
-					<form class="form-horizontal">
-						<input type="hidden" id="braName" />
+					<form class="form-horizontal" id="majorForm"
+						action="major!save.action">
+						<input type="hidden" id="majorId" name="major.majId" />
 						<div class="box-body">
 							<div class="form-group">
 								<label class="col-sm-2">所属分院</label>
 								<div class="col-sm-10">
-									<select class="form-control" id="braSelect">
+									<select class="form-control" id="braSelect"
+										name="major.majBraId">
 										<s:iterator var="branch" value="branchList">
-											<option value="<s:property value="#branch.braId" />"><s:property value="#branch.braName" /></option>
+											<option value="<s:property value="#branch.braId" />"><s:property
+													value="#branch.braName" /></option>
 										</s:iterator>
 									</select>
 								</div>
+								<!-- FIXME -->
 							</div>
 							<div class="form-group">
 								<label class="col-sm-2">专业名称</label>
 								<div class="col-sm-10">
-									<input type="text" class="form-control" placeholder="专业名称" id="majName">
+									<input type="text" class="form-control" placeholder="专业名称"
+										id="majName" name="major.majName">
 								</div>
 							</div>
 							<!-- /.box-body -->
@@ -147,8 +167,70 @@
 
 				</div>
 				<div class="modal-footer">
-					<button type="button" id="modalMajorSave" class="btn btn-primary">保存</button>
-					<button type="button" id="modalMajorCancel" class="btn btn-default"
+					<button type="button" id="majorSave" class="btn btn-primary">保存</button>
+					<button type="button" id="majorCancel" class="btn btn-default"
+						data-dismiss="modal">取消</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<div class="modal" id="collectiveModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+					<h4 class="modal-title" id="collectiveTitle">新增班级</h4>
+				</div>
+				<div class="modal-body">
+					<form class="form-horizontal" action="collective!save.action">
+						<input type="hidden" id="collectiveId" name="collective.colId" />
+						<div class="box-body">
+							<div class="form-group">
+								<label class="col-sm-2">所属分院</label>
+								<div class="col-sm-10">
+									<select class="form-control" id="braSelect2">
+										<s:iterator var="branch" value="branchList">
+											<option value="<s:property value="#branch.braId" />"><s:property
+													value="#branch.braName" /></option>
+										</s:iterator>
+									</select>
+								</div>
+								<label class="col-sm-2">专业名称</label>
+								<div class="col-sm-10">
+									<select class="form-control" id="majSelect"
+										name="collective.colMajId">
+										<option>2013</option>
+										<option>2014</option>
+										<option>2015</option>
+										<option>2016</option>
+										<option>2017</option>
+									</select>
+								</div>
+								<label class="col-sm-2">班级名称</label>
+								<div class="col-sm-10">
+									<select class="form-control" id="majSelect"
+										name="collective.colMajId">
+										<option>2013</option>
+										<option>2014</option>
+										<option>2015</option>
+										<option>2016</option>
+										<option>2017</option>
+									</select>
+								</div>
+							</div>
+							<!-- /.box-body -->
+						</div>
+					</form>
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" id="collectiveSave" class="btn btn-primary">保存</button>
+					<button type="button" id="collectiveCancel" class="btn btn-default"
 						data-dismiss="modal">取消</button>
 				</div>
 			</div>
@@ -158,98 +240,133 @@
 	</div>
 </body>
 <script type="text/javascript">
-	$("#modalBranchSave").click(function() {
-		$.ajax({
-			type : 'POST',
-			url : 'branch!save.action',
-			data : {
-				'branch.braId' : $("#braId").val(),
-				'branch.braName' : $("#braName").val()
-			},
-			dataType : 'json',
-			success : function(data, textStatus, jqXHR) {
-				console.log(data)
+	$("#branchSave").click(function() {
+		$("#branchForm").ajaxSubmit(function(data) {
+			alertInfo("info","提示","操作成功");
+			reloadTree();
+		})
+		$('#branchModal').modal('hide');
+	});
+
+	$("#majorSave").click(function() {
+		$("#majorForm").ajaxSubmit(function(data) {
+			if(testData(data)){
+				alertInfo("info","提示","操作成功");
 			}
 		})
-		$('#modalBranch').modal('hide');
+		$('#majorModal').modal('hide');
 	});
-	
-	$("#modalMajorSave").click(function() {
-		$.ajax({
-			type : 'POST',
-			url : 'major!save.action',
-			data : {
-				'major.majBraId' : $("#braSelect").val(),
-				'major.majId' : $("#majId").val(),
-				'major.majName' : $("#majName").val()
-			},
-			dataType : 'json',
-			success : function(data, textStatus, jqXHR) {
-				console.log(data)
-			}
+
+	$("#collectiveSave").click(function() {
+		$("#collectiveForm").ajaxSubmit(function(data) {
+			alert(data.result);
 		})
-		$('#modalBranch').modal('hide');
+		$('#collectiveModel').modal('hide');
 	});
-	
-	
-	function showBranch(braId){
-		if(braId!=null){
+
+	function showBranch(braId) {
+		if (braId != null) {
 			$("#braId").val(braId);
 			$("#branchTitle").html("修改分院");
-		}else{
+		} else {
 			$("#branchTitle").html("新增分院");
 		}
-		$('#modalBranch').modal('show');
+		$('#branchModal').modal('show');
 	}
-	
-	function showMajor(majId){
-		if(majId!=null){
+
+	function showMajor(majId) {
+		if (majId != null) {
 			$("#majId").val(majId);
-			$("#majTitle").html("修改分院");
-		}else{
-			$("#majTitle").html("新增分院");
+			$("#majorTitle").html("修改分院");
+		} else {
+			$("#majorTitle").html("新增分院");
 		}
-		$('#modalMajor').modal('show');
+		$('#majorModal').modal('show');
 	}
-	
-	function deleteBranch(braId){
+
+	function showCollective(colId) {
+		if (colId != null) {
+			$("#colId").val(colId);
+			$("#collectiveTitle").html("新增班级");
+		} else {
+			$("#collectiveTitle").html("新增班级");
+		}
+		$('#collectiveModal').modal('show');
+	}
+
+	function deleteBranch(braId) {
 		$.ajax({
-		    url:'branch!delete.action',
-		    type:'POST', //GET
-		    async:true,    //或false,是否异步
-		    data:{
-		    	'branch.braId':braId
-		    },
-		    dataType:'json',
-		    success:function(data,textStatus,jqXHR){
-		    	if(data.result=="success"){
-		    		//删除成功
-		    	}else{
-		    		//删除失败
-		    	}
-		    }
+			url : 'branch!delete.action',
+			type : 'POST', //GET
+			async : true, //或false,是否异步
+			data : {
+				'branch.braId' : braId
+			},
+			dataType : 'json',
+			success : function(data, textStatus, jqXHR) {
+				if (data.result == "success") {
+					//删除成功
+				} else {
+					//删除失败
+				}
+			}
 		})
 	}
-	function deleteMajor(majId){
+
+	function deleteMajor(majId) {
 		$.ajax({
-		    url:'major!delete.action',
-		    type:'POST', //GET
-		    async:true,    //或false,是否异步
-		    data:{
-		    	'major.majId':majId
-		    },
-		    dataType:'json',
-		    success:function(data,textStatus,jqXHR){
-		    	if(data.result=="success"){
-		    		//删除成功
-		    	}else{
-		    		//删除失败
-		    	}
-		    }
+			url : 'major!delete.action',
+			type : 'POST', //GET
+			async : true, //或false,是否异步
+			data : {
+				'major.majId' : majId
+			},
+			dataType : 'json',
+			success : function(data, textStatus, jqXHR) {
+				if (data.result == "success") {
+					//删除成功
+				} else {
+					//删除失败
+				}
+			}
 		})
 	}
-	$(function(){
-		
+
+	function deleteCollective(colId) {
+		$.ajax({
+			url : 'collective!delete.action',
+			type : 'POST', //GET
+			async : true, //或false,是否异步
+			data : {
+				'collective.colId' : colId
+			},
+			dataType : 'json',
+			success : function(data, textStatus, jqXHR) {
+				if (data.result == "success") {
+					//删除成功
+				} else {
+					//删除失败
+				}
+			}
+		})
+	}
+
+	$(function() {
+		reloadTree();
+		alertInfo("info","","")
 	})
+	function reloadTree(){
+		$.ajax({
+			url : 'school!listAll.action',
+			type : 'POST', //GET
+			async : true, //或false,是否异步
+			dataType : 'json',
+			success : function(data, textStatus, jqXHR) {
+				var $tree = $('#treeviewBranch').treeview({
+					data : data.result
+				})
+			}
+		})
+	}
 </script>
 </html>

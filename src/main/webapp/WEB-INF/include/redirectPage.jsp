@@ -6,15 +6,25 @@
 			+ path + "/";
 %>
 <script type="text/javascript">
+	var url;
 	function redirectPage(flag) {
-		var url = "${sessionScope.userType }!redirectPage.action?flag="+flag;
+		url = "${sessionScope.userType }!redirectPage.action?flag="+flag;
 		$("#main").load(url);
 	}
-	
 	function testData(data){
-		if(data.result=="01"){
-			
+		if(data.result=="success"){
+			return true;
+		}else if(data.result=="01"){
+			return false;
+		}else{
+			return false
 		}
+	}
+	function alertInfo(type,title,content){
+		$("#alertTitle").html(title);
+		$("#alertContent").html(content);
+		$("#alertInfo").addClass("alert-"+type);
+		$("#alertInfo").show();
 	}
 	
 </script>
