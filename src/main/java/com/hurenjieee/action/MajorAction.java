@@ -35,4 +35,14 @@ public class MajorAction extends BaseAction<Major, Long> {
         return major == null ? new Major() : major;
     }
 
+    
+    public Major getMajor(){
+        return major;
+    }
+
+    
+    public void setMajor(Major major){
+        this.major = major;
+    }
+
 }
