@@ -19,3 +19,4 @@
 <script src="<%=basePath%>dist/js/demo.js"></script>
 <!-- bootstrap-jquery-plugin插件	 -->
 <script src="<%=basePath%>plugins/bootstrap-treeview/bootstrap-treeview.min.js"></script>
+<script src="<%=basePath%>plugins/toastr/toastr.min.js"></script>

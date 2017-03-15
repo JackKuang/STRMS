@@ -19,11 +19,11 @@
 			return false
 		}
 	}
-	function alertInfo(type,title,content){
+	/* function alertInfo(type,title,content){
 		$("#alertTitle").html(title);
 		$("#alertContent").html(content);
 		$("#alertInfo").addClass("alert-"+type);
 		$("#alertInfo").show();
-	}
+	} */
 		
 </script>

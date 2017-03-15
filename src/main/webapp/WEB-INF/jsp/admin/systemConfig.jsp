@@ -18,14 +18,14 @@
 	</section>
 	<!-- Main content -->
 	<section class="content">
-		<div class="alert alert-danger alert-dismissible" hidden="true">
+		<%-- <div class="alert alert-danger alert-dismissible" hidden="true" id="alertInfo">
 			<button type="button" class="close" data-dismiss="alert"
 				aria-hidden="true">×</button>
 			<h4>
 				<i class="icon fa fa-ban"></i><span id="alertTitle"></span>
 			</h4>
 			<span id="alertContent"></span>
-		</div>
+		</div> --%>
 		<div class="col-md-3">
 			<table class="table table-bordered text-center">
 				<tr>
@@ -209,7 +209,6 @@
 	$("#branchSave").click(function() {
 		$("#branchForm").ajaxSubmit(function(data) {
 			if(testData(data)){
-				alertInfo("info","提示","操作成功");
 				reloadTree();
 				($("#branchForm"))[0].reset();
 			}
@@ -220,7 +219,7 @@
 	$("#majorSave").click(function() {
 		$("#majorForm").ajaxSubmit(function(data) {
 			if(testData(data)){
-				alertInfo("info","提示","操作成功");
+				
 			}
 		})
 		$('#majorModal').modal('hide');
@@ -232,6 +231,7 @@
 		})
 		$('#collectiveModel').modal('hide');
 	});
+	
 
 	function showBranch(braId) {
 		if (braId != null) {
@@ -263,6 +263,7 @@
 		$('#collectiveModal').modal('show');
 	}
 
+	
 	function deleteBranch(braId) {
 		$.ajax({
 			url : 'branch!delete.action',
@@ -320,9 +321,12 @@
 		})
 	}
 
+	
 	$(function() {
 		reloadTree();
+		toastr.warning('My name is Inigo Montoya. You killed my father, prepare to die!')
 	})
+	
 	function reloadTree(){
 		$.ajax({
 			url : 'school!listAll.action',
