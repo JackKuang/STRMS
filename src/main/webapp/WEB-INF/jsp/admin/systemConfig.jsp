@@ -50,40 +50,6 @@
 		</div>
 		<!-- /.col -->
 		<div class="col-md-3">
-			<%-- <s:iterator var="branch" value="branchList">
-					<div class="box box-success box-solid">
-						<div class="box-header with-border">
-							<h3 class="box-title">
-								<s:property value="#branch.braName" />
-							</h3>
-							<div class="box-tools pull-right">
-								<button type="button" class="btn btn-box-tool"
-									data-widget="collapse">
-									<i class="fa fa-minus"></i>
-								</button>
-								<button type="button" class="btn btn-box-tool"
-									onclick="showBranch(<s:property value="#branch.braId" />)">
-									<i class="fa fa-edit"></i>
-								</button>
-								<button type="button" class="btn btn-box-tool"
-									onclick="deleteBranch(<s:property value="#branch.braId" />)">
-									<i class="fa fa-close"></i>
-								</button>
-							</div>
-						</div>
-						<s:iterator var="major" value="#branch.majors">
-							<div class="box-body">
-								<s:property value="#major.majName" />
-								&nbsp;&nbsp;&nbsp;
-								<button type="button" class="btn btn-default btn-sm"
-									onclick="showMajor(<s:property value="#major.majId" />)">修改</button>
-								&nbsp;&nbsp;&nbsp;
-								<button type="button" class="btn btn-default btn-sm"
-									onclick="deleteMajor(<s:property value="#major.majId" />)">删除</button>
-							</div>
-						</s:iterator>
-					</div>
-				</s:iterator> --%>
 			<div id="treeviewBranch"></div>
 			<!-- /.col -->
 		</div>
@@ -242,8 +208,11 @@
 <script type="text/javascript">
 	$("#branchSave").click(function() {
 		$("#branchForm").ajaxSubmit(function(data) {
-			alertInfo("info","提示","操作成功");
-			reloadTree();
+			if(testData(data)){
+				alertInfo("info","提示","操作成功");
+				reloadTree();
+				($("#branchForm"))[0].reset();
+			}
 		})
 		$('#branchModal').modal('hide');
 	});
@@ -353,7 +322,6 @@
 
 	$(function() {
 		reloadTree();
-		alertInfo("info","","")
 	})
 	function reloadTree(){
 		$.ajax({
@@ -368,5 +336,6 @@
 			}
 		})
 	}
+	
 </script>
 </html>

@@ -6,9 +6,8 @@
 			+ path + "/";
 %>
 <script type="text/javascript">
-	var url;
 	function redirectPage(flag) {
-		url = "${sessionScope.userType }!redirectPage.action?flag="+flag;
+		var url = "${sessionScope.userType }!redirectPage.action?flag="+flag;
 		$("#main").load(url);
 	}
 	function testData(data){
@@ -26,5 +25,5 @@
 		$("#alertInfo").addClass("alert-"+type);
 		$("#alertInfo").show();
 	}
-	
+		
 </script>
