@@ -2,15 +2,14 @@ package com.hurenjieee.util;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.security.spec.PKCS8EncodedKeySpec;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.poi.ss.formula.functions.T;
 import org.apache.struts2.interceptor.ApplicationAware;
 import org.apache.struts2.interceptor.CookiesAware;
 import org.apache.struts2.interceptor.ServletRequestAware;
@@ -18,7 +17,6 @@ import org.apache.struts2.interceptor.ServletResponseAware;
 import org.apache.struts2.interceptor.SessionAware;
 import org.springframework.web.context.ServletContextAware;
 
-import com.hurenjieee.entity.Branch;
 import com.hurenjieee.service.BaseService;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -147,7 +145,7 @@ public abstract class BaseAction<T, ID extends Serializable> extends ActionSuppo
     }
 
     public Map<String, Object> getResultMap(){
-        return resultMap;
+        return  resultMap==null?new HashMap<String, Object>():resultMap;
     }
 
     
@@ -181,7 +179,7 @@ public abstract class BaseAction<T, ID extends Serializable> extends ActionSuppo
     
     public String save(){
         try {
-            resultMap = new HashMap<String,Object>();
+        	getResultMap();
             getService().saveOrUpdate(getObject());
             resultMap.put("result","success");
         } catch (Exception e) {
@@ -194,7 +192,7 @@ public abstract class BaseAction<T, ID extends Serializable> extends ActionSuppo
 
     public String update(){
         try {
-            resultMap = new HashMap<String,Object>();
+        	getResultMap();
             getService().update(getObject());
             resultMap.put("result","success");
         } catch (Exception e) {
@@ -207,7 +205,7 @@ public abstract class BaseAction<T, ID extends Serializable> extends ActionSuppo
     
     public String delete(){
         try {
-            resultMap = new HashMap<String,Object>();
+        	getResultMap();
             getService().delete(getObject());
             resultMap.put("result","success");
         } catch (Exception e) {
@@ -220,6 +218,7 @@ public abstract class BaseAction<T, ID extends Serializable> extends ActionSuppo
     
     public String list(){
         try {
+        	getResultMap();
             List<T> list = getService().getList();
             resultMap.put("result","success");
             resultMap.put("list",list);

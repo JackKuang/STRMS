@@ -1,10 +1,13 @@
 package com.hurenjieee.action;
 
+import java.util.List;
+
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.EnableLoadTimeWeaving;
 import org.springframework.context.annotation.Scope;
 
 import com.hurenjieee.entity.Major;
@@ -43,6 +46,19 @@ public class MajorAction extends BaseAction<Major, Long> {
     
     public void setMajor(Major major){
         this.major = major;
+    }
+    
+    public String listByMajBraId(){
+    	try {
+    		getResultMap();
+    		List<Major> list = majorService.listByMajBraId(major);
+    		getResultMap().put("result", "success");
+    		getResultMap().put("content", list);
+		} catch (Exception e) {
+			e.printStackTrace();
+			// TODO: handle exception
+		}
+    	return "json";
     }
 
 }

@@ -117,7 +117,8 @@ public class SchoolAction extends ActionSupport {
                 node.setNodes(listNode2);
                 listNode.add(node);
             }
-            resultMap.put("result",listNode);
+            resultMap.put("result","succeess");
+            resultMap.put("content",listNode);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -161,7 +161,9 @@
 								<div class="col-sm-10">
 									<select class="form-control" id="braSelect2">
 										<s:iterator var="branch" value="branchList">
-											<option value="<s:property value="#branch.braId" />"><s:property
+											<option value="<s:property value="#branch.braId" />"
+											onclick="loadMajor(<s:property value="#branch.braId" />)"
+											><s:property
 													value="#branch.braName" /></option>
 										</s:iterator>
 									</select>
@@ -170,23 +172,12 @@
 								<div class="col-sm-10">
 									<select class="form-control" id="majSelect"
 										name="collective.colMajId">
-										<option>2013</option>
-										<option>2014</option>
-										<option>2015</option>
-										<option>2016</option>
-										<option>2017</option>
 									</select>
 								</div>
 								<label class="col-sm-2">班级名称</label>
 								<div class="col-sm-10">
-									<select class="form-control" id="majSelect"
-										name="collective.colMajId">
-										<option>2013</option>
-										<option>2014</option>
-										<option>2015</option>
-										<option>2016</option>
-										<option>2017</option>
-									</select>
+									<input type="text" class="form-control" placeholder="班级名称"
+										id="colName" name="collective.colName">
 								</div>
 							</div>
 							<!-- /.box-body -->
@@ -219,7 +210,8 @@
 	$("#majorSave").click(function() {
 		$("#majorForm").ajaxSubmit(function(data) {
 			if(testData(data)){
-				
+				reloadTree();
+				($("#branchForm"))[0].reset();
 			}
 		})
 		$('#majorModal').modal('hide');
@@ -227,7 +219,6 @@
 
 	$("#collectiveSave").click(function() {
 		$("#collectiveForm").ajaxSubmit(function(data) {
-			alert(data.result);
 		})
 		$('#collectiveModel').modal('hide');
 	});
@@ -337,6 +328,26 @@
 				var $tree = $('#treeviewBranch').treeview({
 					data : data.result
 				})
+			}
+		})
+	}
+	function loadMajor(majBraId){
+		$.ajax({
+			url : 'major!listBymajBraId.action',
+			type : 'POST', //GET
+			async : true, //或false,是否异步
+			dataType : 'json',
+			data : {
+				'major.majBraId' : majBraId
+			},
+			success : function(data, textStatus, jqXHR) {
+				if(testData(data)){
+					$("#majSelect").empty();
+					for(var i=0;i<data.content.length;i++){
+					   var option = $("<option>").val(data.content[i].majId).text(data.content[i].majName);
+					   $("#majSelect").append(option);
+					}
+				}
 			}
 		})
 	}
