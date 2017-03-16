@@ -8,27 +8,28 @@ import org.springframework.context.annotation.Scope;
 
 import com.opensymphony.xwork2.ActionSupport;
 
-//这里的类都做action跳转
+// 这里的类都做action跳转
 @ParentPackage(value = "all") // 应用全局包
 @Scope("prototype")
 @Namespace(value = "/teacher")
-@Action(results = { @Result(name = "index", location = "/WEB-INF/jsp/teacher/index.jsp") })
+@Action(results = { @Result(name = "index",location = "/WEB-INF/jsp/teacher/index.jsp") })
 public class StudentAction extends ActionSupport {
-	String flag;
 
-	public String index() {
-		return "index";
-	}
+    String flag;
 
-	public String getFlag() {
-		return flag;
-	}
+    public String index(){
+        return "index";
+    }
 
-	public void setFlag(String flag) {
-		this.flag = flag;
-	}
+    public String getFlag(){
+        return flag;
+    }
 
-	public String redirectPage() {
-		return flag;
-	}
+    public void setFlag(String flag){
+        this.flag = flag;
+    }
+
+    public String redirectPage(){
+        return flag;
+    }
 }

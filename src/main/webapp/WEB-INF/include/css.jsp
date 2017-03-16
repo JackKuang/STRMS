@@ -25,3 +25,6 @@
 	href="<%=basePath%>dist/css/skins/_all-skins.min.css">
 <link rel="stylesheet"
 	href="<%=basePath%>plugins/toastr/toastr.min.css">
+	
+<link rel="stylesheet"
+	href="<%=basePath%>plugins/bootstrap-select/bootstrap-select.min.css">

@@ -30,12 +30,12 @@ public abstract class BaseAction<T, ID extends Serializable> extends ActionSuppo
     // ------------------BaseService 和 Object 作为基本类-------------------------
     public BaseService<T, ID> service;
 
-    public T object;
+    public T                  object;
 
     public abstract BaseService<T, ID> getService();
 
     public abstract T getObject();
-    
+
     private Map<String, Object> resultMap;
 
     // ------------------BaseService 和 Object 作为基本类-------------------------
@@ -55,7 +55,7 @@ public abstract class BaseAction<T, ID extends Serializable> extends ActionSuppo
     // cookie存在客户端中，银盘持久化
     private Map<String, String> cookieMap;
 
-    private ServletContext servletContext;
+    private ServletContext      servletContext;
 
     @Override
     public void setApplication(Map<String, Object> application){
@@ -116,9 +116,9 @@ public abstract class BaseAction<T, ID extends Serializable> extends ActionSuppo
     // -----------------------通用访问参数---------------------------
     private Map<String, Integer> intMap;
 
-    private Map<String, String> strMap;
+    private Map<String, String>  strMap;
 
-    private Map<String, Double> douMap;
+    private Map<String, Double>  douMap;
 
     public Map<String, Integer> getIntMap(){
         return intMap;
@@ -145,10 +145,9 @@ public abstract class BaseAction<T, ID extends Serializable> extends ActionSuppo
     }
 
     public Map<String, Object> getResultMap(){
-        return  resultMap==null?new HashMap<String, Object>():resultMap;
+        return resultMap==null?new HashMap<String, Object>():resultMap;
     }
 
-    
     public void setResultMap(Map<String, Object> resultMap){
         this.resultMap = resultMap;
     }
@@ -176,10 +175,10 @@ public abstract class BaseAction<T, ID extends Serializable> extends ActionSuppo
             e.printStackTrace();
         }
     }
-    
+
     public String save(){
         try {
-        	getResultMap();
+            resultMap = new HashMap<String, Object>();
             getService().saveOrUpdate(getObject());
             resultMap.put("result","success");
         } catch (Exception e) {
@@ -192,7 +191,7 @@ public abstract class BaseAction<T, ID extends Serializable> extends ActionSuppo
 
     public String update(){
         try {
-        	getResultMap();
+            resultMap = new HashMap<String, Object>();
             getService().update(getObject());
             resultMap.put("result","success");
         } catch (Exception e) {
@@ -202,10 +201,10 @@ public abstract class BaseAction<T, ID extends Serializable> extends ActionSuppo
         }
         return "json";
     }
-    
+
     public String delete(){
         try {
-        	getResultMap();
+            resultMap = new HashMap<String, Object>();
             getService().delete(getObject());
             resultMap.put("result","success");
         } catch (Exception e) {
@@ -215,13 +214,13 @@ public abstract class BaseAction<T, ID extends Serializable> extends ActionSuppo
         }
         return "json";
     }
-    
+
     public String list(){
         try {
-        	getResultMap();
+            resultMap = new HashMap<String, Object>();
             List<T> list = getService().getList();
             resultMap.put("result","success");
-            resultMap.put("list",list);
+            resultMap.put("content",list);
         } catch (Exception e) {
             e.printStackTrace();
             resultMap.put("result","fail");
@@ -229,6 +228,6 @@ public abstract class BaseAction<T, ID extends Serializable> extends ActionSuppo
         }
         return "json";
     }
-    
+
     // --------------通用方法----------------
 }

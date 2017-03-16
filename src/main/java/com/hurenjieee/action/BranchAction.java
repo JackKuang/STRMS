@@ -1,7 +1,5 @@
 package com.hurenjieee.action;
 
-import java.security.KeyStore.PrivateKeyEntry;
-import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.struts2.convention.annotation.Action;
@@ -19,7 +17,8 @@ import com.hurenjieee.util.BaseAction;
 @ParentPackage(value = "json") // 应用全局包
 @Scope("prototype")
 @Namespace(value = "/admin")
-@Action(results = { @Result(name = "json",type = "json",params = { "root", "resultMap" }) })
+@Action(results = { @Result(name = "json",type = "json",params = { "root", "resultMap" }) ,
+        @Result(name = "jsonSon",type = "json",params = { "root", "resultMapSon" }) })
 public class BranchAction extends BaseAction<Branch, Long> {
 
     @Autowired
@@ -27,6 +26,8 @@ public class BranchAction extends BaseAction<Branch, Long> {
 
     Branch branch;
 
+    Map<String, Object> resultMapSon;
+    
     @Override
     public BaseService<Branch, Long> getService(){
         // TODO Auto-generated method stub
@@ -47,6 +48,16 @@ public class BranchAction extends BaseAction<Branch, Long> {
     
     public void setBranch(Branch branch){
         this.branch = branch;
+    }
+
+    
+    public Map<String, Object> getResultMapSon(){
+        return resultMapSon;
+    }
+
+    
+    public void setResultMapSon(Map<String, Object> resultMapSon){
+        this.resultMapSon = resultMapSon;
     }
     
 }

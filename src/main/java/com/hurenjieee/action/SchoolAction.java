@@ -104,9 +104,11 @@ public class SchoolAction extends ActionSupport {
                         // 不存在则新增加
                         if (has == false) {
                             Node node3 = new Node();
+                            node3.setNodes(new ArrayList<Node>());
                             Node node4 = new Node();
                             node4.setText(collective.getColName());
                             node3.getNodes().add(node4);
+                            node3.setText(collective.getColYear()+"");
                             listNode3.add(node3);
                         }
                     }

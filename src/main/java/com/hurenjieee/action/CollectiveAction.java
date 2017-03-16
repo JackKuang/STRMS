@@ -1,5 +1,7 @@
 package com.hurenjieee.action;
 
+import java.util.Map;
+
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
@@ -15,13 +17,17 @@ import com.hurenjieee.util.BaseAction;
 @ParentPackage(value = "json") // 应用全局包
 @Scope("prototype")
 @Namespace(value = "/admin")
-@Action(results = { @Result(name = "json",type = "json",params = { "root", "resultMap" }) })
+@Action(results = { @Result(name = "json",type = "json",params = { "root", "resultMap" }) ,
+        @Result(name = "jsonSon",type = "json",params = { "root", "resultMapSon" }) })
 public class CollectiveAction extends BaseAction<Collective, Long> {
 
     @Autowired
     CollectiveService collectiveService;
 
     Collective collective;
+    
+    Map<String, Object> resultMapSon;
+    
 
     @Override
     public BaseService<Collective, Long> getService(){
@@ -34,5 +40,26 @@ public class CollectiveAction extends BaseAction<Collective, Long> {
         // TODO Auto-generated method stub
         return collective == null ? new Collective() : collective;
     }
+
+    
+    public Collective getCollective(){
+        return collective;
+    }
+
+    
+    public void setCollective(Collective collective){
+        this.collective = collective;
+    }
+
+    
+    public Map<String, Object> getResultMapSon(){
+        return resultMapSon;
+    }
+
+    
+    public void setResultMapSon(Map<String, Object> resultMapSon){
+        this.resultMapSon = resultMapSon;
+    }
+
 
 }

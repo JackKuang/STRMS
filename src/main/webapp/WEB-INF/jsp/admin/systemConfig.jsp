@@ -18,14 +18,6 @@
 	</section>
 	<!-- Main content -->
 	<section class="content">
-		<%-- <div class="alert alert-danger alert-dismissible" hidden="true" id="alertInfo">
-			<button type="button" class="close" data-dismiss="alert"
-				aria-hidden="true">×</button>
-			<h4>
-				<i class="icon fa fa-ban"></i><span id="alertTitle"></span>
-			</h4>
-			<span id="alertContent"></span>
-		</div> --%>
 		<div class="col-md-3">
 			<table class="table table-bordered text-center">
 				<tr>
@@ -118,7 +110,6 @@
 										</s:iterator>
 									</select>
 								</div>
-								<!-- FIXME -->
 							</div>
 							<div class="form-group">
 								<label class="col-sm-2">专业名称</label>
@@ -127,7 +118,6 @@
 										id="majName" name="major.majName">
 								</div>
 							</div>
-							<!-- /.box-body -->
 						</div>
 					</form>
 
@@ -138,9 +128,7 @@
 						data-dismiss="modal">取消</button>
 				</div>
 			</div>
-			<!-- /.modal-content -->
 		</div>
-		<!-- /.modal-dialog -->
 	</div>
 	<div class="modal" id="collectiveModal">
 		<div class="modal-dialog">
@@ -153,7 +141,7 @@
 					<h4 class="modal-title" id="collectiveTitle">新增班级</h4>
 				</div>
 				<div class="modal-body">
-					<form class="form-horizontal" action="collective!save.action">
+					<form class="form-horizontal" action="collective!save.action" id="collectiveForm">
 						<input type="hidden" id="collectiveId" name="collective.colId" />
 						<div class="box-body">
 							<div class="form-group">
@@ -162,7 +150,6 @@
 									<select class="form-control" id="braSelect2">
 										<s:iterator var="branch" value="branchList">
 											<option value="<s:property value="#branch.braId" />"
-											onclick="loadMajor(<s:property value="#branch.braId" />)"
 											><s:property
 													value="#branch.braName" /></option>
 										</s:iterator>
@@ -174,13 +161,22 @@
 										name="collective.colMajId">
 									</select>
 								</div>
+								<label class="col-sm-2">入学时间</label>
+								<div class="col-sm-10">
+									<select class="form-control" name="collective.colYear">
+										<option>2013</option>
+										<option>2014</option>
+										<option>2015</option>
+										<option>2016</option>
+										<option>2017</option>
+									</select>
+								</div>
 								<label class="col-sm-2">班级名称</label>
 								<div class="col-sm-10">
 									<input type="text" class="form-control" placeholder="班级名称"
 										id="colName" name="collective.colName">
 								</div>
 							</div>
-							<!-- /.box-body -->
 						</div>
 					</form>
 
@@ -191,9 +187,7 @@
 						data-dismiss="modal">取消</button>
 				</div>
 			</div>
-			<!-- /.modal-content -->
 		</div>
-		<!-- /.modal-dialog -->
 	</div>
 </body>
 <script type="text/javascript">
@@ -219,6 +213,10 @@
 
 	$("#collectiveSave").click(function() {
 		$("#collectiveForm").ajaxSubmit(function(data) {
+			if(testData(data)){
+				reloadTree();
+				($("#collectiveForm"))[0].reset();
+			}
 		})
 		$('#collectiveModel').modal('hide');
 	});
@@ -315,7 +313,6 @@
 	
 	$(function() {
 		reloadTree();
-		toastr.warning('My name is Inigo Montoya. You killed my father, prepare to die!')
 	})
 	
 	function reloadTree(){
@@ -326,14 +323,15 @@
 			dataType : 'json',
 			success : function(data, textStatus, jqXHR) {
 				var $tree = $('#treeviewBranch').treeview({
-					data : data.result
+					data : data.content
 				})
 			}
 		})
 	}
-	function loadMajor(majBraId){
-		$.ajax({
-			url : 'major!listBymajBraId.action',
+	$('#braSelect2').change(function(){
+	    var majBraId=$('#braSelect2').val();
+	    $.ajax({
+			url : 'major!listByMajBraId.action',
 			type : 'POST', //GET
 			async : true, //或false,是否异步
 			dataType : 'json',
@@ -350,7 +348,7 @@
 				}
 			}
 		})
-	}
+	});
 	
 </script>
 </html>
