@@ -8,6 +8,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hurenjieee.entity.Branch;
 import com.hurenjieee.entity.Major;
 import com.hurenjieee.util.BaseDao;
 
@@ -24,5 +25,9 @@ public class MajorService extends BaseService<Major, Long> {
     
     public List<Major> listByMajBraId(Major major){
     	    return getDao().getListByHQL("from Major m where m.majBraId = ?", major.getMajBraId());
+    }
+    
+    public Major selectByMajId(Major major){
+        return getDao().getByHQL("from Major m where m.majId = ?", major.getMajId());
     }
 }

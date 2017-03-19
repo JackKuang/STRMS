@@ -19,17 +19,17 @@ import javax.persistence.Table;
 @Table(name = "branch",catalog = "strms")
 public class Branch implements java.io.Serializable {
 
-    private int    braId;
+    private long    braId;
     private String braName;
     private Set<Major> majors;
 
     public Branch() {}
 
-    public Branch(int braId) {
+    public Branch(long braId) {
         this.braId = braId;
     }
 
-    public Branch(int braId, String braName) {
+    public Branch(long braId, String braName) {
         this.braId = braId;
         this.braName = braName;
     }
@@ -37,11 +37,11 @@ public class Branch implements java.io.Serializable {
     @Id
 
     @Column(name = "bra_id",unique = true,nullable = false)
-    public int getBraId(){
+    public long getBraId(){
         return this.braId;
     }
 
-    public void setBraId(int braId){
+    public void setBraId(long braId){
         this.braId = braId;
     }
 
@@ -54,7 +54,7 @@ public class Branch implements java.io.Serializable {
         this.braName = braName;
     }
 
-    @OneToMany(cascade=CascadeType.ALL,mappedBy="majBraId")   
+    @OneToMany(cascade=CascadeType.ALL,mappedBy="majBraId")
     //@OneToMany(cascade=CascadeType.ALL,mappedBy="clazz",fetch=FetchType.EAGER) πÿ±’—”≥Ÿº”‘ÿ°£ 
     public Set<Major> getMajors(){
         return majors;

@@ -20,7 +20,7 @@ public class BranchService extends BaseService<Branch, Long> {
         setDao(dao);
     }
     
-    public Branch selectByBraName(String braName){
-        return getDao().getByHQL("from Branch b where b.braName = ?",braName);
+    public Branch selectByBraId(Branch branch){
+        return getDao().getByHQL("from Branch b where b.braId = ?",branch.getBraId());
     }
 }

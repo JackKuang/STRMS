@@ -11,6 +11,7 @@ import org.apache.struts2.convention.annotation.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 
+import com.hurenjieee.entity.Branch;
 import com.hurenjieee.entity.Major;
 import com.hurenjieee.service.BaseService;
 import com.hurenjieee.service.MajorService;
@@ -69,6 +70,20 @@ public class MajorAction extends BaseAction<Major, Long> {
         } catch (Exception e) {
             e.printStackTrace();
             resultMapSon.put("result","failed");
+        }
+        return "jsonSon";
+    }
+    
+    public String getById(){
+        try {
+            resultMapSon = new HashMap<String, Object>();
+            Major major2 = majorService.selectByMajId(major);
+            resultMapSon.put("result","success");
+            resultMapSon.put("content",major2);
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultMapSon.put("result","fail");
+            resultMapSon.put("reason","Î´Öª´íÎó£¡");
         }
         return "jsonSon";
     }

@@ -1,5 +1,6 @@
 package com.hurenjieee.action;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.struts2.convention.annotation.Action;
@@ -58,6 +59,20 @@ public class BranchAction extends BaseAction<Branch, Long> {
     
     public void setResultMapSon(Map<String, Object> resultMapSon){
         this.resultMapSon = resultMapSon;
+    }
+        
+    public String getById(){
+        try {
+            resultMapSon = new HashMap<String, Object>();
+            Branch branch2 = branchService.selectByBraId(branch);
+            resultMapSon.put("result","success");
+            resultMapSon.put("content",branch2);
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultMapSon.put("result","fail");
+            resultMapSon.put("reason","Î´Öª´íÎó£¡");
+        }
+        return "jsonSon";
     }
     
 }

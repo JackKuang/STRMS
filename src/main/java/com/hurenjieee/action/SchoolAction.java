@@ -83,10 +83,12 @@ public class SchoolAction extends ActionSupport {
             for ( Branch branch : branchs ) {
                 Node node = new Node();
                 node.setText(branch.getBraName());
+                node.setId(branch.getBraId());
                 List<Node> listNode2 = new ArrayList<Node>();
                 for ( Major major : branch.getMajors() ) {
                     Node node2 = new Node();
                     node2.setText(major.getMajName());
+                    node2.setId(major.getMajId());
                     // 获取到该分院下的所有班级
                     List<Collective> collectives = collectiveService.selectListByMajId(major.getMajId());
                     List<Node> listNode3 = new ArrayList<Node>();
@@ -94,9 +96,10 @@ public class SchoolAction extends ActionSupport {
                         boolean has = false;
                         // 循环node判断是否有存在
                         for ( Node node3 : listNode3 ) {
-                            if (node3.getText().equals(collective.getColYear())) {
+                            if (node3.getText().equals(""+collective.getColYear())) {
                                 Node node4 = new Node();
                                 node4.setText(collective.getColName());
+                                node4.setId(collective.getColId());
                                 node3.getNodes().add(node4);
                                 has = true;
                             }
@@ -107,6 +110,7 @@ public class SchoolAction extends ActionSupport {
                             node3.setNodes(new ArrayList<Node>());
                             Node node4 = new Node();
                             node4.setText(collective.getColName());
+                            node4.setId(collective.getColId());
                             node3.getNodes().add(node4);
                             node3.setText(collective.getColYear()+"");
                             listNode3.add(node3);

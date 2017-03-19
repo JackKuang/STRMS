@@ -37,6 +37,7 @@ public abstract class BaseAction<T, ID extends Serializable> extends ActionSuppo
     public abstract T getObject();
 
     private Map<String, Object> resultMap;
+    
 
     // ------------------BaseService 和 Object 作为基本类-------------------------
 
@@ -151,6 +152,7 @@ public abstract class BaseAction<T, ID extends Serializable> extends ActionSuppo
     public void setResultMap(Map<String, Object> resultMap){
         this.resultMap = resultMap;
     }
+    
     // -----------------------通用访问参数结束---------------------------
 
     // --------------通用方法----------------
@@ -228,6 +230,7 @@ public abstract class BaseAction<T, ID extends Serializable> extends ActionSuppo
         }
         return "json";
     }
-
+    
+    
     // --------------通用方法----------------
 }
