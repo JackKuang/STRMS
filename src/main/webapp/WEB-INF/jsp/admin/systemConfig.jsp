@@ -243,7 +243,7 @@
 				async : true, //或false,是否异步
 				dataType : 'json',
 				data :{
-					'id':braId
+					'branch.braId':braId
 				},
 				success : function(data, textStatus, jqXHR) {
 					if(testData(data)){
@@ -342,7 +342,7 @@
 					type : 'POST', //GET
 					async : true, //或false,是否异步
 					data : {
-						'branch.braId' : braId
+						'major.majId' : majId
 					},
 					dataType : 'json',
 					success : function(data, textStatus, jqXHR) {
@@ -365,7 +365,7 @@
 					type : 'POST', //GET
 					async : true, //或false,是否异步
 					data : {
-						'branch.braId' : braId
+						'collective.colId' : colId
 					},
 					dataType : 'json',
 					success : function(data, textStatus, jqXHR) {
