@@ -26,7 +26,7 @@
 				<table class="table table-bordered text-center">
 					<tr>
 						<td>
-							<button type="button" onclick="addTeacher();"
+							<button type="button" onclick="showTeacher();"
 								class="btn btn-block btn-primary btn-lg">增加教师</button>
 						</td>
 					</tr>
@@ -51,8 +51,8 @@
 					<h4 class="modal-title" id="teahcherTitle">新增分院</h4>
 				</div>
 				<div class="modal-body">
-					<form class="form-horizontal" id="branchForm"
-						action="teacher!save.action">
+					<form class="form-horizontal" id="teacherForm"
+						action="teacher_operate!save.action">
 						<input type="hidden" id="teacherId" name="teacher.teaId" />
 						<div class="box-body">
 							<div class="form-group">
@@ -83,15 +83,17 @@
 										name="teacher.teaLevel" placeholder="教师职位">
 								</div>
 							</div>
-							<label class="col-sm-2">所属分院</label>
-							<div class="col-sm-10">
-								<select class="form-control" id="braSelect"
-									name="major.majBraId">
-									<s:iterator var="branch" value="branchList">
-										<option value="<s:property value="#branch.braId" />"><s:property
-												value="#teacher.teaBraName" /></option>
-									</s:iterator>
-								</select>
+							<div class="form-group">
+								<label class="col-sm-2">所属分院</label>
+								<div class="col-sm-10">
+									<select class="form-control" id="braSelect"
+										name="teacher.teaBraId">
+										<s:iterator var="branch" value="branchList">
+											<option value="<s:property value="#branch.braId" />"><s:property
+													value="#branch.braName" /></option>
+										</s:iterator>
+									</select>
+								</div>
 							</div>
 						</div>
 					</form>
@@ -107,4 +109,39 @@
 		<!-- /.modal-dialog -->
 	</div>
 </body>
+<script type="text/javascript">
+	function showTeacher(teaId) {
+		if (teaId != null) {
+			$("#teacherTitle").html("修改分院");
+			$("#teacherId").val(teaId);
+			$.ajax({
+				url : 'teacher!getById.action',
+				type : 'POST', //GET
+				async : true, //或false,是否异步
+				dataType : 'json',
+				data :{
+					'teacher.teaId':teaId
+				},
+				success : function(data, textStatus, jqXHR) {
+					if(testData(data)){
+						$("#braName").val(data.content.braName);
+					}
+				}
+			})
+		} else {
+			$("#teacherTitle").html("新增分院");
+		}
+		$('#teacherModal').modal('show');
+	}
+	
+	$("#teacherSave").click(function() {
+		$("#teacherForm").ajaxSubmit(function(data) {
+			if(testData(data)){
+				bootbox.alert("操作成功");
+				($("#teacherForm"))[0].reset();
+			}
+		})
+		$('#teacherModal').modal('hide');
+	});
+</script>
 </html>

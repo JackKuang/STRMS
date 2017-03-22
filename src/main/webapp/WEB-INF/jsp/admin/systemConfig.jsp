@@ -223,6 +223,7 @@
 		})
 		$('#collectiveModel').modal('hide');
 	});
+	
 	$("#branchCancel").click(function() {
 		($("#branchForm"))[0].reset();
 	});
