@@ -43,6 +43,7 @@
 			<tx:method name="delete*" propagation="REQUIRED" />
 			<tx:method name="get*" propagation="REQUIRED" />
 			<tx:method name="load*" propagation="REQUIRED" />
+			<tx:method name="count*" propagation="REQUIRED" />
 
 		</tx:attributes>
 	</tx:advice>

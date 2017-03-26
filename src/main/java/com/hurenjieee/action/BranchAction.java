@@ -60,7 +60,14 @@ public class BranchAction extends BaseAction<Branch, Long> {
     public void setResultMapSon(Map<String, Object> resultMapSon){
         this.resultMapSon = resultMapSon;
     }
-        
+       
+    
+    /**
+     * @Description: 更具branch.braId来获取所相关的信息
+     * @Author: JackKuang
+     * @Since: 2017年3月26日下午7:47:11
+     * @return
+     */
     public String getById(){
         try {
             resultMapSon = new HashMap<String, Object>();

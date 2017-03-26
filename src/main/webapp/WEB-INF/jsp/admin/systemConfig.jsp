@@ -6,9 +6,8 @@
 <head>
 <title>系统信息查看</title>
 <jsp:include page="/WEB-INF/include/meta.jsp"></jsp:include>
-<jsp:include page="/WEB-INF/include/css.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/include/css-jquery.jsp"></jsp:include>
 <jsp:include page="/WEB-INF/include/adaptor.jsp"></jsp:include>
-<jsp:include page="/WEB-INF/include/jquery.jsp"></jsp:include>
 <jsp:include page="/WEB-INF/include/redirectPage.jsp"></jsp:include>
 </head>
 <body>

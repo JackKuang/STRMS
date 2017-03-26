@@ -40,15 +40,20 @@ public class AdminAction extends ActionSupport {
     }
 
     public String redirectPage(){
+        //系统信息
         if ("systemDetail".equals(flag)) {
+            //系统信息
             return "systemDetail";
         } else if ("systemConfig".equals(flag)) {
+            //系统相关设置
             systemConfig();
             return "systemConfig";
         } else if ("teacherManager".equals(flag)) {
+            //教师管理
             systemConfig();
             return "teacherManager";
         } else if ("studentManager".equals(flag)) {
+           //学生管理
             return "studentManager";
         } else {
             return "detail";
@@ -57,7 +62,6 @@ public class AdminAction extends ActionSupport {
     
     public void systemConfig(){
         branchList = branchService.getList();
-        System.out.println(111);
     }
     
     public String getFlag(){

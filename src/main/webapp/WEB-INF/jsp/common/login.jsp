@@ -6,7 +6,7 @@
 <head>
 <title>${prop.systemName }</title>
 <jsp:include page="/WEB-INF/include/meta.jsp"></jsp:include>
-<jsp:include page="/WEB-INF/include/css.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/include/css-jquery.jsp"></jsp:include>
 <jsp:include page="/WEB-INF/include/adaptor.jsp"></jsp:include>
 </head>
 <body class="hold-transition login-page">

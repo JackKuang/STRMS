@@ -25,5 +25,7 @@
 		$("#alertInfo").addClass("alert-"+type);
 		$("#alertInfo").show();
 	} */
+	
+	
 		
 </script>

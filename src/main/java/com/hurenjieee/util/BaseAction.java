@@ -37,7 +37,6 @@ public abstract class BaseAction<T, ID extends Serializable> extends ActionSuppo
     public abstract T getObject();
 
     private Map<String, Object> resultMap;
-    
 
     // ------------------BaseService 和 Object 作为基本类-------------------------
 
@@ -111,7 +110,9 @@ public abstract class BaseAction<T, ID extends Serializable> extends ActionSuppo
     public void setServletContext(ServletContext servletContext){
         this.servletContext = servletContext;
     }
-
+    
+    
+    
     // -------------------------资源访问设置结束-------------------------------
 
     // -----------------------通用访问参数---------------------------
@@ -206,8 +207,8 @@ public abstract class BaseAction<T, ID extends Serializable> extends ActionSuppo
 
     public String delete(){
         try {
-            resultMap = new HashMap<String, Object>();
             getService().delete(getObject());
+            resultMap = new HashMap<String, Object>();
             resultMap.put("result","success");
         } catch (Exception e) {
             e.printStackTrace();
@@ -230,7 +231,6 @@ public abstract class BaseAction<T, ID extends Serializable> extends ActionSuppo
         }
         return "json";
     }
-    
     
     // --------------通用方法----------------
 }

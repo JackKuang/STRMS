@@ -89,6 +89,7 @@ public abstract class BaseService<T, ID extends Serializable> {
     }
 
     public PageResults<T> getListByPage(String hql,String countHql,int pageNo,int pageSize,Object... values){
+        countHql = "select count(*)" + countHql;
         return dao.findPageByFetchedHql(hql,countHql,pageNo,pageSize,values);
     }
 
