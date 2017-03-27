@@ -39,7 +39,7 @@
 						<!-- /.box-header -->
 						<div class="box-body">
 							<table id="teacherTable" class="table table-bordered table-striped dataTable" role="grid">
-								<tbody>
+								<th></th>
 							</table>
 						</div>
 						<!-- /.box-body -->
@@ -160,7 +160,7 @@
         //初始化表格,动态从服务器加载数据  
         $("#teacherTable").bootstrapTable({  
             method: "get",  //使用get请求到服务器获取数据  
-            url:"http://localhost:8080/STRMS/test.json",
+            url:"/STRMS/test.json",
             striped: true,  //表格显示条纹  
             pagination: true, //启动分页 	 
             pageSize: 10,  //每页显示的记录数  
@@ -173,24 +173,25 @@
             //设置为limit可以获取limit, offset, search, sort, order  
             queryParamsType : "undefined",   
             queryParams: function queryParams(params) {   //设置查询参数  
-              var param = {    
+              /* var param = {    
                   pageNo: params.pageNumber,    
                   pageSize: params.pageSize
               };
-              return param;                   
+              return param;          */          
             },  
             columns: [{  
                 field: 'teaId',
                 title: '教师编号'  
             }],  
-            onLoadSuccess: function(data){  //加载成功时执行
-            	var newData;
+            onLoadSuccess: function(){  //加载成功时执行
+            	/*var newData;
             	if(testData(data)){
             		newData = data.content.results;
             	}else{
             		newData="";
             	}
-            	return newData;
+            	console.log(newData);
+            	return "[{'teaId':'123'},{'teaId':'12333'}]";*/
             },  
             onLoadError: function(){  //加载失败时执行 
             } 
