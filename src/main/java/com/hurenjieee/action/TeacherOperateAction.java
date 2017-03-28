@@ -96,10 +96,11 @@ public class TeacherOperateAction extends BaseAction<Teacher, Long> {
             resultMapSon = new HashMap<String, Object>();
             String hql = "From Teacher t";
             if(teacher!= null && !"".equals(teacher.getTeaName()))
-                hql = hql + "t.teaNo like  '%"+teacher.getTeaName()+ "%' or t.teaName like  '%"+teacher.getTeaName()+ "%'";
+                hql = hql + " where  t.teaNo like  '%"+teacher.getTeaName()+ "%' or t.teaName like  '%"+teacher.getTeaName()+ "%'";
             PageResults<Teacher> pageResults = getService().getListByPage(hql,hql,pageNo,pageSize);
             resultMapSon.put("result","success");
-            resultMapSon.put("content",pageResults);
+            resultMapSon.put("rows",pageResults.getResults());
+            resultMapSon.put("total",pageResults.getTotalCount());
         } catch (Exception e) {
             e.printStackTrace();
             resultMapSon.put("result","fail");

@@ -160,7 +160,8 @@
         //初始化表格,动态从服务器加载数据  
         $("#teacherTable").bootstrapTable({  
             method: "get",  //使用get请求到服务器获取数据  
-            url:"/STRMS/test.json",
+            url:"teacher_operate!page.action", 
+            //url:"/STRMS/test.json",
             striped: true,  //表格显示条纹  
             pagination: true, //启动分页 	 
             pageSize: 10,  //每页显示的记录数  
@@ -172,26 +173,32 @@
             //设置为undefined可以获取pageNumber，pageSize，searchText，sortName，sortOrder  
             //设置为limit可以获取limit, offset, search, sort, order  
             queryParamsType : "undefined",   
-            queryParams: function queryParams(params) {   //设置查询参数  
-              /* var param = {    
+            queryParams: function queryParams(params) {   //设置查询参数 
+            console.log(params)
+             var param = {
                   pageNo: params.pageNumber,    
-                  pageSize: params.pageSize
+                  pageSize: params.pageSize,
+                  'teacher.teaName':params.searchText
               };
-              return param;          */          
+              return param;  
             },  
             columns: [{  
-                field: 'teaId',
-                title: '教师编号'  
+                field: 'teaNo',
+                title: '教师编号'
+            },{  
+                field: 'teaNo',
+                title: '姓名'
+            },{  
+                field: 'teaEmail',
+                title: '邮箱'
+            },{  
+                field: 'teaLevel',
+                title: '教师职位'
+            },{  
+                field: 'teaBraId',
+                title: '所属分院'
             }],  
             onLoadSuccess: function(){  //加载成功时执行
-            	/*var newData;
-            	if(testData(data)){
-            		newData = data.content.results;
-            	}else{
-            		newData="";
-            	}
-            	console.log(newData);
-            	return "[{'teaId':'123'},{'teaId':'12333'}]";*/
             },  
             onLoadError: function(){  //加载失败时执行 
             } 
