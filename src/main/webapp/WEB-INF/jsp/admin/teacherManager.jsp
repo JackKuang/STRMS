@@ -197,6 +197,12 @@
             },{  
                 field: 'teaBraId',
                 title: '所属分院'
+            }, {
+                field: 'teaId',
+                title: '操作',
+                align: 'center',
+                events: operateEvents,
+                formatter: operateFormatter
             }],  
             onLoadSuccess: function(){  //加载成功时执行
             },  
@@ -204,5 +210,26 @@
             } 
           });  
       }
+	 function operateFormatter(value, row, index) {
+	        return [
+	            '<a class="like" href="javascript:void(0)" title="Like">',
+	            '<i class="glyphicon glyphicon-heart"></i>',
+	            '</a>  ',
+	            '<a class="remove" href="javascript:void(0)" title="Remove">',
+	            '<i class="glyphicon glyphicon-remove"></i>',
+	            '</a>'
+	        ].join('');
+	    }
+	 window.operateEvents = {
+		        'click .like': function (e, value, row, index) {
+		            alert('You click like action, row: ' + JSON.stringify(row));
+		        },
+		        'click .remove': function (e, value, row, index) {
+		            $table.bootstrapTable('remove', {
+		                field: 'teaId',
+		                values: [row.teaId]
+		            });
+		        }
+		    };
 </script>
 </html>
