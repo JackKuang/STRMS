@@ -70,13 +70,11 @@ public class Collective implements java.io.Serializable {
         this.colMajId = colMajId;
     }
 
-
     @Formula("(select m.maj_bra_id from major m where m.maj_id = col_maj_id)") 
     public Long getColMajBarId(){
         return colMajBarId;
     }
 
-    
     public void setColMajBarId(Long colMajBarId){
         this.colMajBarId = colMajBarId;
     }

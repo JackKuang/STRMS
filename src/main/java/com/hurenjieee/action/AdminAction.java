@@ -54,6 +54,7 @@ public class AdminAction extends ActionSupport {
             return "teacherManager";
         } else if ("studentManager".equals(flag)) {
            //学生管理
+            systemConfig();
             return "studentManager";
         } else {
             return "detail";

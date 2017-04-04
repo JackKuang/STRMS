@@ -79,10 +79,4 @@ public class PageResults<T> {
 		pageNo = currentPage + 1;
 		pageCount = totalCount % pageSize == 0 ? totalCount / pageSize : totalCount / pageSize + 1;
 	}
-	public Rows toRows(){
-	    Rows result = new Rows<>();
-     result.setTotal(getTotalCount());
-     result.setRows(getResults());
-     return result;
-	}
 }

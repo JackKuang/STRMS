@@ -146,7 +146,7 @@
 							<div class="form-group">
 								<label class="col-sm-2">所属分院</label>
 								<div class="col-sm-10">
-									<select class="form-control" id="braSelect2" onchange="loadMajorList(this.value)">
+									<select class="form-control" id="braSelect2" onclick="loadMajorList(this.value)">
 										<s:iterator var="branch" value="branchList">
 											<option value="<s:property value="#branch.braId" />"
 											><s:property
@@ -154,12 +154,16 @@
 										</s:iterator>
 									</select>
 								</div>
+							</div>
+							<div class="form-group">
 								<label class="col-sm-2">专业名称</label>
 								<div class="col-sm-10">
 									<select class="form-control" id="majSelect"
 										name="collective.colMajId">
 									</select>
 								</div>
+							</div>
+							<div class="form-group">
 								<label class="col-sm-2">入学时间</label>
 								<div class="col-sm-10">
 									<select class="form-control" name="collective.colYear" id="colYear">
@@ -170,6 +174,8 @@
 										<option>2017</option>
 									</select>
 								</div>
+							</div>
+							<div class="form-group">
 								<label class="col-sm-2">班级名称</label>
 								<div class="col-sm-10">
 									<input type="text" class="form-control" placeholder="班级名称"
@@ -220,7 +226,7 @@
 				($("#collectiveForm"))[0].reset();
 			}
 		})
-		$('#collectiveModel').modal('hide');
+		$('#collectiveModal').modal('hide');
 	});
 	
 	$("#branchCancel").click(function() {
@@ -402,7 +408,7 @@
 	}
 	
 	function formatterData(data,depth){
-		var type = ""
+		var type = "";
 		if(depth==1){
 			type="Branch";
 		}

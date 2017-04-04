@@ -6,10 +6,6 @@
 			+ path + "/";
 %>
 <script type="text/javascript">
-	function redirectPage(flag) {
-		var url = "${sessionScope.userType }!redirectPage.action?flag="+flag;
-		$("#main").load(url);
-	}
 	function testData(data){
 		if(data.result=="success"){
 			return true;
@@ -19,6 +15,7 @@
 			return false
 		}
 	}
+	
 	/* function alertInfo(type,title,content){
 		$("#alertTitle").html(title);
 		$("#alertContent").html(content);

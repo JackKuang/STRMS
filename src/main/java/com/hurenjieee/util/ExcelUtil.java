@@ -531,7 +531,7 @@ public class ExcelUtil {
      * @param cell 
      * @return 
      */  
-    private String getCellValue(Cell cell) {  
+    public String getCellValue(Cell cell) {  
         Object result = "";  
         if (cell != null) {  
             switch (cell.getCellType()) {  

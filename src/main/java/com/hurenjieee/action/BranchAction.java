@@ -71,7 +71,7 @@ public class BranchAction extends BaseAction<Branch, Long> {
     public String getById(){
         try {
             resultMapSon = new HashMap<String, Object>();
-            Branch branch2 = branchService.selectByBraId(branch);
+            Branch branch2 = branchService.selectByBraId(branch.getBraId());
             resultMapSon.put("result","success");
             resultMapSon.put("content",branch2);
         } catch (Exception e) {

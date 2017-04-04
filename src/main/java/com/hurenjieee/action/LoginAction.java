@@ -14,6 +14,7 @@ import com.hurenjieee.entity.Teacher;
 import com.hurenjieee.service.AdminService;
 import com.hurenjieee.service.StudentService;
 import com.hurenjieee.service.TeacherService;
+import com.hurenjieee.util.Md5AndSha;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -70,7 +71,9 @@ public class LoginAction extends ActionSupport {
         sessionMap.clear();
         Map<String, Object> request = (Map<String, Object>) actionContext.get("request");
         // MD5¼ÓÃÜ
-        // password = Md5AndSha.convertMD5(password);
+        //System.out.println( Md5AndSha.convertMD5("1"));
+        //c4ca4238a0b923820dcc509a6f75849b
+        password = Md5AndSha.convertMD5(password);
 
         // Ñ§ÉúµÇÂ¼
         if ("student".equals(userType)) {

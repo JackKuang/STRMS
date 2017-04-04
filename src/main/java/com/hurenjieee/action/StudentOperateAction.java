@@ -14,12 +14,11 @@ import org.apache.struts2.convention.annotation.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 
-import com.hurenjieee.entity.Branch;
+import com.hurenjieee.entity.Collective;
 import com.hurenjieee.entity.Student;
-import com.hurenjieee.entity.Teacher;
 import com.hurenjieee.service.BaseService;
-import com.hurenjieee.service.BranchService;
-import com.hurenjieee.service.TeacherService;
+import com.hurenjieee.service.CollectiveService;
+import com.hurenjieee.service.StudentService;
 import com.hurenjieee.util.BaseAction;
 import com.hurenjieee.util.ExcelUtil;
 import com.hurenjieee.util.Md5AndSha;
@@ -30,22 +29,23 @@ import com.hurenjieee.util.PageResults;
 @Namespace(value = "/admin")
 @Action(results = { @Result(name = "json",type = "json",params = { "root", "resultMap" }) ,
         @Result(name = "jsonSon",type = "json",params = { "root", "resultMapSon" }) })
-public class TeacherOperateAction extends BaseAction<Teacher, Long> {
+public class StudentOperateAction extends BaseAction<Student, Long> {
 
         
     @Autowired
-    TeacherService teacherService;
+    StudentService studentService;
 
     @Autowired
-    BranchService branchService;
-    
-    Teacher        teacher;
+    CollectiveService collectiveService;
+
+    Student        student;
 
     Map<String, Object> resultMapSon;
     
     private Integer pageNumber;
     
     private Integer pageSize;
+
     
     private File excelFile; //上传的文件
     private String excelFileName; //文件名称
@@ -53,33 +53,27 @@ public class TeacherOperateAction extends BaseAction<Teacher, Long> {
 
     
     @Override
-    public BaseService<Teacher, Long> getService(){
+    public BaseService<Student, Long> getService(){
         // TODO Auto-generated method stub
-        return teacherService;
+        return studentService;
     }
 
     @Override
-    public Teacher getObject(){
+    public Student getObject(){
         // TODO Auto-generated method stub
-        return teacher == null ? new Teacher() : teacher;
+        return student == null ? new Student() : student;
     }
     
-    public Teacher getTeacher(){
-        return teacher;
-    }
-
-    public void setTeacher(Teacher teacher){
-        this.teacher = teacher;
-    }
-
-    public Map<String, Object> getResultMapSon(){
-        return resultMapSon;
-    }
-
-    public void setResultMapSon(Map<String, Object> resultMapSon){
-        this.resultMapSon = resultMapSon;
-    }
     
+    public Student getStudent(){
+        return student;
+    }
+
+    
+    public void setStudent(Student student){
+        this.student = student;
+    }
+
     
     public Integer getPageNumber(){
         return pageNumber;
@@ -90,6 +84,15 @@ public class TeacherOperateAction extends BaseAction<Teacher, Long> {
         this.pageNumber = pageNumber;
     }
 
+    public Map<String, Object> getResultMapSon(){
+        return resultMapSon;
+    }
+
+    
+    public void setResultMapSon(Map<String, Object> resultMapSon){
+        this.resultMapSon = resultMapSon;
+    }
+    
     public Integer getPageSize(){
         return pageSize;
     }
@@ -132,10 +135,10 @@ public class TeacherOperateAction extends BaseAction<Teacher, Long> {
         try {
             resultMapSon = new HashMap<String, Object>();
             resultMapSon = new HashMap<String, Object>();
-            String hql = "From Teacher t";
-            if(teacher!= null && !"".equals(teacher.getTeaName()))
-                hql = hql + " where  t.teaNo like  '%"+teacher.getTeaName()+ "%' or t.teaName like  '%"+teacher.getTeaName()+ "%'";
-            PageResults<Teacher> pageResults = getService().getListByPage(hql,hql,pageNumber,pageSize);
+            String hql = "From Student s";
+            if(student!= null && !"".equals(student.getStuName()))
+                hql = hql + " where s.stuId like '%"+student.getStuName()+ "%' or s.stuName like  '%"+student.getStuName()+ "%'";
+            PageResults<Student> pageResults = getService().getListByPage(hql,hql,pageNumber,pageSize);
             resultMapSon.put("result","success");
             resultMapSon.put("rows",pageResults.getResults());
             resultMapSon.put("total",pageResults.getTotalCount());
@@ -146,13 +149,13 @@ public class TeacherOperateAction extends BaseAction<Teacher, Long> {
         }
         return "jsonSon";
     }
-
+    
     public String getById(){
         try {
             resultMapSon = new HashMap<String, Object>();
-            Teacher teacher2 = teacherService.selectByBraId(teacher);
+            Student student2 = studentService.selectByStuId(student.getStuId());
             resultMapSon.put("result","success");
-            resultMapSon.put("content",teacher2);
+            resultMapSon.put("content",student2);
         } catch (Exception e) {
             e.printStackTrace();
             resultMapSon.put("result","fail");
@@ -167,42 +170,24 @@ public class TeacherOperateAction extends BaseAction<Teacher, Long> {
             if(excelFile!=null){
                 ExcelUtil excelUtil = new ExcelUtil();
                 List<Row> list = excelUtil.readExcel(excelFile.getPath());
-                List<Teacher> teachers = new ArrayList<Teacher>();
+                List<Student> students = new ArrayList<Student>();
                 for(int i=1;i<list.size();i++){
                     Row row= list.get(i);
-                    Teacher teacher = new Teacher();
-                    teacher.setTeaNo(excelUtil.getCellValue(row.getCell(0)));
-                    teacher.setTeaName(excelUtil.getCellValue(row.getCell(1)));
-                    teacher.setTeaPhone(excelUtil.getCellValue(row.getCell(2)));
-                    teacher.setTeaEmail(excelUtil.getCellValue(row.getCell(3)));
-                    String level = excelUtil.getCellValue(row.getCell(4));
-                    switch (level) {
-                        case "教授":
-                            teacher.setTeaLevel(1);
-                            break;
-                        case "副教授":
-                            teacher.setTeaLevel(2);
-                            break;
-                        case "讲师":
-                            teacher.setTeaLevel(3);
-                            break;
-                        case "助教":
-                            teacher.setTeaLevel(4);
-                            break;
-                        default:
-                            teacher.setTeaLevel(0);
-                            break;
+                    Student student = new Student();
+                    student.setStuNo(excelUtil.getCellValue(row.getCell(0)));
+                    student.setStuName(excelUtil.getCellValue(row.getCell(1)));
+                    student.setStuPhone(excelUtil.getCellValue(row.getCell(2)));
+                    student.setStuEmail(excelUtil.getCellValue(row.getCell(3)));
+                    String colName =  excelUtil.getCellValue(row.getCell(4));
+                    Collective collective = collectiveService.selectByColName(colName);
+                    if(collective!=null){
+                        student.setStuColId(collective.getColId());
                     }
-                    String braName =  excelUtil.getCellValue(row.getCell(5));
-                    Branch branch = branchService.selectByBraName(braName);
-                    if(branch!=null){
-                        teacher.setTeaBraId(branch.getBraId());
-                    }
-                    teachers.add(teacher);
+                    students.add(student);
                 }
-                for(Teacher t:teachers){
-                    t.setTeaPassword(Md5AndSha.convertMD5("123456"));
-                    teacherService.save(t);
+                for(Student s:students){
+                    s.setStuPassword(Md5AndSha.convertMD5("123456"));
+                    studentService.save(s);
                 }
                 resultMapSon.put("result","success");
                 resultMapSon.put("reason","未知错误！");

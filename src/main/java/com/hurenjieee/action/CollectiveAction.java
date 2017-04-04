@@ -66,7 +66,7 @@ public class CollectiveAction extends BaseAction<Collective, Long> {
     public String getById(){
         try {
             resultMapSon = new HashMap<String, Object>();
-            Collective collective2 = collectiveService.selectByColId(collective);
+            Collective collective2 = collectiveService.selectByColId(collective.getColId());
             resultMapSon.put("result","success");
             resultMapSon.put("content",collective2);
         } catch (Exception e) {

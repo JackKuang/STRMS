@@ -164,5 +164,10 @@
 			$(this).addClass('active');
 		});
 	});
+
+	function redirectPage(flag) {
+		var url = "${sessionScope.userType }!redirectPage.action?flag="+flag;
+		$("#main").load(url);
+	}
 </script>
 </html>

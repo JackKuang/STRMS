@@ -13,14 +13,18 @@ import com.hurenjieee.util.BaseDao;
 @Transactional
 public class TeacherService extends BaseService<Teacher, Long> {
 
-	@Autowired
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		BaseDao<Teacher,Long> dao = new BaseDao<Teacher,Long>();
-		dao.setSessionFactory(sessionFactory);
-		setDao(dao);
-	}
-	
-	public Teacher getTeacherByUsernameAndPassword(String userName,String password){
-		return getDao().getByHQL("from Teacher t where t.teaName = '" + userName + "' and t.teaPassword = '" + password+"'");
-	}
+    @Autowired
+    public void setSessionFactory(SessionFactory sessionFactory){
+        BaseDao<Teacher, Long> dao = new BaseDao<Teacher, Long>();
+        dao.setSessionFactory(sessionFactory);
+        setDao(dao);
+    }
+
+    public Teacher getTeacherByUsernameAndPassword(String userName,String password){
+        return getDao().getByHQL("from Teacher t where t.teaNo = '" + userName + "' and t.teaPassword = '" + password + "'");
+    }
+    
+    public Teacher selectByBraId(Teacher teacher){
+        return getDao().getByHQL("from Teacher t where t.teaId =  ? ",teacher.getTeaId());
+    }
 }

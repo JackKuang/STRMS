@@ -8,6 +8,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hurenjieee.entity.Branch;
 import com.hurenjieee.entity.Collective;
 import com.hurenjieee.entity.Major;
 import com.hurenjieee.util.BaseDao;
@@ -27,7 +28,12 @@ public class CollectiveService extends BaseService<Collective, Long> {
         return getDao().getListByHQL("from Collective c where c.colMajId = ? order by c.colYear desc",colMajId);
     }
 
-    public Collective selectByColId(Collective collective){
-        return getDao().getByHQL("from Collective c where c.colId =?", collective.getColId());
+    public Collective selectByColId(Long colId){
+        return getDao().getByHQL("from Collective c where c.colId = ?", colId);
+    }
+    
+
+    public Collective selectByColName(String colName){
+        return getDao().getByHQL("from Collective c where c.colName = ?",colName);
     }
 }
