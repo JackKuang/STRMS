@@ -41,7 +41,7 @@ public class AdminAction extends ActionSupport {
 
     public String redirectPage(){
         //系统信息
-        if ("systemDetail".equals(flag)) {
+        if ("index".equals(flag)) {
             //系统信息
             return "systemDetail";
         } else if ("systemConfig".equals(flag)) {

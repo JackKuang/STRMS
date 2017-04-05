@@ -20,6 +20,8 @@ public class Resource implements java.io.Serializable {
     private String resUuid;
     private String resName;
     private String resType;
+    private Integer resState;
+    private Long   resSize;
     private Long   resParId;
     private Long   resTeaId;
     private Date   resUploadTime;
@@ -128,6 +130,24 @@ public class Resource implements java.io.Serializable {
 
     public void setResApplyTime(Date resApplyTime){
         this.resApplyTime = resApplyTime;
+    }
+
+    @Column(name = "res_size")
+    public Long getResSize(){
+        return resSize;
+    }
+    
+    public void setResSize(Long resSize){
+        this.resSize = resSize;
+    }
+
+    @Column(name = "res_state")
+    public Integer getResState(){
+        return resState;
+    }
+    
+    public void setResState(Integer resState){
+        this.resState = resState;
     }
 
 }

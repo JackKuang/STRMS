@@ -39,14 +39,12 @@ public class TeacherOperateAction extends BaseAction<Teacher, Long> {
     @Autowired
     BranchService branchService;
     
-    Teacher        teacher;
+    Teacher       teacher;
 
     Map<String, Object> resultMapSon;
     
     private Integer pageNumber;
-    
     private Integer pageSize;
-    
     private File excelFile; //上传的文件
     private String excelFileName; //文件名称
     private String excelFileContentType; //文件类型
@@ -130,7 +128,6 @@ public class TeacherOperateAction extends BaseAction<Teacher, Long> {
 
     public String page(){
         try {
-            resultMapSon = new HashMap<String, Object>();
             resultMapSon = new HashMap<String, Object>();
             String hql = "From Teacher t";
             if(teacher!= null && !"".equals(teacher.getTeaName()))

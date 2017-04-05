@@ -134,7 +134,6 @@ public class StudentOperateAction extends BaseAction<Student, Long> {
     public String page(){
         try {
             resultMapSon = new HashMap<String, Object>();
-            resultMapSon = new HashMap<String, Object>();
             String hql = "From Student s";
             if(student!= null && !"".equals(student.getStuName()))
                 hql = hql + " where s.stuId like '%"+student.getStuName()+ "%' or s.stuName like  '%"+student.getStuName()+ "%'";

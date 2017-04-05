@@ -78,7 +78,7 @@
 						<li class="dropdown user user-menu"><a href="#"
 							class="dropdown-toggle" data-toggle="dropdown"> <img
 								src="../dist/img/user2-160x160.jpg" class="user-image"
-								alt="User Image"> <span class="hidden-xs">${admin.admName }</span></a>
+								alt="User Image"> <span class="hidden-xs">${teacher.teaName }</span></a>
 							<ul class="dropdown-menu">
 								<!-- User image -->
 								<li class="user-header"><img
@@ -125,16 +125,13 @@
 				<ul class="nav sidebar-menu">
 					<li class="header">主导航</li>
 					<li><a href="#" onclick="redirectPage('index')" class='active'> <i
-							class="fa fa-navicon"></i> <span>系统信息查看</span>
+							class="fa fa-navicon"></i> <span>消息查看</span>
 					</a></li>
-					<li><a href="#" onclick="redirectPage('systemConfig')"> <i
-							class="fa fa-wrench"></i> <span>属性配置</span>
+					<li><a href="#" onclick="redirectPage('resourceManager')"> <i
+							class="fa fa-wrench"></i> <span>资源管理</span>
 					</a></li>
-					<li><a href="#" onclick="redirectPage('teacherManager')">
-							<i class="fa fa-users"></i> <span>教师管理</span>
-					</a></li>
-					<li><a href="#" onclick="redirectPage('studentManager')">
-							<i class="fa fa-users"></i> <span>学生管理</span>
+					<li><a href="#" onclick="redirectPage('messageManager')"> <i
+							class="fa fa-wrench"></i> <span>最新消息</span>
 					</a></li>
 				</ul>
 			</section>

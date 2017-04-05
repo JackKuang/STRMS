@@ -42,7 +42,7 @@ public class RoleForJsonInterceptor implements Interceptor {
         String servletPath = httpServletRequest.getServletPath();
         String loginUserType = servletPath.split("/")[1];
         // 去除不需要过滤的网址
-        if (loginUserType.equals(userType) || "/login!login.action".equals(servletPath) || "/login!toLogin.action".equals(servletPath)) {
+        if ("resource".equals(loginUserType) || loginUserType.equals(userType) || "/login!login.action".equals(servletPath) || "/login!toLogin.action".equals(servletPath)) {
             // 经过Servlet方法
             return invocation.invoke();
         }
