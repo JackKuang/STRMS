@@ -95,7 +95,7 @@
 										<a href="#" class="btn btn-default btn-flat">个人信息</a>
 									</div>
 									<div class="pull-right">
-										<a href="#" class="btn btn-default btn-flat">登出</a>
+										<a onclick="exit();" class="btn btn-default btn-flat">登出</a>
 									</div>
 								</li>
 							</ul></li>
@@ -168,6 +168,9 @@
 	function redirectPage(flag) {
 		var url = "${sessionScope.userType }!redirectPage.action?flag="+flag;
 		$("#main").load(url);
+	}
+	function exit(){
+		location.href="../login!exit.action";
 	}
 </script>
 </html>

@@ -18,6 +18,12 @@ import com.hurenjieee.util.Md5AndSha;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
+
+/**
+ * @Description: TODO
+ * @Author: JackKuang
+ * @Since: 2017年4月5日上午9:03:44  
+ */
 @ParentPackage(value = "all") // 应用全局包
 @Scope("prototype")
 @Action(results = { @Result(name = "success-admin",type = "redirectAction",location = "admin/admin!index.action"),
@@ -81,7 +87,7 @@ public class LoginAction extends ActionSupport {
             if (student != null) {
                 sessionMap.put("userType","student");
                 sessionMap.put("student",student);
-                result = "success-admin";
+                result = "success-student";
             } else {
                 request.put("wrong",1);
                 request.put("userType",userType);
@@ -94,7 +100,7 @@ public class LoginAction extends ActionSupport {
             if (teacher != null) {
                 sessionMap.put("userType","teacher");
                 sessionMap.put("student",teacher);
-                result = "success-admin";
+                result = "success-teacher";
             } else {
                 request.put("wrong",1);
                 request.put("type",userType);
@@ -121,4 +127,20 @@ public class LoginAction extends ActionSupport {
     public String toLogin(){
         return "toLogin";
     }
+    
+    /**
+     * @Description: 清理sesson后推出
+     * @Author: JackKuang
+     * @Since: 2017年4月5日上午9:03:48
+     * @return
+     */
+    public String exit(){
+        ActionContext actionContext = ActionContext.getContext();
+        Map<String, Object> sessionMap = actionContext.getSession();
+        String userType = (String)sessionMap.get("userType");
+        sessionMap.remove(userType);
+        sessionMap.remove("userType");
+        return "toLogin";
+    }
+    
 }
