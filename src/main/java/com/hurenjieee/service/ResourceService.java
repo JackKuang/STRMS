@@ -23,8 +23,12 @@ public class ResourceService extends BaseService<Resource, Long> {
         setDao(dao);
     }
 
-    public List<Resource> getListByReaParIdAndReaTeaId(Long resParId,Long resTeaId){
-        return getDao().getListByHQL("from Resource r where r.resParId = ? and r.reaTeaId = ?",resParId,resTeaId);
+    public List<Resource> getListByReaParIdAndReaTeaId(Resource resource){
+        return getDao().getListByHQL("from Resource r where r.resParId = ? and r.reaTeaId = ? and r.reaName like ? ",resource.getResParId(),resource.getResTeaId(),"%"+resource.getResName()+"%");
+    }
+    
+    public List<Resource> getListByReaParIdAndReaTeaIdAndApprove(Resource resource){
+        return getDao().getListByHQL("from Resource r where r.resState = 10 and r.resParId = ? and r.reaTeaId = ? and r.reaName like ? ",resource.getResParId(),resource.getResTeaId(),"%"+resource.getResName()+"%");
     }
 
     public void updateCustom(Resource resource){

@@ -38,8 +38,6 @@ public class SchoolAction extends ActionSupport {
     @Autowired
     private BranchService     branchService;
     @Autowired
-    private MajorService      majorService;
-    @Autowired
     private CollectiveService collectiveService;
 
     public String testJson(){

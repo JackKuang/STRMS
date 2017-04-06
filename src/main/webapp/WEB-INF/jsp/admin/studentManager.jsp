@@ -187,6 +187,10 @@
 		$('#studentModal').modal('hide');
 	});
 	
+	$("#studentCancel").click(function() {
+		($("#studentForm"))[0].reset();
+	});
+	
 	$("#fileUpload").click(function() {
 		$("#fileForm").ajaxSubmit(function(data) {
 			if (testData(data)) {

@@ -76,7 +76,8 @@ public class ResourceAction extends BaseAction<Resource, Long> {
             resultMapSon = new HashMap<String, Object>();
             Long resTeaId = ((Teacher) getSessionMap()).getTeaId();
             //获取到文件List
-            List<Resource> resourceList = resourceService.getListByReaParIdAndReaTeaId((Long)reqMap.get("resParId"),resTeaId);
+            resource.setResTeaId(resTeaId);
+            List<Resource> resourceList = resourceService.getListByReaParIdAndReaTeaId(resource);
             resultMapSon.put("result","success");
             resultMapSon.put("rows",resourceList);
             resultMapSon.put("path","path");
@@ -88,47 +89,4 @@ public class ResourceAction extends BaseAction<Resource, Long> {
         return "jsonSon";
     }
     
-    public String applyRes(){
-        if(!"teacher".equals(getSessionMap().get("userType"))){
-            resultMapSon.put("result","02");
-            resultMapSon.put("reason","越权操作");
-            return "jsonSon";
-        }
-        try {
-            resultMapSon = new HashMap<String, Object>();
-            Long resTeaId = ((Teacher) getSessionMap()).getTeaId();
-            //获取到文件List
-            resource.setResTeaId(resTeaId);
-            resourceService.updateCustom(resource);
-            resultMapSon.put("result","success");
-            resultMapSon.put("path","path");
-        } catch (Exception e) {
-            e.printStackTrace();
-            resultMapSon.put("result","fail");
-            resultMapSon.put("reason","未知错误！");
-        }
-        return "jsonSon";
-    }
-
-    public String updateRes(){
-        if(!"teacher".equals(getSessionMap().get("userType"))){
-            resultMapSon.put("result","02");
-            resultMapSon.put("reason","越权操作");
-            return "jsonSon";
-        }
-        try {
-            resultMapSon = new HashMap<String, Object>();
-            Long resTeaId = ((Teacher) getSessionMap()).getTeaId();
-            //获取到文件List
-            resource.setResTeaId(resTeaId);
-            resourceService.updateCustom(resource);
-            resultMapSon.put("result","success");
-            resultMapSon.put("path","path");
-        } catch (Exception e) {
-            e.printStackTrace();
-            resultMapSon.put("result","fail");
-            resultMapSon.put("reason","未知错误！");
-        }
-        return "jsonSon";
-    }
 }

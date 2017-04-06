@@ -85,7 +85,7 @@ public class TeacherAction extends ActionSupport {
         Map<String, Object> sessionMap = actionContext.getSession();
         Long resTeaId = ((Teacher)sessionMap.get("teacher")).getTeaId();
         //获取到文件List
-        resourceList = resourceService.getListByReaParIdAndReaTeaId(resParId,resTeaId);
+        //resourceList = resourceService.getListByReaParIdAndReaTeaId(resParId,resTeaId);
         //获取到文件路径
     }
 }

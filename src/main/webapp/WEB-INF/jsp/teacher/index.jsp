@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>${admin.admName }</title>
+<title>${teacher.teaName }</title>
 <jsp:include page="/WEB-INF/include/meta.jsp"></jsp:include>
 <jsp:include page="/WEB-INF/include/css-jquery.jsp"></jsp:include>
 <jsp:include page="/WEB-INF/include/adaptor.jsp"></jsp:include>
@@ -15,7 +15,7 @@
 		<header class="main-header">
 			<!-- Logo -->
 			<!-- 主页链接  -->
-			<a href="admin!index.action" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
+			<a href="${sessionScope.userType }!index.action" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
 				<span class="logo-mini">★</span> <!-- logo for regular state and mobile devices -->
 				<span class="logo-lg">${prop.systemName }</span>
 			</a>
@@ -87,8 +87,8 @@
 
 									<p>
 										管理员 <small>Member since Nov. 2012</small>
-									</p></li>
-
+									</p>
+								</li>
 								<!-- Menu Footer-->
 								<li class="user-footer">
 									<div class="pull-left">

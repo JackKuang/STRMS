@@ -172,7 +172,10 @@
 		})
 		$('#teacherModal').modal('hide');
 	});
-	
+
+	$("#teacherCancel").click(function() {
+		($("#teacherForm"))[0].reset();
+	});
 	$("#fileUpload").click(function() {
 		$("#fileForm").ajaxSubmit(function(data) {
 			if (testData(data)) {
