@@ -99,7 +99,7 @@ public class LoginAction extends ActionSupport {
             Teacher teacher = teacherService.getTeacherByUsernameAndPassword(userName,password);
             if (teacher != null) {
                 sessionMap.put("userType","teacher");
-                sessionMap.put("student",teacher);
+                sessionMap.put("teacher",teacher);
                 result = "success-teacher";
             } else {
                 request.put("wrong",1);

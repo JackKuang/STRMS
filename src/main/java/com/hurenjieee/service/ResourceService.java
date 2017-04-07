@@ -23,19 +23,19 @@ public class ResourceService extends BaseService<Resource, Long> {
         setDao(dao);
     }
 
-    public List<Resource> getListByReaParIdAndReaTeaId(Resource resource){
-        return getDao().getListByHQL("from Resource r where r.resParId = ? and r.reaTeaId = ? and r.reaName like ? ",resource.getResParId(),resource.getResTeaId(),"%"+resource.getResName()+"%");
+    public List<Resource> getListByRea(Resource resource){
+        return getDao().getListByHQL("from Resource r where r.resParId = ? and r.resTeaId = ? and r.resName like ? ",resource.getResParId(),resource.getResTeaId(),"%"+resource.getResName()+"%");
     }
     
-    public List<Resource> getListByReaParIdAndReaTeaIdAndApprove(Resource resource){
-        return getDao().getListByHQL("from Resource r where r.resState = 10 and r.resParId = ? and r.reaTeaId = ? and r.reaName like ? ",resource.getResParId(),resource.getResTeaId(),"%"+resource.getResName()+"%");
+    public List<Resource> getListByReaAndApprove(Resource resource){
+        return getDao().getListByHQL("from Resource r where r.resState = 10 and r.resParId = ? and r.resTeaId = ? and r.resName like ? ",resource.getResParId(),resource.getResTeaId(),"%"+resource.getResName()+"%");
     }
 
     public void updateCustom(Resource resource){
         StringBuilder sql = new StringBuilder();
         sql.append("update resource set ");
-        if (resource.getResName() != null && !"".equals(resource.getResName())) sql.append("res_name = '" + resource.getResName() + "', ");
-        if (resource.getResState() != null && !"".equals(resource.getResState())) sql.append("res_state = " + resource.getResState() + ", ");
+        if (resource.getResName() != null && !"".equals(resource.getResName())) sql.append("res_name = '" + resource.getResName() + "',");
+        if (resource.getResState() != null && !"".equals(resource.getResState())) sql.append("res_state = " + resource.getResState() + ",");
         if (resource.getResParId() != null && !"".equals(resource.getResParId())) sql.append("res_par_id = " + resource.getResParId() + ",");
         if (resource.getResAdmId() != null && !"".equals(resource.getResAdmId())) sql.append("res_adm_id = " + resource.getResParId() + ",");
         sql.deleteCharAt(sql.length() - 1);

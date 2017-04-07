@@ -20,7 +20,8 @@ import com.opensymphony.xwork2.ActionSupport;
 @ParentPackage(value = "all") // 应用全局包
 @Scope("prototype")
 @Namespace(value = "/teacher")
-@Action(results = { @Result(name = "systemDetail",location = "/WEB-INF/jsp/teacher/systemDetail.jsp"),
+@Action(results = { @Result(name = "index",location = "/WEB-INF/jsp/teacher/index.jsp"),
+        @Result(name = "systemDetail",location = "/WEB-INF/jsp/teacher/systemDetail.jsp"),
         @Result(name = "resourceManager",location = "/WEB-INF/jsp/teacher/resourceManager.jsp"),
         @Result(name = "messageManager",location = "/WEB-INF/jsp/teacher/messageManager.jsp")})
 public class TeacherAction extends ActionSupport {

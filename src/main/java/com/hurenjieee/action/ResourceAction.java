@@ -7,7 +7,6 @@ import java.util.Map;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
-import org.hibernate.hql.internal.ast.tree.UpdateStatement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 
@@ -74,10 +73,30 @@ public class ResourceAction extends BaseAction<Resource, Long> {
     public String page(){
         try {
             resultMapSon = new HashMap<String, Object>();
-            Long resTeaId = ((Teacher) getSessionMap()).getTeaId();
+            Map<String,Object> map = getSessionMap();
+            Long resTeaId = ((Teacher) getSessionMap().get("teacher")).getTeaId();
             //获取到文件List
             resource.setResTeaId(resTeaId);
-            List<Resource> resourceList = resourceService.getListByReaParIdAndReaTeaId(resource);
+            List<Resource> resourceList = resourceService.getListByRea(resource);
+            resultMapSon.put("result","success");
+            resultMapSon.put("rows",resourceList);
+            resultMapSon.put("path","path");
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultMapSon.put("result","fail");
+            resultMapSon.put("reason","未知错误！");
+        }
+        return "jsonSon";
+    }
+
+    public String pageDownload(){
+        try {
+            resultMapSon = new HashMap<String, Object>();
+            Map<String,Object> map = getSessionMap();
+            Long resTeaId = ((Teacher) getSessionMap().get("teacher")).getTeaId();
+            //获取到文件List
+            resource.setResTeaId(resTeaId);
+            List<Resource> resourceList = resourceService.getListByReaAndApprove(resource);
             resultMapSon.put("result","success");
             resultMapSon.put("rows",resourceList);
             resultMapSon.put("path","path");

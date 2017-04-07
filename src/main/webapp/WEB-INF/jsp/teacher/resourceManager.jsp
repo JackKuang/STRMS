@@ -19,9 +19,11 @@
 				Path
 			</div>
 			<div class="col-md-12">
-				Operate
-			</div>
-			<div class="col-md-12">
+				<div id="toolbar">
+				    <button id="remove" class="btn btn-danger" disabled>
+				        <i class="glyphicon glyphicon-remove"></i> Delete
+				    </button>
+				</div>
 				<table id="resourceTable" class="table table-bordered table-striped dataTable" role="grid">
 				</table>
 			</div>
@@ -68,9 +70,10 @@
 	})
 	function initTable() {  
 	    //先销毁表格  
-	    $("#studentTable").bootstrapTable('destroy');  
+	    $("#resourceTable").bootstrapTable('destroy');  
 	    //初始化表格,动态从服务器加载数据  
-	    $("#studentTable").bootstrapTable({  
+	    $("#resourceTable").bootstrapTable({
+	    	toolbar:"#toolbar",
 	        method: "get",  //使用get请求到服务器获取数据  
 	        url:"../resource/resource!page.action", 
 	        //url:"/STRMS/test.json",
@@ -133,7 +136,7 @@
 	   }
 	   return [level].join('');
 	}
-	function operateFormatter(value, row, index) {
+	function stateFormatter(value, row, index) {
 		var level="";
 		if(value =="10"){
 			level = "开放下载";
