@@ -16,12 +16,17 @@
 	<section class="content">
 		<div class="row">
 			<div class="col-md-12">
-				Path
+				<ol class="breadcrumb" id="path">
+			        <li id="0"><a href="#" onclick="reloadByPath(this)"><i class="fa fa-home"></i> Home</a></li>
+			    </ol>
 			</div>
 			<div class="col-md-12">
 				<div id="toolbar">
-				    <button id="remove" class="btn btn-danger" disabled>
-				        <i class="glyphicon glyphicon-remove"></i> Delete
+				    <button id="newFolder" class="btn btn-primary">
+				        <i class="fa fa-folder"></i> 新建文件夹
+				    </button>
+				    <button id="uploadFiles" class="btn btn-primary">
+				        <i class="fa fa-upload"></i> 上传文件
 				    </button>
 				</div>
 				<table id="resourceTable" class="table table-bordered table-striped dataTable" role="grid">
@@ -31,27 +36,30 @@
 	</section>
 	
 	<div class="modal" id="resourceModal">
-			<div class="modal-dialog">
+			<div class="modal-dialog">	
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"
 							aria-label="Close">
 							<span aria-hidden="true">×</span>
 						</button>
-						<h4 class="modal-title" id="resourceTitle">新增分院</h4>
+						<h4 class="modal-title" id="resourceTitle"></h4>
 					</div>
 					<div class="modal-body">
 						<form class="form-horizontal" id="resourceForm"
-							action="../resource/resource!save.action">
-							<input type="hidden" id="resource.resId" name="resource.resId" />
+							action="../resource/resource!update.action">
+							<input type="hidden" name="resource.resTeaId" value="${teacher.teaId }" />
+							<input type="hidden" id="resourceId" name="resource.resId" />
+							<input type="hidden" id="resourceType" name="resource.resType" value = "folder" />
 							<div class="box-body">
 								<div class="form-group">
-									<label class="col-sm-2">新文件名</label>
+									<label class="col-sm-2" id="labFile">文件名</label>
 									<div class="col-sm-10">
 										<input type="text" class="form-control" id="resourceName"
 											name="resource.resName" placeholder="新文件名">
 									</div>
 								</div>
+							</div>
 						</form>
 					</div>
 					<div class="modal-footer">
@@ -62,11 +70,109 @@
 				</div>
 			</div>
 		</div>
+		<div class="modal" id="newFolderModal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">×</span>
+						</button>
+						<h4 class="modal-title">新建文件夹</h4>
+					</div>
+					<div class="modal-body">
+						<form class="form-horizontal" id="newFolderForm"
+							action="../resource/resource!save.action">
+							<input type="hidden" name="resource.resTeaId" value="${teacher.teaId }" />
+							<input type="hidden" name="resource.resState" value="1"/>
+							<input type="hidden" name="resource.resParId" id="resourceParId" />
+							<input type="hidden" name="resource.resType" id="resourceTypeFolder" value = "folder" />
+							<div class="box-body">
+								<div class="form-group">
+									<label class="col-sm-2">新文件夹名</label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control" name="resource.resName" placeholder="新文件夹名">
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" id="newFolderSave" class="btn btn-primary">保存</button>
+						<button type="button" id="newFolderCancel" class="btn btn-default"
+							data-dismiss="modal">取消</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal" id="uploadFilesModal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">×</span>
+						</button>
+						<h4 class="modal-title">上传文件</h4>	
+					</div>
+					<div class="modal-body">
+						<form class="form-horizontal" id="uploadFilesForm" method="post" enctype="multipart/form-data"
+							action="../resource/resource!saveFiles.action">
+							<input type="hidden" name="resource.resTeaId" value="${teacher.teaId }" />
+							<input type="hidden" name="resource.resState" value="1"/>
+							<input type="hidden" name="resource.resParId" id="resourceParId2" />
+							<div class="box-body">
+								<div class="form-group">
+									<label class="col-sm-2">选择文件</label>
+									<div class="col-sm-10">
+										<input type="file" name="fff" multiple/>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" id="uploadFilesSave" class="btn btn-primary">保存</button>
+						<button type="button" id="uploadFilesCancel" class="btn btn-default"
+							data-dismiss="modal">取消</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal" id="movePathModal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">×</span>
+						</button>
+						<h4 class="modal-title">移动文件</h4>	
+					</div>
+					<div class="modal-body">
+						<div class="box-body">
+							<div class="form-group">
+								<label class="col-sm-2">选择路劲</label>
+								<div class="col-sm-10">
+									<div id="movePathTree"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" id="movePathSave" class="btn btn-primary">保存</button>
+						<button type="button" id="movePathCancel" class="btn btn-default"
+							data-dismiss="modal">取消</button>
+					</div>
+				</div>
+			</div>
+		</div>
 </body>
 <script type="text/javascript">
-	var resParId = "";
+	var resParId = 0 ;
 	$(function(){
 		initTable();
+		$('#resourceParId').val(resParId);
 	})
 	function initTable() {  
 	    //先销毁表格  
@@ -88,10 +194,11 @@
 	        //设置为undefined可以获取pageNumber，pageSize，searchText，sortName，sortOrder  
 	        //设置为limit可以获取limit, offset, search, sort, order  
 	        queryParamsType : "undefined",   
-	        queryParams: function queryParams(params) {   //设置查询参数 
+	        queryParams: function queryParams(params) {   //设置查询参数
 	            var param = {
-	                'resource.resName':params.searchText,
-	                'resource.resParId':resParId
+ 	                'resource.resName':params.searchText,
+	                'resource.resParId':resParId,
+	                'resource.resTeaId':'${teacher.teaId }'
 	            };
 	        	return param;
 	        },  
@@ -118,6 +225,12 @@
 	        onLoadSuccess: function(){  //加载成功时执行
 	        },  
 	        onLoadError: function(){  //加载失败时执行 
+	        },
+	        //onClickRow:function(){}
+	        onDblClickCell:function(field, value, row){
+	        	addPath(row.resId,row.resName);
+	        	resParId  = row.resId;
+		        $("#resourceTable").bootstrapTable('refresh');
 	        }
 		});
 	}
@@ -125,16 +238,18 @@
 	function operateFormatter(value, row, index) {
 	   var s="";
 	   s = s + '<a class="rename">重命名</a>';
-	   s = s + '<a class="move">移动 </a>';
-	   s = s + '<a class="remove">删除</a>';
-	   if(row.resState=="10"){
-		   s = s + '<a class="canel-download">取消开放下载</a>';
-	   }else if(value =="1" || value =="3"){
-		   s = s + '<a class="apply">开放下载</a>';
-	   }else if(value =="2"){
-		   s = s + '<a class="canel-apply">取消申请</a>';
+	   s = s + ' <a class="move">移动 </a>';
+	   s = s + ' <a class="remove">删除</a>';
+	   if(row.resType!="folder"){
+		   if(row.resState=="10"){
+			   s = s + ' <a class="canel-download">取消开放下载</a>';
+		   }else if(row.resState =="1" || row.resState =="3"){
+			   s = s + ' <a class="apply">开放下载</a>';
+		   }else if(row.resState =="2"){
+			   s = s + ' <a class="canel-apply">取消申请</a>';
+		   }
 	   }
-	   return [level].join('');
+	   return [s].join('');
 	}
 	function stateFormatter(value, row, index) {
 		var level="";
@@ -160,20 +275,20 @@
 		   updateResource(row.resId,0);
 	   },
 	   'click .canel-download': function (e, value, row, index) {
-		   updateResource(row.stuId,1);
+		   updateResource(row.resId,1);
 	   },
 	   'click .apply': function (e, value, row, index) {
 		   updateResource(row.resId,2);
 	   },
-	   'click .remove': function (e, value, row, index) {
-		   updateResource(row.resId,0);
+	   'click .canel-apply': function (e, value, row, index) {
+		   updateResource(row.resId,1);
 	   }
 	};
 	function renameResource(resId,resName){
-		if (stuId != null) {
+		if (resId != null || resId != '') {
 			$("#resourceTitle").html("重命名");
 			$("#resourceId").val(resId);
-			$("#resourceId").val(resName);
+			$("#resourceName").val(resName);
 		}
 		$('#resourceModal').modal('show');
 	}
@@ -182,7 +297,7 @@
 		$("#resourceForm").ajaxSubmit(function(data) {
 			if(testData(data)) {
 				bootbox.alert("操作成功");
-				($("#resourcetForm"))[0].reset();
+				($("#resourceForm"))[0].reset();
 		        $("#resourceTable").bootstrapTable('refresh');
 			}
 		})
@@ -194,23 +309,39 @@
 	});
 	
 	function moveResource(resId){
-		
+		$('#movePathModal').modal('show');
+		$.ajax({
+			url : '../resource/resource!folderTree.action',
+			type : 'POST', //GET
+			async : true, //或false,是否异步
+			dataType : 'json',
+			data:{
+				'resource.resTeaId':${teacher.teaId }
+			},
+			success : function(data, textStatus, jqXHR) {
+				var content =  data.content;
+				var $tree = $('#movePathTree').treeview({
+					data : content,
+					backColor: 'green'
+				})
+			}
+		})
 	}
 	
 	function updateResource(resId,state){
 		$.ajax({
-			url : '../resource/resource!save.action',
+			url : '../resource/resource!update.action',
 			type : 'POST', //GET
 			async : true, //或false,是否异步
 			data : {
-				'resource.resId' : stuId,
+				'resource.resId' : resId,
 				'resource.resState' : state
 			},	
 			dataType : 'json',
 			success : function(data, textStatus, jqXHR) {
 				if (data.result == "success") {
 					bootbox.alert("操作成功");
-			        $("#studentTable").bootstrapTable('refresh');
+			        $("#resourceTable").bootstrapTable('refresh');
 				} else {
 					bootbox.alert("操作失败");
 				}
@@ -218,5 +349,59 @@
 		})
 	}
 	
+	$('#newFolder').click(function(){
+		$('#resourceParId').val(resParId);
+		$('#newFolderModal').modal('show');
+	})
+	
+	$('#uploadFiles').click(function(){
+		$('#resourceParId2').val(resParId);
+		$('#uploadFilesModal').modal('show');
+	})
+	
+	
+
+	$("#uploadFilesSave").click(function() {
+		$("#uploadFilesForm").ajaxSubmit(function(data) {
+			if(testData(data)) {
+				bootbox.alert("操作成功");
+				($("#uploadFilesForm"))[0].reset();
+		        $("#resourceTable").bootstrapTable('refresh');
+			}
+		})
+		$('#uploadFilesModal').modal('hide');
+	});
+
+	$("#uploadFilesCancel").click(function() {
+		($("#uploadFilesForm"))[0].reset();
+	});
+	
+
+	$("#newFolderSave").click(function() {
+		$("#newFolderForm").ajaxSubmit(function(data) {
+			if(testData(data)) {
+				bootbox.alert("操作成功");
+				($("#newFolderForm"))[0].reset();
+		        $("#resourceTable").bootstrapTable('refresh');
+			}
+		})
+		$('#newFolderModal').modal('hide');
+	});
+
+	$("#newFolderCancel").click(function() {
+		($("#newFolderForm"))[0].reset();
+	});
+	
+	function addPath(id,name){
+        //<li id="0"><a href="#" onclick="reloadByPath(this)"><i class="fa fa-home"></i> Home</a></li>
+        var oldPath = $("#path").last().childNodes;
+        console.log(oldPath);
+        alert(oldPath)
+	}
+	
+	function reloadByPath(obj){
+		resParId = obj.parentNode.id;
+	    $("#resourceTable").bootstrapTable('refresh');
+	}
 </script>
 </html>

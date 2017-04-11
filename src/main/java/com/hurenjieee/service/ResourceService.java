@@ -24,7 +24,13 @@ public class ResourceService extends BaseService<Resource, Long> {
     }
 
     public List<Resource> getListByRea(Resource resource){
+        if(resource.getResName()==null || "undefined".equals(resource.getResName()))
+            resource.setResName("");
         return getDao().getListByHQL("from Resource r where r.resParId = ? and r.resTeaId = ? and r.resName like ? ",resource.getResParId(),resource.getResTeaId(),"%"+resource.getResName()+"%");
+    }
+
+    public List<Resource> getListByReaTeaId(Resource resource){
+        return getDao().getListByHQL("from Resource r where r.resTeaId = ? and r.resType = ? and r.resState <> 0 order by r.resId",resource.getResTeaId(),"folder");
     }
     
     public List<Resource> getListByReaAndApprove(Resource resource){

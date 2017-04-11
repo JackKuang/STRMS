@@ -36,6 +36,8 @@
 	<!-- 路径配置 -->
 	<constant name="struts.convention.result.path" value="" />
 	<constant name="struts.action.extension" value="action" />
+	<!-- 文件大小限制 -->
+	<constant name="struts.multipart.maxSize" value="1000000000"></constant>
 	<!-- 拦截器配置 -->
 	<package name="all" extends="struts-default">
 		<interceptors>
