@@ -17,162 +17,273 @@
 		<div class="row">
 			<div class="col-md-12">
 				<ol class="breadcrumb" id="path">
-			        <li id="0"><a href="#" onclick="reloadByPath(this)"><i class="fa fa-home"></i> Home</a></li>
-			    </ol>
+					<li id="0"><i class="fa fa-home"></i> Home</li>
+				</ol>
 			</div>
-			<div class="col-md-12">
+			<div class="col-md-12" id="tableDiv">
 				<div id="toolbar">
-				    <button id="newFolder" class="btn btn-primary">
-				        <i class="fa fa-folder"></i> 新建文件夹
-				    </button>
-				    <button id="uploadFiles" class="btn btn-primary">
-				        <i class="fa fa-upload"></i> 上传文件
-				    </button>
+					<button id="newFolder" class="btn btn-primary">
+						<i class="fa fa-folder"></i> 新建文件夹
+					</button>
+					<button id="uploadFiles" class="btn btn-primary">
+						<i class="fa fa-upload"></i> 上传文件
+					</button>
 				</div>
-				<table id="resourceTable" class="table table-bordered table-striped dataTable" role="grid">
+				<table id="resourceTable"
+					class="table table-bordered table-striped dataTable" role="grid">
 				</table>
 			</div>
-		</div>
-	</section>
-	
-	<div class="modal" id="resourceModal">
-			<div class="modal-dialog">	
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
-							<span aria-hidden="true">×</span>
-						</button>
-						<h4 class="modal-title" id="resourceTitle"></h4>
-					</div>
-					<div class="modal-body">
-						<form class="form-horizontal" id="resourceForm"
-							action="../resource/resource!update.action">
-							<input type="hidden" name="resource.resTeaId" value="${teacher.teaId }" />
-							<input type="hidden" id="resourceId" name="resource.resId" />
-							<input type="hidden" id="resourceType" name="resource.resType" value = "folder" />
-							<div class="box-body">
-								<div class="form-group">
-									<label class="col-sm-2" id="labFile">文件名</label>
-									<div class="col-sm-10">
-										<input type="text" class="form-control" id="resourceName"
-											name="resource.resName" placeholder="新文件名">
-									</div>
-								</div>
-							</div>
-						</form>
-					</div>
-					<div class="modal-footer">
-						<button type="button" id="resourceSave" class="btn btn-primary">保存</button>
-						<button type="button" id="resourceCancel" class="btn btn-default"
-							data-dismiss="modal">取消</button>
-					</div>
+			<div class="col-md-12" id="previewDiv">
+				<div id="toolbar">
+					<button id="previewBtn" class="btn btn-primary">
+						<i class="fa fa-upload"></i> 预览
+					</button>
 				</div>
-			</div>
-		</div>
-		<div class="modal" id="newFolderModal">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
-							<span aria-hidden="true">×</span>
-						</button>
-						<h4 class="modal-title">新建文件夹</h4>
+				<div class="box box-success">
+					<div class="box-header ui-sortable-handle" style="cursor: move;">
+						<i class="fa fa-comments-o"></i>
+						<h3 class="box-title">评论</h3>
 					</div>
-					<div class="modal-body">
-						<form class="form-horizontal" id="newFolderForm"
-							action="../resource/resource!save.action">
-							<input type="hidden" name="resource.resTeaId" value="${teacher.teaId }" />
-							<input type="hidden" name="resource.resState" value="1"/>
-							<input type="hidden" name="resource.resParId" id="resourceParId" />
-							<input type="hidden" name="resource.resType" id="resourceTypeFolder" value = "folder" />
-							<div class="box-body">
-								<div class="form-group">
-									<label class="col-sm-2">新文件夹名</label>
-									<div class="col-sm-10">
-										<input type="text" class="form-control" name="resource.resName" placeholder="新文件夹名">
-									</div>
-								</div>
+					<div class="slimScrollDiv"
+						style="position: relative; overflow: hidden; width: auto; height: 250px;">
+						<div class="box-body chat" id="chat-box"
+							style="overflow: hidden; width: auto; height: 250px;">
+							<!-- chat item -->
+							<div class="item">
+								<img src="../dist/img/user4-128x128.jpg" alt="user image"
+									class="online">
+								<p class="message">
+									<a href="#" class="name"> <small
+										class="text-muted pull-right"><i class="fa fa-clock-o"></i>
+											2:15</small> Mike Doe
+									</a> I would like to meet you to discuss the latest news about the
+									arrival of the new theme. They say it is going to be one the
+									best themes on the market
+								</p>
 							</div>
-						</form>
-					</div>
-					<div class="modal-footer">
-						<button type="button" id="newFolderSave" class="btn btn-primary">保存</button>
-						<button type="button" id="newFolderCancel" class="btn btn-default"
-							data-dismiss="modal">取消</button>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="modal" id="uploadFilesModal">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
-							<span aria-hidden="true">×</span>
-						</button>
-						<h4 class="modal-title">上传文件</h4>	
-					</div>
-					<div class="modal-body">
-						<form class="form-horizontal" id="uploadFilesForm" method="post" enctype="multipart/form-data"
-							action="../resource/resource!saveFiles.action">
-							<input type="hidden" name="resource.resTeaId" value="${teacher.teaId }" />
-							<input type="hidden" name="resource.resState" value="1"/>
-							<input type="hidden" name="resource.resParId" id="resourceParId2" />
-							<div class="box-body">
-								<div class="form-group">
-									<label class="col-sm-2">选择文件</label>
-									<div class="col-sm-10">
-										<input type="file" name="fff" multiple/>
-									</div>
-								</div>
+							<div class="item">
+								<img src="../dist/img/user3-128x128.jpg" alt="user image"
+									class="offline">
+
+								<p class="message">
+									<a href="#" class="name"> <small
+										class="text-muted pull-right"><i class="fa fa-clock-o"></i>
+											5:15</small> Alexander Pierce
+									</a> I would like to meet you to discuss the latest news about the
+									arrival of the new theme. They say it is going to be one the
+									best themes on the market
+								</p>
 							</div>
-						</form>
+							<div class="item">
+								<img src="../dist/img/user2-160x160.jpg" alt="user image"
+									class="offline">
+								<p class="message">
+									<a href="#" class="name"> <small
+										class="text-muted pull-right"><i class="fa fa-clock-o"></i>
+											5:30</small> Susan Doe
+									</a> I would like to meet you to discuss the latest news about the
+									arrival of the new theme. They say it is going to be one the
+									best themes on the market
+								</p>
+							</div>
+							<!-- /.item -->
+						</div>
+						<div class="slimScrollBar"
+							style="background: rgb(0, 0, 0); width: 7px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 184.911px;"></div>
+						<div class="slimScrollRail"
+							style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div>
 					</div>
-					<div class="modal-footer">
-						<button type="button" id="uploadFilesSave" class="btn btn-primary">保存</button>
-						<button type="button" id="uploadFilesCancel" class="btn btn-default"
-							data-dismiss="modal">取消</button>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="modal" id="movePathModal">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
-							<span aria-hidden="true">×</span>
-						</button>
-						<h4 class="modal-title">移动文件</h4>	
-					</div>
-					<div class="modal-body">
-						<div class="box-body">
-							<div class="form-group">
-								<label class="col-sm-2">选择路劲</label>
-								<div class="col-sm-10">
-									<div id="movePathTree"></div>
-								</div>
+					<!-- /.chat -->
+					<div class="box-footer">
+						<div class="input-group">
+							<input class="form-control" placeholder="Type message...">
+
+							<div class="input-group-btn">
+								<button type="button" class="btn btn-success">
+									<i class="fa fa-plus"></i>
+								</button>
 							</div>
 						</div>
 					</div>
-					<div class="modal-footer">
-						<button type="button" id="movePathSave" class="btn btn-primary">保存</button>
-						<button type="button" id="movePathCancel" class="btn btn-default"
-							data-dismiss="modal">取消</button>
-					</div>
 				</div>
 			</div>
 		</div>
+	</section>
+
+	<div class="modal" id="resourceModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+					<h4 class="modal-title" id="resourceTitle"></h4>
+				</div>
+				<div class="modal-body">
+					<form class="form-horizontal" id="resourceForm"
+						action="../resource/resource!update.action">
+						<input type="hidden" name="resource.resTeaId"
+							value="${teacher.teaId }" /> <input type="hidden"
+							id="resourceId" name="resource.resId" /> <input type="hidden"
+							id="resourceType" name="resource.resType" value="folder" />
+						<div class="box-body">
+							<div class="form-group">
+								<label class="col-sm-2" id="labFile">文件名</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" id="resourceName"
+										name="resource.resName" placeholder="新文件名">
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" id="resourceSave" class="btn btn-primary">保存</button>
+					<button type="button" id="resourceCancel" class="btn btn-default"
+						data-dismiss="modal">取消</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal" id="newFolderModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+					<h4 class="modal-title">新建文件夹</h4>
+				</div>
+				<div class="modal-body">
+					<form class="form-horizontal" id="newFolderForm"
+						action="../resource/resource!save.action">
+						<input type="hidden" name="resource.resTeaId"
+							value="${teacher.teaId }" /> <input type="hidden"
+							name="resource.resState" value="1" /> <input type="hidden"
+							name="resource.resParId" id="resourceParId" /> <input
+							type="hidden" name="resource.resType" id="resourceTypeFolder"
+							value="folder" />
+						<div class="box-body">
+							<div class="form-group">
+								<label class="col-sm-2">新文件夹名</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" name="resource.resName"
+										placeholder="新文件夹名">
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" id="newFolderSave" class="btn btn-primary">保存</button>
+					<button type="button" id="newFolderCancel" class="btn btn-default"
+						data-dismiss="modal">取消</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal" id="uploadFilesModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+					<h4 class="modal-title">上传文件</h4>
+				</div>
+				<div class="modal-body">
+					<form class="form-horizontal" id="uploadFilesForm" method="post"
+						enctype="multipart/form-data"
+						action="../resource/resource!saveFiles.action">
+						<input type="hidden" name="resource.resTeaId"
+							value="${teacher.teaId }" /> <input type="hidden"
+							name="resource.resState" value="1" /> <input type="hidden"
+							name="resource.resParId" id="resourceParId2" />
+						<div class="box-body">
+							<div class="form-group">
+								<label class="col-sm-2">选择文件</label>
+								<div class="col-sm-10">
+									<input type="file" name="fff" multiple />
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" id="uploadFilesSave" class="btn btn-primary">保存</button>
+					<button type="button" id="uploadFilesCancel"
+						class="btn btn-default" data-dismiss="modal">取消</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal" id="movePathModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+					<h4 class="modal-title">移动文件</h4>
+				</div>
+				<input type="hidden" id="resourceIdMove" />
+				<div class="modal-body">
+					<div class="box-body">
+						<div class="form-group">
+							<label class="col-sm-2">选择路径</label>
+							<div class="col-sm-10">
+								<div id="movePathTree"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" id="movePathSave" class="btn btn-primary">保存</button>
+					<button type="button" id="movePathCancel" class="btn btn-default"
+						data-dismiss="modal">取消</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal" id="videoDiv">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-body">
+					<video id="video" width="100%" controls="controls">您的浏览器不支持此种视频格式。</video> 
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal" id="audioDiv">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-body">
+					<audio id="audio" src="" width="100%">您的浏览器不支持此种音频格式。</audio>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal" id="imageDiv">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-body">
+					<img id="image" src="" width="100%">
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 <script type="text/javascript">
 	var resParId = 0 ;
+	var res;
 	$(function(){
 		initTable();
 		$('#resourceParId').val(resParId);
+		$("#previewDiv").hide();
 	})
 	function initTable() {  
 	    //先销毁表格  
@@ -207,10 +318,11 @@
 	            title: '文件名'
 	        },{  
 	            field: 'resSize',
-	            title: '文件大小'
+	            title: '文件大小',
+	            formatter: sizeFormatter
 	        },{ 
 	            field: 'resUploadTime',
-	            title: '文件大小'
+	            title: '上传时间'
 	        },{ 
 	            field: 'resState',
 	            title: '文件状态',
@@ -228,19 +340,28 @@
 	        },
 	        //onClickRow:function(){}
 	        onDblClickCell:function(field, value, row){
-	        	addPath(row.resId,row.resName);
-	        	resParId  = row.resId;
-		        $("#resourceTable").bootstrapTable('refresh');
+				addPath(row.resId,row.resName);
+		        if(row.resType=="folder"){
+					resParId  = row.resId;
+					$("#resourceTable").bootstrapTable('refresh');
+				}else{
+					res = row;
+					$("#tableDiv").hide();
+					$("#previewDiv").show();
+				}
 	        }
 		});
 	}
 	
 	function operateFormatter(value, row, index) {
 	   var s="";
-	   s = s + '<a class="rename">重命名</a>';
-	   s = s + ' <a class="move">移动 </a>';
+	  		s = s + '<a class="rename">重命名</a>';
+	   if(row.resType!="folder"){
+	   		s = s + ' <a class="move">移动 </a>';
+	   }
 	   s = s + ' <a class="remove">删除</a>';
 	   if(row.resType!="folder"){
+		   s = s + ' <a class="download">下载</a>';
 		   if(row.resState=="10"){
 			   s = s + ' <a class="canel-download">取消开放下载</a>';
 		   }else if(row.resState =="1" || row.resState =="3"){
@@ -250,6 +371,24 @@
 		   }
 	   }
 	   return [s].join('');
+	}
+	function sizeFormatter(value, row, index) {
+		if(row.resType!="folder"){
+			var danwei ="B";
+			if(value > 1024){
+				value = value/1024;
+				danwei ="KB";
+			}
+			if(value > 1024){
+				value = value/1024;
+				danwei ="MB";
+			}
+			if(value > 1024){
+				value = value/1024;
+				danwei ="GB";
+			}
+		   return [parseFloat(value).toFixed(2)+danwei].join('');
+		}
 	}
 	function stateFormatter(value, row, index) {
 		var level="";
@@ -282,8 +421,12 @@
 	   },
 	   'click .canel-apply': function (e, value, row, index) {
 		   updateResource(row.resId,1);
+	   },
+	   'click .download': function (e, value, row, index) {
+		   downloadResource(row.resId);
 	   }
 	};
+	
 	function renameResource(resId,resName){
 		if (resId != null || resId != '') {
 			$("#resourceTitle").html("重命名");
@@ -309,6 +452,7 @@
 	});
 	
 	function moveResource(resId){
+		$('#resourceIdMove').val(resId);
 		$('#movePathModal').modal('show');
 		$.ajax({
 			url : '../resource/resource!folderTree.action',
@@ -316,7 +460,7 @@
 			async : true, //或false,是否异步
 			dataType : 'json',
 			data:{
-				'resource.resTeaId':${teacher.teaId }
+				'resource.resTeaId':'${teacher.teaId }'
 			},
 			success : function(data, textStatus, jqXHR) {
 				var content =  data.content;
@@ -327,7 +471,37 @@
 			}
 		})
 	}
-	
+
+	function downloadResource(resId){
+		window.location.href='../resource/resource!downloadFile.action?resource.resId='+resId;
+	}
+
+	$("#movePathSave").click(function() {
+		var arr = $('#movePathTree').treeview('getSelected');
+		var resId = $('#resourceIdMove').val();
+		if(arr.length==0){
+			bootbox.alert("请选择一个文件夹");
+		}
+		$.ajax({
+			url : '../resource/resource!update.action',
+			type : 'POST', //GET
+			async : true, //或false,是否异步
+			data : {
+				'resource.resId' : resId,
+				'resource.resParId' : arr[0].id
+			},	
+			dataType : 'json',
+			success : function(data, textStatus, jqXHR) {
+				if (data.result == "success") {
+					bootbox.alert("操作成功");
+			        $("#resourceTable").bootstrapTable('refresh');
+				} else {
+					bootbox.alert("操作失败");
+				}
+			}
+		})
+		$('#movePathModal').modal('hide');
+	});
 	function updateResource(resId,state){
 		$.ajax({
 			url : '../resource/resource!update.action',
@@ -359,8 +533,6 @@
 		$('#uploadFilesModal').modal('show');
 	})
 	
-	
-
 	$("#uploadFilesSave").click(function() {
 		$("#uploadFilesForm").ajaxSubmit(function(data) {
 			if(testData(data)) {
@@ -394,14 +566,53 @@
 	
 	function addPath(id,name){
         //<li id="0"><a href="#" onclick="reloadByPath(this)"><i class="fa fa-home"></i> Home</a></li>
-        var oldPath = $("#path").last().childNodes;
-        console.log(oldPath);
-        alert(oldPath)
+        var oldPath = $("#path li:last-child").html();
+        var newPath = '<a href="#" onclick="reloadByPath(this)">' + oldPath + '</a>';
+        $("#path li:last-child").html(newPath);
+        $("#path").append('<li id="'+id+'">'+name+'</li>');
 	}
-	
+
 	function reloadByPath(obj){
-		resParId = obj.parentNode.id;
+		$("#tableDiv").show();
+		$("#previewDiv").hide();
+	    var arr = $("#path li");
+	    var state = false;
+	    resParId = obj.parentNode.id;
+	    for(var i=0;i<arr.length;i++){
+		    if(state==true){
+		    	arr[i].remove();
+			}
+		    if(arr[i].id == resParId){
+			    state = true;
+			}
+		}
+		//去掉a标签
+        $("#path li:last-child").html($("#path li:last-child a").html());
 	    $("#resourceTable").bootstrapTable('refresh');
 	}
+
+	var videoType = new Array("OGG","MP4","BMW","MP3");
+	var imageType = new Array("JPG","JPEG","PNG");
+	var textType = new Array("txt","mp4","BMW");
+	
+	$('#previewBtn').click(function(){
+		var url = '../resource/resource!downloadFile.action?resource.resId='+res.resId;
+		///resource/resource!d"ownload.action?resource.resId=62
+		for(var i=0;i<videoType.length;i++){
+			if(res.resType == videoType[i]){
+				$('#videoDiv').modal('show');
+				$('#video').attr('src',url);
+				return;
+			}
+		}
+		for(var i=0;i<imageType.length;i++){
+			if(res.resType == imageType[i]){
+				$('#imageDiv').modal('show');
+				$('#image').attr('src',url);
+				return;
+			}
+		}
+		bootbox.alert("此类文件不支持预览！");
+	});
 </script>
 </html>

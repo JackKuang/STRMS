@@ -21,7 +21,7 @@ public class Resource implements java.io.Serializable {
     private String resName;
     private String resType;
     private Integer resState;
-    private Double   resSize;
+    private Long   resSize;
     private Long   resParId;
     private Long   resTeaId;
     private Date   resUploadTime;
@@ -133,11 +133,11 @@ public class Resource implements java.io.Serializable {
     }
 
     @Column(name = "res_size")
-    public Double getResSize(){
+    public Long getResSize(){
         return resSize;
     }
     
-    public void setResSize(Double resSize){
+    public void setResSize(Long resSize){
         this.resSize = resSize;
     }
 

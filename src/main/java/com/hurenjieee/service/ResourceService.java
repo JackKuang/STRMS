@@ -26,7 +26,7 @@ public class ResourceService extends BaseService<Resource, Long> {
     public List<Resource> getListByRea(Resource resource){
         if(resource.getResName()==null || "undefined".equals(resource.getResName()))
             resource.setResName("");
-        return getDao().getListByHQL("from Resource r where r.resParId = ? and r.resTeaId = ? and r.resName like ? ",resource.getResParId(),resource.getResTeaId(),"%"+resource.getResName()+"%");
+        return getDao().getListByHQL("from Resource r where r.resParId = ? and r.resTeaId = ? and r.resName like ? and r.resState <> 0 ",resource.getResParId(),resource.getResTeaId(),"%"+resource.getResName()+"%");
     }
 
     public List<Resource> getListByReaTeaId(Resource resource){
@@ -50,5 +50,7 @@ public class ResourceService extends BaseService<Resource, Long> {
         if (resource.getResTeaId() != null && !"".equals(resource.getResTeaId())) sql.append("and res_tea_id = " + resource.getResTeaId() + " ");
         getDao().querySql(sql.toString());
     }
-
+    public Resource getById(Long resId){
+    	return getDao().getByHQL("from  Resource r where r.resId = ? ", resId);
+    }
 }

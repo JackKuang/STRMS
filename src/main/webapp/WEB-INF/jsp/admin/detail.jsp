@@ -17,7 +17,6 @@
 
 	<!-- Main content -->
 	<section class="content">
-
 		<div class="row">
 			<div class="col-md-6">
 				<!-- Profile Image -->
