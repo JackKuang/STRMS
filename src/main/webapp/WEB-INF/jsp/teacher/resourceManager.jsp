@@ -33,47 +33,26 @@
 					class="table table-bordered table-striped dataTable" role="grid">
 				</table>
 			</div>
-			<div class="col-md-12" id="previewDiv">
+			<div class="col-md-12" id="previewOperateDiv" style="padding-bottom: 10px;">
 				<div id="toolbar">
 					<button id="previewBtn" class="btn btn-primary">
-						<i class="fa fa-upload"></i> 预览
+						<i class="fa fa-eye"></i> 预览
+					</button>
+					<button id="downloadBtn" class="btn btn-primary">
+						<i class="fa fa-download"></i> 下载
 					</button>
 				</div>
+			</div>
+			<div class="col-md-12" id="previewDiv">
 				<div class="box box-success">
 					<div class="box-header ui-sortable-handle" style="cursor: move;">
 						<i class="fa fa-comments-o"></i>
 						<h3 class="box-title">评论</h3>
 					</div>
 					<div class="slimScrollDiv"
-						style="position: relative; overflow: hidden; width: auto; height: 250px;">
-						<div class="box-body chat" id="chat-box"
-							style="overflow: hidden; width: auto; height: 250px;">
-							<!-- chat item -->
-							<div class="item">
-								<img src="../dist/img/user4-128x128.jpg" alt="user image"
-									class="online">
-								<p class="message">
-									<a href="#" class="name"> <small
-										class="text-muted pull-right"><i class="fa fa-clock-o"></i>
-											2:15</small> Mike Doe
-									</a> I would like to meet you to discuss the latest news about the
-									arrival of the new theme. They say it is going to be one the
-									best themes on the market
-								</p>
-							</div>
-							<div class="item">
-								<img src="../dist/img/user3-128x128.jpg" alt="user image"
-									class="offline">
-
-								<p class="message">
-									<a href="#" class="name"> <small
-										class="text-muted pull-right"><i class="fa fa-clock-o"></i>
-											5:15</small> Alexander Pierce
-									</a> I would like to meet you to discuss the latest news about the
-									arrival of the new theme. They say it is going to be one the
-									best themes on the market
-								</p>
-							</div>
+						style="position: relative; overflow: hidden; width: auto; height: 500px;">
+						<div class="box-body chat" style="overflow: hidden; width: auto; height: 500px; overflow-y:auto;" id="commentDiv">
+							<!-- 
 							<div class="item">
 								<img src="../dist/img/user2-160x160.jpg" alt="user image"
 									class="offline">
@@ -85,7 +64,7 @@
 									arrival of the new theme. They say it is going to be one the
 									best themes on the market
 								</p>
-							</div>
+							</div> -->
 							<!-- /.item -->
 						</div>
 						<div class="slimScrollBar"
@@ -96,10 +75,9 @@
 					<!-- /.chat -->
 					<div class="box-footer">
 						<div class="input-group">
-							<input class="form-control" placeholder="Type message...">
-
+							<input class="form-control" placeholder="说句话吧。。。" id="comContent">
 							<div class="input-group-btn">
-								<button type="button" class="btn btn-success">
+								<button type="button" class="btn btn-success" id="comSave">
 									<i class="fa fa-plus"></i>
 								</button>
 							</div>
@@ -276,6 +254,16 @@
 			</div>
 		</div>
 	</div>
+	
+	<div class="modal" id="textDiv">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-body">
+					<p id="text"></p>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 <script type="text/javascript">
 	var resParId = 0 ;
@@ -284,6 +272,7 @@
 		initTable();
 		$('#resourceParId').val(resParId);
 		$("#previewDiv").hide();
+		$("#previewOperateDiv").hide();
 	})
 	function initTable() {  
 	    //先销毁表格  
@@ -348,6 +337,8 @@
 					res = row;
 					$("#tableDiv").hide();
 					$("#previewDiv").show();
+					$("#previewOperateDiv").show();
+					loadComment();
 				}
 	        }
 		});
@@ -389,6 +380,7 @@
 			}
 		   return [parseFloat(value).toFixed(2)+danwei].join('');
 		}
+		
 	}
 	function stateFormatter(value, row, index) {
 		var level="";
@@ -575,6 +567,7 @@
 	function reloadByPath(obj){
 		$("#tableDiv").show();
 		$("#previewDiv").hide();
+		$("#previewOperateDiv").show();
 	    var arr = $("#path li");
 	    var state = false;
 	    resParId = obj.parentNode.id;
@@ -593,7 +586,7 @@
 
 	var videoType = new Array("OGG","MP4","BMW","MP3");
 	var imageType = new Array("JPG","JPEG","PNG");
-	var textType = new Array("txt","mp4","BMW");
+	var textType = new Array("TXT","JAVA","CSS","JS","JSON");
 	
 	$('#previewBtn').click(function(){
 		var url = '../resource/resource!downloadFile.action?resource.resId='+res.resId;
@@ -612,7 +605,160 @@
 				return;
 			}
 		}
+		for(var i=0;i<textType.length;i++){
+			if(res.resType == textType[i]){
+				$('#textDiv').modal('show');
+				loadText(url);
+				return;
+			}
+		}
 		bootbox.alert("此类文件不支持预览！");
 	});
+	
+	$('#downloadBtn').click(function(){
+		window.location.href='../resource/resource!downloadFile.action?resource.resId='+res.resId;
+	});
+	
+	function loadText(url){
+	    $('#text').text('');           
+		$.ajax({  
+	        type: "get",  
+	        url: url,  
+	        dataType: "text",  
+	        timeout: 100000, //超时时间：100秒  
+	        success: function(data){//1m的文本                   
+	                    if(data.length>1024000)  
+	                        {  
+	                            var originLength=data.length;  
+	                            data=data.substring(0,1024000);                               
+	                            replaceAndAppendData(data,$("#textareaShowTextOfProduct"),10240,function(){  
+	                                $("#textareaShowTextOfProduct").text("<br/>...............省略"+(originLength-data.length)+"个长度的内容<br/>");  
+	                            });  
+	  
+	                        }else{  
+	                            replaceAndAppendData(data,$("#textareaShowTextOfProduct"),10240);  
+	                        }  
+	                 },  
+	        error:function(XMLHttpRequest, textStatus, errorThrown){  
+	         }  
+	    });  
+	}
+	var replaceAndAppendDataRe;  
+    /** 
+    *替换相关符号，并将之追加在dom节点上 
+    *count表示将数据分为多少份 
+    *countLength,每一次处理的数据量 
+    *callBack执行完毕之后的回调函数 
+    **/  
+    function replaceAndAppendData(data,obj,countLength,callBack){  
+        if(countLength<0) countLength=10240;  
+        if(countLength>51200) countLength=51200;  
+        //var countLength=data.length/count;//每一份的长度  
+        var startStr=0;//当前开始的字符串  
+        replaceAndAppendDataRe=function(){
+			if(startStr<data.length){  
+			    var tmpData=data.substring(startStr,startStr+countLength);  
+			    var startT=new Date().getTime(); 
+			    tmpData=tmpData.replace(/\n/g,"<br>");  
+                tmpData=tmpData.replace(/[ ]/g," ");
+			    var endT=new Date().getTime();  
+			    var spaceT=endT-startT;  
+			    if(spaceT<15) spaceT=15;  
+			    if(spaceT>250){  
+			        countLength=String.parseInt(countLength*0.75+"");  
+			    }  
+			    $('#text').append(tmpData);               
+			    setTimeout("replaceAndAppendDataRe()",spaceT);  
+            }else{  
+                if(typeof callBack!='undefined'&&callBack!=null){  
+                    callBack();  
+                }  
+            }     
+                startStr=startStr+countLength;  
+        };  
+        replaceAndAppendDataRe();  
+    }  
+    /* 
+    <div class="item">
+	<img src="../dist/img/user2-160x160.jpg" alt="user image"
+		class="offline">
+	<p class="message">
+		<a href="#" class="name"> <small
+			class="text-muted pull-right"><i class="fa fa-clock-o"></i>
+				5:30</small> Susan Doe
+		</a> I would like to meet you to discuss the latest news about the
+		arrival of the new theme. They say it is going to be one the
+		best themes on the market
+	</p> */
+	
+
+	$('#comSave').click(function(){
+		var content = $('#comContent').val();
+		if(content==""){
+			bootbox.alert("请输入内容!");
+		}
+		$.ajax({
+			url : '../resource/comment!save.action',
+			type : 'POST', //GET
+			async : true, //或false,是否异步
+			data : {
+				'comment.comResId' : res.resId,
+				'comment.comContent' : content,
+			},	
+			dataType : 'json',
+			success : function(data, textStatus, jqXHR) {
+				if (data.result == "success") {
+					bootbox.alert("评论成功");
+					loadComment();
+				} else {
+					bootbox.alert("操作失败");
+				}
+			}
+		})		
+	});
+	
+	function loadComment(){
+		$.ajax({
+			url : '../resource/comment!getListByComResId.action',
+			type : 'POST', //GET
+			async : true, //或false,是否异步
+			data : {
+				'comment.comResId' : res.resId
+			},	
+			dataType : 'json',
+			success : function(data, textStatus, jqXHR) {
+				if (data.result == "success") {
+					$('#commentDiv').html('');
+					var content = data.content;
+					console.log(content)
+					for(var i=0;i<content.length;i++){
+						var comment = content[i];
+						var str = '';
+						str += '<div class="item">';
+						str += '<img src="../dist/img/user2-160x160.jpg" alt="user image" class="offline">';
+						str += '<p class="message">';
+						str += '<span class="name">';
+						str += '<small class="text-muted pull-right"><i class="fa fa-clock-o"></i>'+content[i].comDate+'</small>';
+						str += content[i].comRoleName + '</span>';
+						str += content[i].comContent+ '</p></div>';
+						$('#commentDiv').append(str);
+					}
+				}
+			}
+		})
+	}
+
+    /* 
+    <div class="item">
+	<img src="../dist/img/user2-160x160.jpg" alt="user image"
+		class="offline">
+	<p class="message">
+		<a href="#" class="name"> <small
+			class="text-muted pull-right"><i class="fa fa-clock-o"></i>
+				5:30</small> Susan Doe
+		</a> I would like to meet you to discuss the latest news about the
+		arrival of the new theme. They say it is going to be one the
+		best themes on the market
+	</p> */
 </script>
 </html>
