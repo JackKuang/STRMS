@@ -153,7 +153,22 @@ public class ResourceAction extends BaseAction<Resource, Long> {
         }
         return "jsonSon";
     }
-    
+    public String pageCheck(){
+        try {
+            resultMapSon = new HashMap<String, Object>();
+            Map<String,Object> map = getSessionMap();
+            //获取到文件List
+            List<Resource> resourceList = resourceService.getListToCheck(resource);
+            resultMapSon.put("result","success");
+            resultMapSon.put("rows",resourceList);
+            resultMapSon.put("path","path");
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultMapSon.put("result","fail");
+            resultMapSon.put("reason","未知错误！");
+        }
+        return "jsonSon";
+    }
 
     public String update(){
         try {

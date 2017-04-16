@@ -27,54 +27,16 @@
 					role="button"> <span class="sr-only">Toggle navigation</span> <span
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
-				</a>
+				</a>	
 
 				<!-- FUNCTION	自定义用户菜单  -->
 				<div class="navbar-custom-menu">
 					<ul class="nav navbar-nav">
 						<!-- Messages: style can be found in dropdown.less-->
-						<li class="dropdown messages-menu"><a href="#"
-							class="dropdown-toggle" data-toggle="dropdown"> <i
-								class="fa fa-envelope-o"></i> <span class="label label-success">4</span>
-						</a>
-							<ul class="dropdown-menu">
-								<li class="header">你有X条消息</li>
-								<li>
-									<!-- inner menu: contains the actual data -->
-									<ul class="menu">
-										<li>
-											<!-- start message --> <a href="#">
-												<div class="pull-left">
-													<img src="../dist/img/user2-160x160.jpg" class="img-circle"
-														alt="User Image">
-												</div>
-												<h4>
-													丁XX老师 <small><i class="fa fa-clock-o"></i> 1小时之前</small>
-												</h4>
-												<p>上传了资源xx.avi</p>
-										</a>
-										</li>
-										<!-- end message -->
-										<li>
-											<!-- start message --> <a href="#">
-												<div class="pull-left">
-													<img src="../dist/img/user2-160x160.jpg" class="img-circle"
-														alt="User Image">
-												</div>
-												<h4>
-													丁XX老师 <small><i class="fa fa-clock-o"></i> 1小时之前</small>
-												</h4>
-												<p>上传了资源xx.avi</p>
-										</a>
-										</li>
-
-									</ul>
-								</li>
-								<li class="footer"><a href="#">查看所有消息</a></li>
-							</ul></li>
-						<!-- Notifications: style can be found in dropdown.less -->
 
 						<!-- User Account: style can be found in dropdown.less -->
+						
+							
 						<li class="dropdown user user-menu"><a href="#"
 							class="dropdown-toggle" data-toggle="dropdown"> <img
 								src="../dist/img/user2-160x160.jpg" class="user-image"
@@ -124,9 +86,9 @@
 				<!-- sidebar menu: : style can be found in sidebar.less -->
 				<ul class="nav sidebar-menu">
 					<li class="header">主导航</li>
-					<li><a href="#" onclick="redirectPage('index')" class='active'> <i
+					<!-- <li><a href="#" onclick="redirectPage('index')" class='active'> <i
 							class="fa fa-navicon"></i> <span>系统信息查看</span>
-					</a></li>
+					</a></li> -->
 					<li><a href="#" onclick="redirectPage('systemConfig')"> <i
 							class="fa fa-wrench"></i> <span>属性配置</span>
 					</a></li>
@@ -135,6 +97,9 @@
 					</a></li>
 					<li><a href="#" onclick="redirectPage('studentManager')">
 							<i class="fa fa-users"></i> <span>学生管理</span>
+					</a></li>
+					<li><a href="#" onclick="redirectPage('resourceManager')">
+							<i class="fa fa-navicon"></i> <span>资源审核</span>
 					</a></li>
 				</ul>
 			</section>
@@ -173,5 +138,8 @@
 	function exit(){
 		location.href="../login!exit.action";
 	}
+	$('.dropdown').click(function(){
+		$(this).addClass('open');
+	})
 </script>
 </html>

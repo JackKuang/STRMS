@@ -23,6 +23,7 @@ import com.opensymphony.xwork2.ActionSupport;
         @Result(name = "systemConfig",location = "/WEB-INF/jsp/admin/systemConfig.jsp"),
         @Result(name = "teacherManager",location = "/WEB-INF/jsp/admin/teacherManager.jsp"),
         @Result(name = "studentManager",location = "/WEB-INF/jsp/admin/studentManager.jsp"),
+        @Result(name = "resourceManager",location = "/WEB-INF/jsp/admin/resourceManager.jsp"),
         @Result(name = "detail",location = "/WEB-INF/jsp/admin/detail.jsp") })
 public class AdminAction extends ActionSupport {
 
@@ -56,6 +57,9 @@ public class AdminAction extends ActionSupport {
            //学生管理
             systemConfig();
             return "studentManager";
+        } else if ("resourceManager".equals(flag)) {
+           //学生管理
+            return "resourceManager";
         } else {
             return "detail";
         }
