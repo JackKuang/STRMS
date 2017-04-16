@@ -403,5 +403,6 @@
 		resParId = obj.parentNode.id;
 	    $("#resourceTable").bootstrapTable('refresh');
 	}
+	function test(){}
 </script>
 </html>
