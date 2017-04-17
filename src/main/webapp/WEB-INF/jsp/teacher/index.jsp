@@ -109,7 +109,7 @@
 		<aside class="main-sidebar">
 			<!-- sidebar: style can be found in sidebar.less -->
 			<section class="sidebar">
-				<!-- Sidebar user panel -->
+				<!-- Sidebar user panel -->	
 				<div class="user-panel">
 					<div class="pull-left image">
 						<img src="../dist/img/user2-160x160.jpg" class="img-circle"
@@ -124,15 +124,15 @@
 				<!-- sidebar menu: : style can be found in sidebar.less -->
 				<ul class="nav sidebar-menu">
 					<li class="header">主导航</li>
-					<li><a href="#" onclick="redirectPage('index')" class='active'> <i
+					<!-- <li><a href="#" onclick="redirectPage('index')" class='active'> <i
 							class="fa fa-navicon"></i> <span>消息查看</span>
-					</a></li>
+					</a></li> -->
 					<li><a href="#" onclick="redirectPage('resourceManager')"> <i
 							class="fa fa-wrench"></i> <span>资源管理</span>
 					</a></li>
-					<li><a href="#" onclick="redirectPage('messageManager')"> <i
+					<!-- <li><a href="#" onclick="redirectPage('messageManager')"> <i
 							class="fa fa-wrench"></i> <span>最新消息</span>
-					</a></li>
+					</a></li> -->
 				</ul>
 			</section>
 			<!-- /.sidebar -->
@@ -160,7 +160,7 @@
 			$('ul.nav > li').removeClass('active');
 			$(this).addClass('active');
 		});
-		redirectPage("index");
+		redirectPage("resourceManager");
 	});
 
 	function redirectPage(flag) {

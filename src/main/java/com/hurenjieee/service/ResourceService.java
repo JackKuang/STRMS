@@ -25,33 +25,34 @@ public class ResourceService extends BaseService<Resource, Long> {
     }
 
     public List<Resource> getListByRea(Resource resource){
-    	String name;
-	    if(resource==null || resource.getResName()==null || "undefined".equals(resource.getResName())){
-	        name = "";
-	    }
-	    else{
-	    	name= resource.getResName();
-	    }
-        return getDao().getListByHQL("from Resource r where r.resParId = ? and r.resTeaId = ? and r.resName like ? and r.resState <> 0 ",resource.getResParId(),resource.getResTeaId(),"%"+name+"%");
-    }
-    
-    public List<Resource> getListToCheck(Resource resource){
-    	String name;
-        if(resource==null || resource.getResName()==null || "undefined".equals(resource.getResName())){
+        String name;
+        if (resource == null || resource.getResName() == null || "undefined".equals(resource.getResName())) {
             name = "";
+        } else {
+            name = resource.getResName();
         }
-        else{
-        	name= resource.getResName();
+        return getDao().getListByHQL("from Resource r where r.resParId = ? and r.resTeaId = ? and r.resName like ? and r.resState <> 0 ",resource.getResParId(),
+                resource.getResTeaId(),"%" + name + "%");
+    }
+
+    public List<Resource> getListToCheck(Resource resource){
+        String name;
+        if (resource == null || resource.getResName() == null || "undefined".equals(resource.getResName())) {
+            name = "";
+        } else {
+            name = resource.getResName();
         }
-    	return getDao().getListByHQL("from Resource r where r.resState = ? and r.resName like ? ", 2,"%"+name+"%");
+        return getDao().getListByHQL("from Resource r where r.resState = ? and r.resName like ? ",2,"%" + name + "%");
     }
 
     public List<Resource> getListByReaTeaId(Resource resource){
-        return getDao().getListByHQL("from Resource r where r.resTeaId = ? and r.resType = ? and r.resState <> 0 order by r.resId",resource.getResTeaId(),"folder");
+        return getDao().getListByHQL("from Resource r where r.resTeaId = ? and r.resType = ? and r.resState <> 0 order by r.resId",resource.getResTeaId(),
+                "folder");
     }
-    
+
     public List<Resource> getListByReaAndApprove(Resource resource){
-        return getDao().getListByHQL("from Resource r where r.resState = 10 and r.resParId = ? and r.resTeaId = ? and r.resName like ? ",resource.getResParId(),resource.getResTeaId(),"%"+resource.getResName()+"%");
+        return getDao().getListByHQL("from Resource r where r.resState = 10 and r.resParId = ? and r.resTeaId = ? and r.resName like ? ",resource.getResParId(),
+                resource.getResTeaId(),"%" + resource.getResName() + "%");
     }
 
     public void updateCustom(Resource resource){
@@ -61,10 +62,10 @@ public class ResourceService extends BaseService<Resource, Long> {
         if (resource.getResState() != null && !"".equals(resource.getResState())) sql.append("res_state = " + resource.getResState() + ",");
         if (resource.getResParId() != null && !"".equals(resource.getResParId())) sql.append("res_par_id = " + resource.getResParId() + ",");
         if (resource.getResAdmId() != null && !"".equals(resource.getResAdmId())) {
-        	sql.append("res_adm_id = " + resource.getResAdmId() + ",");
-        	Date date = new Date();
-        	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        	sql.append("res_apply_time = '" + sdf.format(date) + "',");
+            sql.append("res_adm_id = " + resource.getResAdmId() + ",");
+            Date date = new Date();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+            sql.append("res_apply_time = '" + sdf.format(date) + "',");
         }
         sql.deleteCharAt(sql.length() - 1);
         sql.append(" where res_id = " + resource.getResId() + " ");
@@ -72,7 +73,8 @@ public class ResourceService extends BaseService<Resource, Long> {
         if (resource.getResTeaId() != null && !"".equals(resource.getResTeaId())) sql.append("and res_tea_id = " + resource.getResTeaId() + " ");
         getDao().querySql(sql.toString());
     }
+
     public Resource getById(Long resId){
-    	return getDao().getByHQL("from  Resource r where r.resId = ? ", resId);
+        return getDao().getByHQL("from  Resource r where r.resId = ? ",resId);
     }
 }

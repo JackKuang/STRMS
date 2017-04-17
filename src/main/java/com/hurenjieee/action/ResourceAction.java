@@ -23,8 +23,11 @@ import org.springframework.context.annotation.Scope;
 import com.hurenjieee.entity.Resource;
 import com.hurenjieee.entity.Teacher;
 import com.hurenjieee.service.BaseService;
+import com.hurenjieee.service.BranchService;
 import com.hurenjieee.service.ResourceService;
+import com.hurenjieee.service.TeacherService;
 import com.hurenjieee.util.BaseAction;
+import com.hurenjieee.util.PageResults;
 
 @ParentPackage(value = "json") // 应用全局包
 @Scope("prototype")
@@ -52,6 +55,16 @@ public class ResourceAction extends BaseAction<Resource, Long> {
     
     private FileInputStream fileInputStream;
     
+    @Autowired
+    TeacherService teacherService;
+
+    @Autowired
+    BranchService branchService;
+    
+    Teacher       teacher;
+
+    private Integer pageNumber;
+    private Integer pageSize;
     @Override
     public BaseService<Resource, Long> getService(){
         // TODO Auto-generated method stub
@@ -134,14 +147,40 @@ public class ResourceAction extends BaseAction<Resource, Long> {
     public void setFffContentType(String[] fffContentType){
         this.fffContentType = fffContentType;
     }
+    
+    
+    public Teacher getTeacher(){
+        return teacher;
+    }
+
+    
+    public void setTeacher(Teacher teacher){
+        this.teacher = teacher;
+    }
+
+    
+    public Integer getPageNumber(){
+        return pageNumber;
+    }
+
+    
+    public void setPageNumber(Integer pageNumber){
+        this.pageNumber = pageNumber;
+    }
+
+    
+    public Integer getPageSize(){
+        return pageSize;
+    }
+
+    
+    public void setPageSize(Integer pageSize){
+        this.pageSize = pageSize;
+    }
 
     public String page(){
         try {
             resultMapSon = new HashMap<String, Object>();
-            Map<String,Object> map = getSessionMap();
-            Long resTeaId = ((Teacher) getSessionMap().get("teacher")).getTeaId();
-            //获取到文件List
-            resource.setResTeaId(resTeaId);
             List<Resource> resourceList = resourceService.getListByRea(resource);
             resultMapSon.put("result","success");
             resultMapSon.put("rows",resourceList);
@@ -320,5 +359,23 @@ public class ResourceAction extends BaseAction<Resource, Long> {
             return "jsonSon";
         }
     	return "download";
+    }
+   
+    public String pageTeacher(){
+        try {
+            resultMapSon = new HashMap<String, Object>();
+            String hql = "From Teacher t";
+            if(teacher!= null && !"".equals(teacher.getTeaName()))
+                hql = hql + " where t.teaName like  '%"+teacher.getTeaName()+ "%'";
+            PageResults<Teacher> pageResults = teacherService.getListByPage(hql,hql,pageNumber,pageSize);
+            resultMapSon.put("result","success");
+            resultMapSon.put("rows",pageResults.getResults());
+            resultMapSon.put("total",pageResults.getTotalCount());
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultMapSon.put("result","fail");
+            resultMapSon.put("reason","未知错误！");
+        }
+        return "jsonSon";
     }
 }
