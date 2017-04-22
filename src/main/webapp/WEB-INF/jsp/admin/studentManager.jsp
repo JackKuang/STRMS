@@ -17,15 +17,13 @@
 	<section class="content">
 
 		<div class="row">
-			<div class="col-md-3">
+			<div class="col-md-6">
 				<table class="table table-bordered text-center">
 					<tr>
-						<td colspan="2">
+						<td>
 							<button type="button" onclick="showStudent();"
 								class="btn btn-block btn-primary btn-lg">增加学生</button>
 						</td>
-					</tr>
-					<tr>
 						<td>
 							<form id="fileForm" action="student_operate!fileSave.action" method="post" enctype="multipart/form-data">
                  				<input type="file" id="excelFile" name="excelFile">
@@ -38,7 +36,7 @@
 					</tr>
 				</table>
 			</div>
-			<div class="col-md-9">
+			<div class="col-md-12">
 				<div class="box">
 					<div class="box-body">
 						<table id="studentTable" class="table table-bordered table-striped dataTable" role="grid">
