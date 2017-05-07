@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,9 +43,11 @@
 					<button id="previewBtn" class="btn btn-primary">
 						<i class="fa fa-eye"></i> 预览
 					</button>
+					<c:if test="${student.stuNo!='0000' }">
 					<button id="downloadBtn" class="btn btn-primary">
 						<i class="fa fa-download"></i> 下载
 					</button>
+					</c:if>
 				</div>
 			</div>
 			<div class="col-md-12" id="previewDiv">
@@ -77,6 +80,7 @@
 							style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div>
 					</div>
 					<!-- /.chat -->
+					<c:if test="${student.stuNo!='0000' }">
 					<div class="box-footer">
 						<div class="input-group">
 							<input class="form-control" placeholder="说句话吧。。。" id="comContent">
@@ -87,6 +91,7 @@
 							</div>
 						</div>
 					</div>
+					</c:if>
 				</div>
 			</div>
 		</div>
