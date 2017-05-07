@@ -51,8 +51,14 @@ public class ResourceService extends BaseService<Resource, Long> {
     }
 
     public List<Resource> getListByReaAndApprove(Resource resource){
-        return getDao().getListByHQL("from Resource r where r.resState = 10 and r.resParId = ? and r.resTeaId = ? and r.resName like ? ",resource.getResParId(),
-                resource.getResTeaId(),"%" + resource.getResName() + "%");
+        String name;
+        if (resource == null || resource.getResName() == null || "undefined".equals(resource.getResName())) {
+            name = "";
+        } else {
+            name = resource.getResName();
+        }
+        return getDao().getListByHQL("from Resource r where ((r.resType ='folder' and r.resState = 1 ) OR r.resState = 10 ) and r.resParId = ? and r.resTeaId = ? and r.resName like ? ",resource.getResParId(),
+                resource.getResTeaId(),"%" + name + "%");
     }
 
     public void updateCustom(Resource resource){

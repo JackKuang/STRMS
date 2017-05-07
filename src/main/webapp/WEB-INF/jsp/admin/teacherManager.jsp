@@ -14,7 +14,7 @@
 <body>
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
-		<h1>教师信息管理</h1>
+		<h1>教师管理</h1>
 	</section>
 
 	<!-- Main content -->
@@ -230,7 +230,7 @@
                 title: '教师职位',
                 formatter: levelFormatter
             },{  
-                field: 'teaBraName	',
+                field: 'teaBraName',
                 title: '所属分院'
             }, {
                 field: 'teaId',
@@ -245,14 +245,6 @@
             } 
           });  
       }
-	 function operateFormatter(value, row, index) {
-	    return [
-	        '<a class="add">编辑',
-	        '</a>  ',
-	        '<a class="remove">删除</i>',
-	        '</a>'
-	    ].join('');
-	 }
 	 function levelFormatter(value, row, index) {
 		 var level="";
 		 if(value =="1"){
@@ -266,6 +258,14 @@
 		 }
 		 return [level].join('');
 	 }
+	 function operateFormatter(value, row, index) {
+		    return [
+		        '<a class="add">编辑',
+		        '</a>  ',
+		        '<a class="remove">删除</i>',
+		        '</a>'
+		    ].join('');
+		 }
 	 window.operateEvents = {
         'click .add': function (e, value, row, index) {
         	showTeacher(row.teaId);
