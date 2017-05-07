@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.hurenjieee.entity.Student;
 import com.hurenjieee.util.BaseDao;
+import com.hurenjieee.util.Md5AndSha;
 
 @Service
 @Transactional
@@ -26,5 +27,11 @@ public class StudentService extends BaseService<Student, Long> {
     
     public Student selectByStuId(Long stuId){
         return getDao().getByHQL("from Student s where s.stuId = ? ",stuId);
+    }
+
+    public void saveOrUpdate(Student student){
+    	if(student.getStuId()==0 || "".equals(student.getStuPassword()))
+    		student.setStuPassword(Md5AndSha.convertMD5("123456"));
+        getDao().saveOrUpdate(student);
     }
 }
