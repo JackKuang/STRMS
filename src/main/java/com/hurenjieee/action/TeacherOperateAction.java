@@ -45,6 +45,7 @@ public class TeacherOperateAction extends BaseAction<Teacher, Long> {
     
     private Integer pageNumber;
     private Integer pageSize;
+    
     private File excelFile; //上传的文件
     private String excelFileName; //文件名称
     private String excelFileContentType; //文件类型

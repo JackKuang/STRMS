@@ -11,7 +11,7 @@
 </head>
 <body>
 	<section class="content-header">
-		<h1>资源管理</h1>
+		<h1>资源审批</h1>
 	</section>
 	<section class="content">
 		<div class="row">

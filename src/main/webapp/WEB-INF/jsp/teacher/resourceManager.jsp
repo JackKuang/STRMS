@@ -51,26 +51,9 @@
 					</div>
 					<div class="slimScrollDiv"
 						style="position: relative; overflow: hidden; width: auto; height: 500px;">
-						<div class="box-body chat" style="overflow: hidden; width: auto; height: 500px; overflow-y:auto;" id="commentDiv">
-							<!-- 
-							<div class="item">
-								<img src="../dist/img/user2-160x160.jpg" alt="user image"
-									class="offline">
-								<p class="message">
-									<a href="#" class="name"> <small
-										class="text-muted pull-right"><i class="fa fa-clock-o"></i>
-											5:30</small> Susan Doe
-									</a> I would like to meet you to discuss the latest news about the
-									arrival of the new theme. They say it is going to be one the
-									best themes on the market
-								</p>
-							</div> -->
-							<!-- /.item -->
+						<div class="box-body chat" style="overflow: hidden; width: auto; height: 500px; overflow-y:auto;"
+						 id="commentDiv">
 						</div>
-						<div class="slimScrollBar"
-							style="background: rgb(0, 0, 0); width: 7px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 184.911px;"></div>
-						<div class="slimScrollRail"
-							style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div>
 					</div>
 					<!-- /.chat -->
 					<div class="box-footer">
@@ -567,7 +550,7 @@
 	function reloadByPath(obj){
 		$("#tableDiv").show();
 		$("#previewDiv").hide();
-		$("#previewOperateDiv").show();
+		$("#previewOperateDiv").hide();
 	    var arr = $("#path li");
 	    var state = false;
 	    resParId = obj.parentNode.id;

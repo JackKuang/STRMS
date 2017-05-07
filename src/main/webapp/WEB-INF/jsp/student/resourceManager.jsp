@@ -11,7 +11,7 @@
 </head>
 <body>
 	<section class="content-header">
-		<h1>资源下载</h1>
+		<h1>资源浏览</h1>
 	</section>
 	<section class="content">
 		<div class="row">
@@ -240,15 +240,6 @@
 			</div>
 		</div>
 	</div>
-	<div class="modal" id="audioDiv">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-body">
-					<audio id="audio" src="" width="100%">您的浏览器不支持此种音频格式。</audio>
-				</div>
-			</div>
-		</div>
-	</div>
 	<div class="modal" id="imageDiv">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -323,7 +314,7 @@
                 title: '教师职位',
                 formatter: levelFormatter
             },{  
-                field: 'teaBraName	',
+                field: 'teaBraName',
                 title: '所属分院'
             }],  
             onLoadSuccess: function(){  //加载成功时执行
@@ -347,7 +338,7 @@
 	    $("#resourceTable").bootstrapTable({
 	    	//toolbar:"#toolbar",
 	        method: "get",  //使用get请求到服务器获取数据  
-	        url:"../resource/resource!page.action", 
+	        url:"../resource/resource!pageDownload.action", 
 	        //url:"/STRMS/test.json",
 	        striped: true,  //表格显示条纹  
 	        //pagination: true, //启动分页 	 
@@ -378,16 +369,6 @@
 	        },{ 
 	            field: 'resUploadTime',
 	            title: '上传时间'
-	        },{ 
-	            field: 'resState',
-	            title: '文件状态',
-	            formatter: stateFormatter
-	        },{
-	            field: 'resId',
-	            title: '操作',
-	            align: 'left',
-	            events: operateEvents,
-	            formatter: operateFormatter
 	        }],  
 	        onLoadSuccess: function(){  //加载成功时执行
 	        },  

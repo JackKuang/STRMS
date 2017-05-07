@@ -225,9 +225,9 @@ public class ResourceAction extends BaseAction<Resource, Long> {
     public String pageDownload(){
         try {
             resultMapSon = new HashMap<String, Object>();
-            Long resTeaId = ((Teacher) getSessionMap().get("teacher")).getTeaId();
+            //Long resTeaId = ((Teacher) getSessionMap().get("teacher")).getTeaId();
             //获取到文件List
-            resource.setResTeaId(resTeaId);
+            //resource.setResTeaId(resTeaId);
             List<Resource> resourceList = resourceService.getListByReaAndApprove(resource);
             resultMapSon.put("result","success");
             resultMapSon.put("rows",resourceList);
@@ -278,8 +278,6 @@ public class ResourceAction extends BaseAction<Resource, Long> {
     public String folderTree(){
         try {
             resultMapSon = new TreeMap<String, Object>();
-            if (fff != null) {
-            }
             List<Resource> list =resourceService.getListByReaTeaId(resource);
             List<Map<String,Object>> result = new ArrayList<Map<String,Object>>();
             Map<String,Object> map = new HashMap<>();
@@ -325,16 +323,6 @@ public class ResourceAction extends BaseAction<Resource, Long> {
             }
             r.put("nodes",listTemp);
             result.add(r);
-//            List<Node> listNode = new ArrayList<Node>();
-//            int i=0;
-//            while(i<list.size()){
-//                Node node = new Node();
-//                Resource r =list.get(i);
-//                node.setId(r.getResId());
-//                node.setText(r.getResName());
-//                listNode.add(node);
-//                i++;
-//            }
             resultMapSon.put("result","success");
             resultMapSon.put("content",result);
         } catch (Exception e) {
@@ -347,14 +335,14 @@ public class ResourceAction extends BaseAction<Resource, Long> {
     
     public String downloadFile(){
         try {
-	    	Resource r = resourceService.getById(resource.getResId());
+            Resource r = resourceService.getById(resource.getResId());
             String realpath = ((Map<String,String>)getServletContext().getAttribute("prop")).get("filePath");
             String filePath = realpath+"\\"+r.getResUuid();
-	    	fileInputStream = new FileInputStream(filePath);
-	    	setDownloadFileName(r.getResName());
+            fileInputStream = new FileInputStream(filePath);
+            setDownloadFileName(r.getResName());
         }catch(Exception e){
             e.printStackTrace();
-            resultMapSon.put("result","fail");
+            resultMapSon.put("result","fail"); 
             resultMapSon.put("reason","未知错误！");
             return "jsonSon";
         }

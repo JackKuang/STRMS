@@ -12,7 +12,7 @@
 </head>
 <body>
 	<section class="content-header">
-		<h1>学生信息管理</h1>
+		<h1>学生管理</h1>
 	</section>
 	<section class="content">
 

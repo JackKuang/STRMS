@@ -77,6 +77,7 @@ public class SchoolAction extends ActionSupport {
         try {
             resultMap = new HashMap<>();
             List<Node> listNode = new ArrayList<Node>();
+            //获取到所有分院信息以及分院下的所有专业
             List<Branch> branchs = branchService.getList();
             for ( Branch branch : branchs ) {
                 Node node = new Node();
@@ -114,7 +115,6 @@ public class SchoolAction extends ActionSupport {
                             listNode3.add(node3);
                         }
                     }
-                    //
                     node2.setNodes(listNode3);
                     listNode2.add(node2);
                 }
