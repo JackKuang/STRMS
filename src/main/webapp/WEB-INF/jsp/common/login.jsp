@@ -22,14 +22,14 @@
 		</c:if>
 
 		<div class="login-box-body">
-			<form action="login!login.action" method="post">
+			<form action="login!login.action" method="post" id="loginForm">
 				<div class="form-group has-feedback">
-					<input type="text" class="form-control" name="userName"
+					<input type="text" class="form-control" name="userName" id="userName"
 						placeholder="用户名"> <span
 						class="glyphicon glyphicon-user form-control-feedback"></span>
 				</div>
 				<div class="form-group has-feedback">
-					<input type="password" class="form-control" name="password"
+					<input type="password" class="form-control" name="password" id="password"
 						placeholder="密码"> <span
 						class="glyphicon glyphicon-lock form-control-feedback"></span>
 				</div>
@@ -39,10 +39,13 @@
 					<label><input type="radio" name="userType" value="admin" class="minimal">管理员</label>
 				</div>
 				<div class="row">
-					<div class="col-xs-8"></div>
+					<div class="col-xs-4"></div>
 					<!-- /.col -->
 					<div class="col-xs-4">
-						<button type="submit" class="btn btn-primary btn-block btn-flat">登录</button>
+						<button type="button" id="anonymous" class="btn btn-block btn-info btn-flat" style="float:left">游客使用</button>
+					</div>
+					<div class="col-xs-4">
+						<button type="submit" class="btn btn-primary btn-block btn-flat" style="float:left">登录</button>
 					</div>
 					<!-- /.col -->
 				</div>
@@ -68,6 +71,12 @@
 				increaseArea : '20%' // optional
 			});	
 		});
+		$('#anonymous').click(function(){	
+			$('#userName').val('0000');
+			$('#password').val('123456');
+			$("input[name='userType'][value='student']").attr("checked","checked");
+			$("#loginForm").submit();
+		})
 	</script>
 </body>
 </html>
