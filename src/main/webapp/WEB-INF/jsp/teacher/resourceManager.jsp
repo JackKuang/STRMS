@@ -567,7 +567,7 @@
 	    $("#resourceTable").bootstrapTable('refresh');
 	}
 
-	var videoType = new Array("OGG","MP4","BMW","MP3");
+	var videoType = new Array("OGG","MP4","BMW","MP3","MKV");
 	var imageType = new Array("JPG","JPEG","PNG");
 	var textType = new Array("TXT","JAVA","CSS","JS","JSON");
 	
