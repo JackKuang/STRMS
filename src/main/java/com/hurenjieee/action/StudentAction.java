@@ -13,7 +13,8 @@ import com.opensymphony.xwork2.ActionSupport;
 @Scope("prototype")
 @Namespace(value = "/student")
 @Action(results = { @Result(name = "index",location = "/WEB-INF/jsp/student/index.jsp"),
-        @Result(name = "resourceManager",location = "/WEB-INF/jsp/student/resourceManager.jsp")})
+        @Result(name = "resourceManager",location = "/WEB-INF/jsp/student/resourceManager.jsp"),
+        @Result(name = "myResourceManager",location = "/WEB-INF/jsp/student/myResourceManager.jsp")})
 public class StudentAction extends ActionSupport {
 
     String flag;
@@ -38,9 +39,9 @@ public class StudentAction extends ActionSupport {
             //资源管理
             //resourceManager();
             return "resourceManager";
-        }else if("messageManager".equals(flag)){
-            //消息管理
-            return "messageManager";            
+        }else if("myResourceManager".equals(flag)){
+            //班级资源浏览
+            return "myResourceManager";            
         }else{
             return flag;
         }

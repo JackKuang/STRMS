@@ -11,6 +11,7 @@ import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
+import org.aspectj.weaver.ast.Var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 
@@ -134,13 +135,32 @@ public class StudentOperateAction extends BaseAction<Student, Long> {
     public String page(){
         try {
             resultMapSon = new HashMap<String, Object>();
-            String hql = "From Student s";
-            if(student!= null && !"".equals(student.getStuName()))
-                hql = hql + " where s.stuId like '%"+student.getStuName()+ "%' or s.stuName like  '%"+student.getStuName()+ "%'";
+            String hql = "From Student s ";
+            if(student!= null && student.getStuName()!=null && !"".equals(student.getStuName()))
+                hql = hql + " where (s.stuId like '%"+student.getStuName()+ "%' or s.stuName like  '%"+student.getStuName()+ "%')";
             PageResults<Student> pageResults = getService().getListByPage(hql,hql,pageNumber,pageSize);
+            List<Student> list = new ArrayList<Student>();
+            for(int i= 0;i<pageResults.getResults().size();i++){
+            	Student s=pageResults.getResults().get(i);
+            	if(student!= null && student.getStuColId()!=null && !"".equals(student.getStuColId())){
+            		if(s.getStuColId()!=null && s.getStuColId().equals(student.getStuColId()))
+            			list.add(s);
+            	}else if(student!= null && student.getStuYearId()!=null && !"".equals(student.getStuYearId())){
+            		if(s.getStuYearId()!=null && s.getStuYearId().equals(student.getStuYearId()))
+            			list.add(s);
+            	}else if(student!= null && student.getStuMajId()!=null && !"".equals(student.getStuMajId())){
+            		if(s.getStuMajId()!= null && s.getStuMajId().equals(student.getStuMajId()))
+            			list.add(s);
+            	}else if(student!= null && student.getStuBraId()!=null && !"".equals(student.getStuBraId())){
+            		if(s.getStuBraId()!=null && s.getStuBraId().equals(student.getStuBraId()))
+            			list.add(s);
+            	}else{
+            		list.add(s);
+            	}
+            }
             resultMapSon.put("result","success");
-            resultMapSon.put("rows",pageResults.getResults());
-            resultMapSon.put("total",pageResults.getTotalCount());
+            resultMapSon.put("rows",list);
+            resultMapSon.put("total",list.size());
         } catch (Exception e) {
             e.printStackTrace();
             resultMapSon.put("result","fail");

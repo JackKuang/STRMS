@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,15 +46,14 @@
 								<li class="user-header"><img
 									src="../dist/img/user2-160x160.jpg" class="img-circle"
 									alt="User Image">
-
 									<p>
-										管理员 <small>Member since Nov. 2012</small>
+										 ${student.stuName }
 									</p>
 								</li>
 								<!-- Menu Footer-->
 								<li class="user-footer">
 									<div class="pull-left">
-										<a href="#" class="btn btn-default btn-flat">个人信息</a>
+										<a href="#" class="btn btn-default btn-flat">修改密码</a>
 									</div>
 									<div class="pull-right">
 										<a onclick="exit();" class="btn btn-default btn-flat">登出</a>
@@ -88,8 +88,13 @@
 					<!-- <li><a href="#" onclick="redirectPage('index')" class='active'> <i
 							class="fa fa-navicon"></i> <span>消息查看</span>
 					</a></li> -->
+					<c:if test="${student.stuNo!='0000' }">
+						<li><a href="#" onclick="redirectPage('myResourceManager')"> <i
+								class="fa fa-wrench"></i> <span>班级资源浏览</span>
+						</a></li>
+					</c:if>
 					<li><a href="#" onclick="redirectPage('resourceManager')"> <i
-							class="fa fa-wrench"></i> <span>资源浏览</span>
+							class="fa fa-wrench"></i> <span>开放资源浏览</span>
 					</a></li>
 					<!-- <li><a href="#" onclick="redirectPage('messageManager')"> <i
 							class="fa fa-wrench"></i> <span>最新消息</span>
@@ -121,7 +126,7 @@
 			$('ul.nav > li').removeClass('active');
 			$(this).addClass('active');
 		});
-		redirectPage("resourceManager");
+		redirectPage("myResourceManager");
 	});
 
 	function redirectPage(flag) {

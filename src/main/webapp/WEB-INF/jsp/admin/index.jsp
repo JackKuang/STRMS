@@ -46,15 +46,14 @@
 								<li class="user-header"><img
 									src="../dist/img/user2-160x160.jpg" class="img-circle"
 									alt="User Image">
-
 									<p>
-										管理员 <small>Member since Nov. 2012</small>
+										${admin.admName }
 									</p></li>
 
 								<!-- Menu Footer-->
 								<li class="user-footer">
 									<div class="pull-left">
-										<a href="#" class="btn btn-default btn-flat">个人信息</a>
+										<a onclick="updatePassword();" class="btn btn-default btn-flat">修改密码</a>
 									</div>
 									<div class="pull-right">
 										<a onclick="exit();" class="btn btn-default btn-flat">登出</a>
@@ -90,7 +89,7 @@
 							class="fa fa-navicon"></i> <span>系统信息查看</span>
 					</a></li> -->
 					<li><a href="#" onclick="redirectPage('systemConfig')"> <i
-							class="fa fa-wrench"></i> <span>属性配置</span>
+							class="fa fa-wrench"></i> <span>班级配置</span>
 					</a></li>
 					<li><a href="#" onclick="redirectPage('teacherManager')">
 							<i class="fa fa-users"></i> <span>教师管理</span>
@@ -105,8 +104,6 @@
 			</section>
 			<!-- /.sidebar -->
 		</aside>
-
-
 		<!-- Content Wrapper. Contains page content -->
 		<div class="content-wrapper">
 			<!-- Main content -->
@@ -116,8 +113,56 @@
 			</section>
 			<!-- /.content -->
 		</div>
+		
 		<!-- /.content-wrapper -->
 		<jsp:include page="/WEB-INF/include/footer.jsp"></jsp:include>
+		
+		<div class="modal" id="updatePasswordModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+					<h4 class="modal-title" id="updatePasswordTitle">修改密码</h4>
+				</div>
+				<div class="modal-body">
+					<form class="form-horizontal" id="updatePasswordForm"
+						action="school!updatePassword.action">
+						<div class="box-body">
+							<div class="form-group">
+								<label class="col-sm-2">密码</label>
+								<div class="col-sm-10">
+									<input type="password" class="form-control"	name="oldPassword" placeholder="密码">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2">新密码</label>
+								<div class="col-sm-10">
+									<input type="password" class="form-control"	name="newPassword" placeholder="新密码">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2">确认密码</label>
+								<div class="col-sm-10">
+									<input type="password" class="form-control"	name="confirmPassword" placeholder="确认密码">
+								</div>
+							</div>
+							<!-- /.box-body -->
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" id="updatePasswordSave" class="btn btn-primary">保存</button>
+					<button type="button" id="updatePasswordCancel" class="btn btn-default"
+						data-dismiss="modal">取消</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
 	</div>
 	<!-- ./wrapper -->
 </body>
@@ -128,7 +173,7 @@
 			$('ul.nav > li').removeClass('active');
 			$(this).addClass('active');
 		});
-		redirectPage("index");
+		redirectPage("systemConfig");
 	});
 
 	function redirectPage(flag) {
@@ -141,5 +186,22 @@
 	$('.dropdown').click(function(){
 		$(this).addClass('open');
 	})
+	function updatePassword(){
+		$('#updatePasswordModal').modal('show');
+	}
+
+	$("#updatePasswordSave").click(function() {
+		$("#updatePasswordForm").ajaxSubmit(function(data) {
+			if(data.result=="success"){
+				bootbox.alert("操作成功");
+				($("#updatePasswordForm"))[0].reset();
+				$('#updatePasswordModal').modal('hide');
+			}
+			else{
+				bootbox.alert(data.reason);
+			}
+		})
+		$('#branchModal').modal('hide');
+	});
 </script>
 </html>

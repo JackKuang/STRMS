@@ -13,7 +13,7 @@
 <body>
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
-		<h1>属性配置</h1>
+		<h1>班级配置</h1>
 	</section>
 	<!-- Main content -->
 	<section class="content">
@@ -290,7 +290,7 @@
 
 	function showCollective(colId) {
 		if (colId != null) {
-			$("#colId").val(colId);
+			$("#collectiveId").val(colId);
 			$("#collectiveTitle").html("修改班级");
 			$.ajax({
 				url : 'collective!getById.action',

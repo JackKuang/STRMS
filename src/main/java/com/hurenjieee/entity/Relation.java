@@ -1,5 +1,5 @@
 package com.hurenjieee.entity;
-// Generated 2017-5-8 21:39:59 by Hibernate Tools 4.3.5.Final
+// Generated 2017-5-9 21:34:12 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,45 +15,45 @@ import javax.persistence.Table;
 @Table(name = "relation",catalog = "strms")
 public class Relation implements java.io.Serializable {
 
-    private Long reaId;
-    private Long reaTeaId;
-    private Long reaColId;
+    private Long relId;
+    private Long relTeaId;
+    private Long relColId;
 
     public Relation() {}
 
-    public Relation(Long reaTeaId, Long reaColId) {
-        this.reaTeaId = reaTeaId;
-        this.reaColId = reaColId;
+    public Relation(Long relTeaId, Long relColId) {
+        this.relTeaId = relTeaId;
+        this.relColId = relColId;
     }
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
 
-    @Column(name = "rea_id",unique = true,nullable = false)
-    public Long getReaId(){
-        return this.reaId;
+    @Column(name = "rel_id",unique = true,nullable = false)
+    public Long getRelId(){
+        return this.relId;
     }
 
-    public void setReaId(Long reaId){
-        this.reaId = reaId;
+    public void setRelId(Long relId){
+        this.relId = relId;
     }
 
-    @Column(name = "rea_tea_id")
-    public Long getReaTeaId(){
-        return this.reaTeaId;
+    @Column(name = "rel_tea_id")
+    public Long getRelTeaId(){
+        return this.relTeaId;
     }
 
-    public void setReaTeaId(Long reaTeaId){
-        this.reaTeaId = reaTeaId;
+    public void setRelTeaId(Long relTeaId){
+        this.relTeaId = relTeaId;
     }
 
-    @Column(name = "rea_col_id")
-    public Long getReaColId(){
-        return this.reaColId;
+    @Column(name = "rel_col_id")
+    public Long getRelColId(){
+        return this.relColId;
     }
 
-    public void setReaColId(Long reaColId){
-        this.reaColId = reaColId;
+    public void setRelColId(Long relColId){
+        this.relColId = relColId;
     }
 
 }

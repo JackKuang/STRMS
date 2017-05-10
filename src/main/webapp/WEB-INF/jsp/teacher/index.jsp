@@ -47,7 +47,7 @@
 									alt="User Image">
 
 									<p>
-										管理员 <small>Member since Nov. 2012</small>
+										${teacher.teaName }
 									</p>
 								</li>
 								<!-- Menu Footer-->

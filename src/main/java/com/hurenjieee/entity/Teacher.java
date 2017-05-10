@@ -26,6 +26,8 @@ public class Teacher implements java.io.Serializable {
     private String  teaDescription;
     private Long    teaBraId;
     private String  teaBraName;
+    private String  collectiveIds;
+    private String  collectiveNames;
 
     public Teacher() {}
 
@@ -147,5 +149,26 @@ public class Teacher implements java.io.Serializable {
     public void setTeaBraName(String teaBraName){
         this.teaBraName = teaBraName;
     }
+
+    @Formula("(select group_concat(r.rel_col_id) from relation r where r.rel_tea_id = tea_id)") 
+	public String getCollectiveIds() {
+		return collectiveIds;
+	}
+
+	public void setCollectiveIds(String collectiveIds) {
+		this.collectiveIds = collectiveIds;
+	}
+
+    @Formula("(select group_concat(c.col_name) from relation r"
+    		+ " left join collective c on c.col_id = r.rel_col_id where r.rel_tea_id = tea_id)")
+	public String getCollectiveNames() {
+		return collectiveNames;
+	}
+
+	public void setCollectiveNames(String collectiveNames) {
+		this.collectiveNames = collectiveNames;
+	}
+    
+    
 
 }

@@ -39,6 +39,22 @@
 			<div class="col-md-12">
 				<div class="box">
 					<div class="box-body">
+						<div id="toolbar">
+							分院
+							<select style="width:120px" id="braSelect2" onchange="setMajor2(this.value)" >
+								<option value=""></option>
+								<s:iterator var="branch" value="branchList">
+									<option value="<s:property value="#branch.braId" />"><s:property
+											value="#branch.braName" /></option>
+								</s:iterator>
+							</select>
+							专业
+							<select style="width:120px" id="majSelect2" onchange="setYear2(this.value)" ></select>
+							入学时间
+							<select style="width:120px" id="yearSelect2" onchange="setCollective2(this.value)" ></select>
+							班级
+							<select style="width:120px" id="colSelect2" ></select>
+						</div>
 						<table id="studentTable" class="table table-bordered table-striped dataTable" role="grid">
 						</table>
 					</div>
@@ -92,7 +108,8 @@
 								<div class="form-group">
 									<label class="col-sm-2">所属分院</label>
 									<div class="col-sm-10">
-										<select class="form-control" id="braSelect" onclick="setMajor(this.value)">
+										<select class="form-control" id="braSelect" onchange="setMajor(this.value)">
+											<option value=""></option>
 											<s:iterator var="branch" value="branchList">
 												<option value="<s:property value="#branch.braId" />"><s:property
 														value="#branch.braName" /></option>
@@ -103,14 +120,14 @@
 								<div class="form-group">
 									<label class="col-sm-2">专业名称</label>
 									<div class="col-sm-10">
-										<select class="form-control" id="majSelect" onclick="setYear(this.value)">
+										<select class="form-control" id="majSelect" onchange="setYear(this.value)">
 										</select>
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-sm-2">入学时间</label>
 									<div class="col-sm-10">
-										<select class="form-control" id="yearSelect" onclick="setCollective(this.value)">
+										<select class="form-control" id="yearSelect" onchange="setCollective(this.value)">
 										</select>
 									</div>
 								</div>
@@ -203,6 +220,11 @@
 	var yearList;
 	var colList;
 	
+	var tree2;
+	var majList2;
+	var yearList2;
+	var colList2;
+	
 	$(function(){
 		initTable();
 		loadTree();
@@ -214,6 +236,7 @@
         $("#studentTable").bootstrapTable({  
             method: "get",  //使用get请求到服务器获取数据  
             url:"student_operate!page.action", 
+	    	toolbar:"#toolbar",
             //url:"/STRMS/test.json",
             striped: true,  //表格显示条纹  
             pagination: true, //启动分页 	 
@@ -230,7 +253,11 @@
 	            var param = {
 	            	pageNumber: params.pageNumber,    
 	                pageSize: params.pageSize,
-	                'student.stuName':params.searchText
+	                'student.stuName':params.searchText,
+	            	'student.stuBraId':$("#braSelect2").val(),
+	            	'student.stuMajId':$("#majSelect2").val(),
+	            	'student.stuYearId':$("#yearSelect2").val(),
+	            	'student.stuColId':$("#colSelect2").val()
 	            };
             	return param;
             },  
@@ -312,17 +339,19 @@
 			dataType : 'json',
 			success : function(data, textStatus, jqXHR) {
 				tree = data.content;
+				tree2 = tree;
 			}
 		})
 	}
 	function setMajor(braId){
 		var nodes = tree;
+		$("#majSelect").empty();
+		$("#yearSelect").empty();
+		$("#colSelect").empty();
+		$("#majSelect").append( $("<option>").val('').text(''));
 		for(var i=0;i<nodes.length;i++){
 			if(nodes[i].id==braId){
 				majList = nodes[i].nodes;
-				$("#majSelect").empty();
-				$("#yearSelect").empty();
-				$("#colSelect").empty();
 				for(var j=0;j<nodes[i].nodes.length;j++){
 					var option = $("<option>").val(nodes[i].nodes[j].id).text(nodes[i].nodes[j].text);
 					$("#majSelect").append(option);
@@ -333,11 +362,12 @@
 	}
 	function setYear(majId){
 		var nodes = majList;
+		$("#yearSelect").empty();
+		$("#colSelect").empty();
+		$("#yearSelect").append( $("<option>").val('').text(''));
 		for(var i=0;i<nodes.length;i++){
 			if(nodes[i].id==majId){
 				colList = nodes[i].nodes;
-				$("#yearSelect").empty();
-				$("#colSelect").empty();
 				for(var j=0;j<nodes[i].nodes.length;j++){
 					var option = $("<option>").val(nodes[i].nodes[j].text).text(nodes[i].nodes[j].text);
 					$("#yearSelect").append(option);
@@ -348,10 +378,11 @@
 	}
 	function setCollective(yearId){
 		var nodes = colList;
+		$("#colSelect").empty();
+		$("#colSelect").append( $("<option>").val('').text(''));
 		for(var i=0;i<nodes.length;i++){
 			if(nodes[i].text==yearId){
 				majList = nodes[i].nodes;
-				$("#colSelect").empty();
 				for(var j=0;j<nodes[i].nodes.length;j++){
 					var option = $("<option>").val(nodes[i].nodes[j].id).text(nodes[i].nodes[j].text);
 					$("#colSelect").append(option);
@@ -359,6 +390,68 @@
 				return;
 			}
 		}
+	}
+
+
+	function setMajor2(braId){
+		var nodes = tree2;
+		$("#majSelect2").empty();
+		$("#yearSelect2").empty();
+		$("#colSelect2").empty();
+		$("#majSelect2").append( $("<option>").val('').text(''));
+		for(var i=0;i<nodes.length;i++){
+			if(nodes[i].id==braId){
+				majList2 = nodes[i].nodes;
+				for(var j=0;j<nodes[i].nodes.length;j++){
+					var option = $("<option>").val(nodes[i].nodes[j].id).text(nodes[i].nodes[j].text);
+					$("#majSelect2").append(option);
+				}
+			}
+		}
+		reloadStudentTable();
+	}
+	function setYear2(majId){
+		var nodes = majList2;
+		$("#yearSelect2").empty();
+		$("#colSelect2").empty();
+		$("#yearSelect2").append( $("<option>").val('').text(''));
+		for(var i=0;i<nodes.length;i++){
+			if(nodes[i].id==majId){
+				colList2 = nodes[i].nodes;
+				for(var j=0;j<nodes[i].nodes.length;j++){
+					var option = $("<option>").val(nodes[i].nodes[j].text).text(nodes[i].nodes[j].text);
+					$("#yearSelect2").append(option);
+				}
+			}
+		}
+		reloadStudentTable();
+	}
+	function setCollective2(yearId){
+		var nodes = colList2;
+		$("#colSelect2").empty();
+		$("#colSelect2").append( $("<option>").val('').text(''));
+		for(var i=0;i<nodes.length;i++){
+			if(nodes[i].text==yearId){
+				majList2 = nodes[i].nodes;
+				for(var j=0;j<nodes[i].nodes.length;j++){
+					var option = $("<option>").val(nodes[i].nodes[j].id).text(nodes[i].nodes[j].text);
+					$("#colSelect2").append(option);
+				}
+			}
+		}
+		reloadStudentTable();
+	}
+	function reloadStudentTable(){
+        $("#studentTable").bootstrapTable('refresh',{
+            url:"student_operate!page.action",
+            silent: true,
+        	query:{
+            	'student.stuBraId':$("#braSelect2").val(),
+            	'student.stuMajId':$("#majSelect2").val(),
+            	'student.stuYearId':$("#yearSelect2").val(),
+            	'student.stuColId':$("#colSelect2").val()
+            }
+        });
 	}
 </script>
 </html>

@@ -23,4 +23,10 @@ public class AdminService extends BaseService<Admin, Long> {
     public Admin getAdminByUserNameAndPassword(String userName,String password){
         return getDao().getByHQL("from Admin a where a.admName = ? and a.admPassword = ? ",userName,password);
     }
+
+	public void updatePassword(Admin admin) {
+		// TODO Auto-generated method stub
+		String hql = "update Admin a set a.admPassword = '"+admin.getAdmPassword()+"' where a.admId =" +admin.getAdmId();
+		getDao().queryHql(hql);
+	}
 }

@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+c<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE html>
@@ -42,6 +42,16 @@
 			<div class="col-md-12">
 				<div class="box">
 					<div class="box-body">
+							<div id="toolbar">
+							分院
+							<select style="width:120px" id="braSelect2" onchange="setMajor2(this.value)" >
+								<option value=""></option>
+								<s:iterator var="branch" value="branchList">
+									<option value="<s:property value="#branch.braId" />"><s:property
+											value="#branch.braName" /></option>
+								</s:iterator>
+							</select>
+						</div>
 						<table id="teacherTable" class="table table-bordered table-striped dataTable" role="grid">
 						</table>
 					</div>
@@ -129,6 +139,32 @@
 			</div>
 			<!-- /.modal-dialog -->
 		</div>
+		
+		<div class="modal" id="collectiveModal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">×</span>
+						</button>
+						<h4 class="modal-title" id="collectiveTitle">设置班级</h4>
+					</div>
+					<div class="modal-body">
+						<div class="box-body" id="collectives">
+			        	</div>
+			        	<div id="treeviewBranch"></div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" id="collectiveSave" class="btn btn-primary">保存</button>
+						<button type="button" id="collectiveCancel" class="btn btn-default"
+							data-dismiss="modal">取消</button>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
 </body>
 <script type="text/javascript">
 	function showTeacher(teaId) {
@@ -193,6 +229,7 @@
         $("#teacherTable").bootstrapTable({  
             method: "get",  //使用get请求到服务器获取数据  
             url:"teacher_operate!page.action", 
+	    	toolbar:"#toolbar",
             //url:"/STRMS/test.json",
             striped: true,  //表格显示条纹  
             pagination: true, //启动分页 	 
@@ -232,7 +269,10 @@
             },{  
                 field: 'teaBraName',
                 title: '所属分院'
-            }, {
+            },{  
+                field: 'collectiveNames',
+                title: '管辖班级'
+            },{
                 field: 'teaId',
                 title: '操作',
                 align: 'center',
@@ -260,6 +300,8 @@
 	 }
 	 function operateFormatter(value, row, index) {
 		    return [
+		        '<a class="editCollective">设置班级',
+		        '</a>  ',
 		        '<a class="add">编辑',
 		        '</a>  ',
 		        '<a class="remove">删除</i>',
@@ -272,6 +314,12 @@
         },
         'click .remove': function (e, value, row, index) {
         	deleteTeacher(row.teaId);
+        },
+        'click .editCollective': function (e, value, row, index) {
+        	editCollective(row.teaId);
+        	ids = row.collectiveIds;
+            names = row.collectiveNames;
+            stringToHmtl();
         }
     };
 	function deleteTeacher(teaId) {
@@ -295,6 +343,145 @@
 					}
 				})
 		});
+	}
+	var teaIdGlobal;
+	function editCollective(teaId){
+		teaIdGlobal = teaId
+		$('#collectives').html('');
+		reloadTree();
+		$('#collectiveModal').modal('show');
+	}
+
+
+	$("#collectiveSave").click(function() {
+
+		$.ajax({
+			url : 'relation!saveMutiple.action',
+			type : 'POST', //GET
+			async : true, //或false,是否异步
+			dataType : 'json',
+			data : {
+				'relation.relTeaId' : teaIdGlobal,
+				'relColIds' : ids,
+			},
+			success : function(data, textStatus, jqXHR) {
+				if (testData(data)) {
+					bootbox.alert("操作成功");
+					$('#collectiveModal').modal('hide');
+			        $("#teacherTable").bootstrapTable('refresh');
+				}
+			}
+		})
+		$('#teacherModal').modal('hide');
+	});
+
+	function formatterData2(data,depth){
+		var type = "";
+		if(depth==1){
+			type="Branch";
+		}
+		if(depth==2){			
+			type="Major";
+		}
+		if(depth==4){
+			type="Collective";
+		}
+		for(var i=0;i<data.length;i++){
+			if(data[i].nodes==null || data[i].nodes.length==0){
+				if(depth==4){
+					data[i].text = data[i].text +"<div class='box-tools pull-right'><button type='button' onclick='addCollective(\""+data[i].id+"\",\""+data[i].text+"\")' class='btn btn-box-tool' data-widget='collapse'><i class='fa fa-plus'></i></button>" ;
+				}
+			}else{
+				data[i].nodes =  formatterData2(data[i].nodes,depth+1);
+			}
+		}
+		return data;
+	}
+	function reloadTree(){
+		$.ajax({
+			url : 'school!listAll.action',
+			type : 'POST', //GET
+			async : true, //或false,是否异步
+			dataType : 'json',
+			success : function(data, textStatus, jqXHR) {
+				var content =  formatterData2(data.content,1);
+				var $tree = $('#treeviewBranch').treeview({
+					data : content,
+					backColor: 'green',
+				})
+				//$('#treeviewBranch').on('nodeSelected', function(event, data) {
+				//	addCollective(data.id,data.text);
+                //});
+			}
+		})
+	}
+
+	var ids = "";
+	var names = "";
+	function addCollective(id,text){
+		var hasCollective = false;
+		if(ids!=null && ids!=""){
+			var idString = ids.split(',');
+			for(var i=0;i<idString.length;i++){
+				if(idString[i]==id){
+					hasCollective = true;
+				}
+			}
+		}
+		if(hasCollective==false){
+			if(ids==null || ids==""){
+				ids=""+id+"";
+				names=""+text+"";
+			}else{
+				ids=ids+","+id+"";
+				names=names+","+text+"";
+			}
+		}
+        stringToHmtl();
+	}
+	function removeCollective(id,text){
+		var newIds = "";
+		var newNames = "";
+		var idString = ids.split(',');
+        var nameString = names.split(',');
+        for(var i=0;i<idString.length;i++){
+            if(idString[i]!=id){
+        		if(newIds==null || newIds==""){
+        			newIds=""+idString[i]+"";
+        			newNames=""+nameString[i]+"";
+        		}else{
+        			newIds=newIds+","+idString[i]+"";
+        			newNames=newNames+","+nameString[i]+"";
+        		}
+            }
+        }
+        ids = newIds;
+        names = newNames;
+        stringToHmtl();
+	}
+	function stringToHmtl(){
+        $('#collectives').html('');
+		if(ids!=null && ids!=""){
+			console.log(ids);
+	        var idString = ids.split(',');
+	        var nameString = names.split(',');
+	        var oldHtml="";
+	        for(var i=0;i<idString.length;i++){
+		        if(idString[i]!=null && idString[i]!=''){
+					oldHtml = oldHtml + '<div class="col-md-3"><button type="button" class="btn btn-block btn-primary btn-lg" onclick="removeCollective(\''+idString[i]+'\',\''+nameString[i]+'\')">'+nameString[i]+'</button></div>';
+		        }
+	        }
+	        $('#collectives').html(oldHtml);
+		}
+	}
+	function setMajor2(braId){
+		$("#teacherTable").bootstrapTable('refresh',{
+            url:"teacher_operate!page.action",
+            silent: true,
+        	query:{
+            	'teacher.teaBraId':braId
+            }
+        });
 	}
 </script>
 </html>

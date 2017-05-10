@@ -21,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 
 import com.hurenjieee.entity.Resource;
+import com.hurenjieee.entity.Student;
 import com.hurenjieee.entity.Teacher;
 import com.hurenjieee.service.BaseService;
 import com.hurenjieee.service.BranchService;
@@ -359,6 +360,31 @@ public class ResourceAction extends BaseAction<Resource, Long> {
             resultMapSon.put("result","success");
             resultMapSon.put("rows",pageResults.getResults());
             resultMapSon.put("total",pageResults.getTotalCount());
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultMapSon.put("result","fail");
+            resultMapSon.put("reason","Î´Öª´íÎó£¡");
+        }
+        return "jsonSon";
+    }
+    public String pageTeacherForStudent(){
+        try {
+            resultMapSon = new HashMap<String, Object>();
+            String hql = "From Teacher t";
+            if(teacher!= null && !"".equals(teacher.getTeaName()))
+                hql = hql + " where t.teaName like  '%"+teacher.getTeaName()+ "%'";
+            PageResults<Teacher> pageResults = teacherService.getListByPage(hql,hql,pageNumber,pageSize);
+            
+            List<Teacher> list = new ArrayList<Teacher>();
+            Student student = (Student)getSessionMap().get("student");
+            for(int i= 0;i<pageResults.getResults().size();i++){
+            	Teacher t=pageResults.getResults().get(i);
+            	if(t.getCollectiveIds()!=null && t.getCollectiveIds().contains(student.getStuColId().toString()))
+            		list.add(t);
+            }
+            resultMapSon.put("result","success");
+            resultMapSon.put("rows",list);
+            resultMapSon.put("total",list.size());
         } catch (Exception e) {
             e.printStackTrace();
             resultMapSon.put("result","fail");

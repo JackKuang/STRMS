@@ -93,5 +93,6 @@ public abstract class BaseService<T, ID extends Serializable> {
         return dao.findPageByFetchedHql(hql,countHql,pageNo,pageSize,values);
     }
 
+
     // -----------自定义方法 结束-------------------
 }
