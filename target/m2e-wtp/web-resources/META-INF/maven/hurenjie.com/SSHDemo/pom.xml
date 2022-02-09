@@ -11,7 +11,7 @@
 	<properties>
 		<struts2.version>2.3.20.1</struts2.version>
 		<spring.version>4.3.1.RELEASE</spring.version>
-		<hibernate.version>4.3.8.Final</hibernate.version>
+		<hibernate.version>5.4.24.Final</hibernate.version>
 	</properties>
 	<dependencies>
 
