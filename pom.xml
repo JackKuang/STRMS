@@ -10,7 +10,7 @@
 	<!-- 这个地方统一设置了版本，减少了版本的选择以及避免了冲突 -->
 	<properties>
 		<struts2.version>2.3.20.1</struts2.version>
-		<spring.version>4.3.1.RELEASE</spring.version>
+		<spring.version>5.2.22.RELEASE</spring.version>
 		<hibernate.version>4.3.8.Final</hibernate.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
